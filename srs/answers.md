@@ -39,7 +39,7 @@ Department of Computer Science, University of Oklahoma
     <List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.>
 
   1.4 Overview
-
+    
     <Contain an outline of the remainder of the document.>
 
 2. Overall Description
@@ -99,6 +99,11 @@ Department of Computer Science, University of Oklahoma
       <Describe the requirements associated with any communications functions required by this product, including e-mail, web browser, network server communications protocols, electronic forms, and so on. Define any pertinent message formatting. Identify any communication standards that will be used, such as FTP or HTTP. Specify any communication security or encryption issues, data transfer rates, and synchronization mechanisms.>
 
   3.2 Functional Requirements
+    Connects to compatible client
+    AI must win or draw
+    Real time updates of game status
+    Validates opponent moves
+    
 
     <Describe how the transformation of inputs to outputs is achieved. The description is given for each class of functions, and sometimes for each individual function. To a certain extent, this description can be seen as a solution to the user. This component of the requirement specification is the main starting point for the design phase.>
 
@@ -134,7 +139,7 @@ Department of Computer Science, University of Oklahoma
 
     When deciding moves on the game board, both the user and the client will have a set time to make a decision before they are forced forfeit. WHile the client is required to meet the same time standards as the user, due to the small and finite number of moves the system is able to make, the system will be expected to make a decision much faster. It will generally be expected that the system makes any decisions in <1 second, or on a pace that is unnoticeable by the user. When determining a winner or a draw, the system is expected to make an equally quick determination. The performance requirements of an AI versus AI game connection will be determined after the group leaders discuss the terms of the peer-to-peer connection. The design document will be updated to reflect any decisions made.
 
-  3.4 Software System Attributes
+  3.4 Software System Attributes 
 
       <Particular attention is paid to quality aspects. These requirements must be measurable and verifiable. They must be stated in objective terms.>
 
@@ -150,7 +155,7 @@ Department of Computer Science, University of Oklahoma
 
       <Requirements to guarantee a certain level of maintainability of the system, such as a maximum allowable coupling between components.>
 
-  3.5 Design Constraints
+  3.5 Design Constraints -----JOHNATHAN
 
     <Design constraints may result from such things as the prescribed use of certain standards or hardware.>
 
