@@ -12,8 +12,9 @@ Prepared by
   * Jonathan Wesley Stone <jstone25@uco.edu>
   * Logan Glenn Huskins <lhuskins@uco.edu>
   * Thomas Focht <keyboardtyper2@gmail.com>
+  * Matthew McHughes <mmchughes@uco.edu>
 
-Department of Computer Science, University of Oklahoma
+Department of Computer Science, University of Central Oklahoma
 
 2015-02-11
 
