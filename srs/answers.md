@@ -8,7 +8,6 @@ Version 1.0 approved
 
 Prepared by
 
-  * _hey guys fork this and add your name!_
   * Jonathan Wesley Stone <jstone25@uco.edu>
   * Logan Glenn Huskins <lhuskins@uco.edu>
   * Thomas Focht <keyboardtyper2@gmail.com>
