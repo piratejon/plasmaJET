@@ -114,7 +114,7 @@ Department of Computer Science, University of Central Oklahoma
 
     # I think we should also talk over the design of the program 
 
-    3.2.1 Functional Requirement 1
+    3.2.1 Connects to a Compatible Client
 
       3.2.1.1 Introduction
 
@@ -134,9 +134,23 @@ Department of Computer Science, University of Central Oklahoma
 
         <Describes the outputs (destination, quantities, error messages, and the like).>
 
-    3.2.2 Functional Requirement 2
+    3.2.2 AI Must Win or Draw
+      3.2.2.1 Introduction
+      3.2.2.2 Inputs
+      3.2.2.3 Processing
+      3.2.2.4 Outputs
 
-      more stuff!
+    3.2.3 Realtime updates of game status
+      3.2.3.1 Introduction
+      3.2.3.2 Inputs
+      3.2.3.3 Processing
+      3.2.3.4 Outputs
+
+    3.2.4 Validate opponent moves
+      3.2.3.1 Introduction
+      3.2.3.2 Inputs
+      3.2.3.3 Processing
+      3.2.3.4 Outputs
 
   3.3 Performance Requirements
 
