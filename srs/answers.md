@@ -180,7 +180,7 @@ Department of Computer Science, University of Central Oklahoma
 
       <Requirements to guarantee a certain level of maintainability of the system, such as a maximum allowable coupling between components.>
 
-      The system will have well produced documentation using Java's built-in documentation feature that will come alongside any version of the application. This documentation, along with designing alongside typical Object Oriented patterns and standards, will guarentee maintainability for any future work.
+      The system will have well produced documentation using Java's built-in documentation feature that will come alongside any version of the application. This documentation, along with designing alongside typical Object Oriented patterns and standards, will guarantee maintainability for any future work.
 
   3.5 Design Constraints
 
