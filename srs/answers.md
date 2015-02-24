@@ -31,11 +31,13 @@ Department of Computer Science, University of Central Oklahoma
   1.3 References
 
     * http://www.math.cornell.edu/~mec/2003-2004/graphtheory/tictactoe/howtoplayttt.html
-    * Dr. Jicheng Fu's Spring 2015 CMSC 4283/5283 Project Description <https://github.com/loganhuskins/plasmaJET/blob/master/Project%2BDescription.docx>
+    * Dr. Jicheng Fu's Spring 2015 CMSC 4283/5283 Project Description, <https://github.com/loganhuskins/plasmaJET/blob/master/Project%2BDescription.docx>
     * Super Tic Tac Toe protocol documentation (as yet unreleased)
     * PlasmaJET Super Tic Tac Toe Use Case Diagrams (under development)
     * PlasmaJET Super Tic Tac Toe Sequence Diagrams (under development)
     * PlasmaJET Super Tic Tac Toe Class Diagrams
+    * Google Java Style Guide, <https://google-styleguide.googlecode.com/svn/trunk/javaguide.html>
+    * usability.gov User Interface Design Basics <http://www.usability.gov/what-and-why/user-interface-design.html>
 
     <List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.>
 
@@ -170,7 +172,7 @@ Department of Computer Science, University of Central Oklahoma
 
     3.5.1 Standards Compliance
 
-      Several standards govern aspects of the project.
+      Several standards govern different aspects of the project. This design document itself and the design it details adhere to software engineering best practices as described by Dr. Jicheng Fu in course lectures, on Dr. Fu's slide decks and presentation notes, and in the course text, _Object-Oriented Software Engineering using UML, Patterns, and Java (3rd Edition)_. This project's use case diagrams adhere to the UML 2.0 standard. Work done in conjunction with the project is fully compliant with UCO academic integrity standards. Program code written for the project primarily adheres to Google Java Style guide as of March 21, 2014, favoring readability and consistency of style everywhere possible. Additional guidelines determined by team consensus regarding to documentation, testing, and program design patterns are also upheld, with minimal deviations from accepted conventions admitted where noted with an explanation as to why the best practice could not be followed and how the exception better supports the fulfillment of the component's role in meeting the design goal. The user interface and experience conforms to Usability.gov User Interface Design Basics.
 
       <Which existing standards or regulations must be followed, and what requirements result from these. For example, certain report formats or audit procedures may be prescribed>
 
