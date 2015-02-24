@@ -21,7 +21,7 @@ Department of Computer Science, University of Central Oklahoma
 
   1.1 Purpose and Scope
 
-    This document specifies the design of Super Tic Tac Toe 1.0 ("the project"), Team 5 ("PlasmaJET")'s Spring 2015 CMSC 4283/5283 semester project.  The System will efficiently perform all requirements found in the project description for Dr. Jicheng Fu's Spring 2015 CMSC 4283/5283 Software Engineering class.  The basic of these is a system that creates connection to another team's system and perform within protocol a game of Tic Tac Toe with Achi tiebreaker.
+    This document specifies the design of Super Tic Tac Toe 1.0 ("the project"), Team 5 ("PlasmaJET")'s Spring 2015 CMSC 4283/5283 semester project.  The System will efficiently perform all requirements found in the project description for Dr. Jicheng Fu's Spring 2015 CMSC 4283/5283 Software Engineering class.  The basic idea is a system that creates a connection to another team's system and performs within protocol a game of Tic Tac Toe with Achi tiebreaker.
     <Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS (what does it do and what does it not do), particularly if this SRS describes only part of the system or a single subsystem.>
 
   1.2 Definitions, Acronyms, and Abbreviations
