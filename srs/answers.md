@@ -21,7 +21,7 @@ Department of Computer Science, University of Central Oklahoma
 
   1.1 Purpose and Scope
 
-    This document specifies the design of Super Tic Tac Toe 1.0 ("the project"), Team 5 ("PlasmaJET")'s Spring 2015 CMSC 4283/5283 semester project.
+    This document specifies the design of Super Tic Tac Toe 1.0 ("the project"), Team 5 ("PlasmaJET")'s Spring 2015 CMSC 4283/5283 semester project.  The System will efficiently perform all requirements found in the project description for Dr. Jicheng Fu's Spring 2015 CMSC 4283/5283 Software Engineering class.  The basic of these is a system that creates connection to another team's system and perform within protocol a game of Tic Tac Toe with Achi tiebreaker.
     <Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS (what does it do and what does it not do), particularly if this SRS describes only part of the system or a single subsystem.>
 
   1.2 Definitions, Acronyms, and Abbreviations
@@ -92,6 +92,8 @@ Department of Computer Science, University of Central Oklahoma
       <Describe the logical and physical characteristics of each interface between the software product and the hardware components of the system. This may include the supported device types, the nature of the data and control interactions between the software and the hardware, and communication protocols to be used.>
 
     3.1.3 Software Interfaces
+    
+    The Super Tic Tac Toe system will be a Java based desktop application that will connect to all competing systems through protocols proposed by the Software Engineering 4283/5283 protocol committee.  The current proposal is for connections to be made through a known good server.
 
       <Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.>
 
@@ -115,6 +117,8 @@ Department of Computer Science, University of Central Oklahoma
     3.2.1 Connects to a Compatible Client
 
       3.2.1.1 Introduction
+      
+      The connect function will allow the Super Tic Tac Toe system to connect to all competing systems that also adhere to the protocols put forth by the protocol committee.  
 
         <Describe the purpose of this function and the approaches and techniques used. The introduction should include information to clarify the intent of the function.>
 
@@ -144,15 +148,37 @@ Department of Computer Science, University of Central Oklahoma
 
     3.2.3 Realtime updates of game status
       3.2.3.1 Introduction
+      
+      The system will provide real time updates of the game status through the appropriate user interfaces.  This will include each move being displayed as they are made as well as game over decisions and connection status.
+      
       3.2.3.2 Inputs
+      
+      The System will display moves made by both itself and the opposing system.  As the system makes its own move, it displays the move on the game board.  The system will also accept moves from the opposing system, but will not display the move until it has been properly validated within the system.
+      
       3.2.3.3 Processing
+      
+      The system’s display of its own moves will happen automatically as it will have computed its move prior to deciding the move to make.  Opponent moves however will be inputted and processed through validation insuring that the move is indeed valid.  After moves are completed by either system, a check will be made that a game over decision has not been made.
+      
       3.2.3.4 Outputs
+      
+      System moves will be automatically displayed.  After passing validation, opponent moves will be displayed to the user through the appropriate interface.  If a game over decision is triggered, the system will display the appropriate message to the user.  Loss of connection will also provide proper notification to the user that the connection is no longer available.
 
     3.2.4 Validate opponent moves
       3.2.3.1 Introduction
+      
+      The system will have a validation function that will check all opponent moves to ensure the move is allowable to the current game.  If the move validates, the system then continues to check to see if a game time decision has been made.  If the move fails validation, the system alerts the opposing system to the failure to accept its last move.
+      
       3.2.3.2 Inputs
+      
+      The system will receive input commands defined by the protocols put forth by the class committee.  
+      
       3.2.3.3 Processing
+      
+      The system will check that the move is both an allowable move as well as that the current move has not already been made.
+      
       3.2.3.4 Outputs
+      
+      After the validation function is performed, the system will update accordingly.  A valid move will produce the move to be displayed as well as the system will be notified of either a game over decision or the go ahead to make its next move.
 
   3.3 Performance Requirements
 
