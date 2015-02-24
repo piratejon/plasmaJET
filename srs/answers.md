@@ -170,9 +170,15 @@ Department of Computer Science, University of Central Oklahoma
 
     3.5.1 Standards Compliance
 
+      Several standards govern aspects of the project.
+
       <Which existing standards or regulations must be followed, and what requirements result from these. For example, certain report formats or audit procedures may be prescribed>
 
     3.5.2 Hardware Limitations
+
+      The project is implemented in Java and will theoretically run anywhere a JVM is available. Centain hardware capabilities must be available to the JVM in order to meet specific design requirements. The user interface requires requires a hardware graphical display capable of rendering bitmap graphics as outlined in the interface design section of this document, as well as hardware input devices enabling the user to participate in the use cases outlined above, including choosing a game mode (AI-vs-AI or player-vs-AI), entering an opponent network address, indicating a move during gameplay, and acknowledging the result of the game at its conclusion. These user actions are facilitated by some combination of input devices such as a hardware keyboard, hardware mouse, virtual keyboard operated by hardware mouse, or hardware touchscreen as pointer enabling operation of a virtual keyboard.
+      In order for the client to successfully participate in AI-vs-AI mode, a TCP/IP network stack and supporting hardware must also be available to the JVM that is running the application code.
+      The computer tic-tac-toe algorithm is CPU-bound and additional hardware architectural constraints 
 
       <A description of the characteristics of the hardware environment, in as far as they lead to software requirements. An example of this might be the amount of memory available.>
 
