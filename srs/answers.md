@@ -44,6 +44,8 @@ Department of Computer Science, University of Central Oklahoma
     
     <Contain an outline of the remainder of the document.>
 
+    See attached diagram.
+
 2. Overall Description
 
   2.1 Product Functions
@@ -139,7 +141,7 @@ Department of Computer Science, University of Central Oklahoma
 
     <If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.>
 
-    When deciding moves on the game board, both the user and the client will have a set time to make a decision before they are forced forfeit. WHile the client is required to meet the same time standards as the user, due to the small and finite number of moves the system is able to make, the system will be expected to make a decision much faster. It will generally be expected that the system makes any decisions in <1 second, or on a pace that is unnoticeable by the user. When determining a winner or a draw, the system is expected to make an equally quick determination. The performance requirements of an AI versus AI game connection will be determined after the group leaders discuss the terms of the peer-to-peer connection. The design document will be updated to reflect any decisions made.
+    When deciding moves on the game board, both the user and the client will have a set time to make a decision before they are forced forfeit. While the client is required to meet the same time standards as the user, due to the small and finite number of moves the system is able to make, the system will be expected to make a decision much faster. It will generally be expected that the system makes any decisions in <1 second, or on a pace that is unnoticeable by the user while playing on a 3x3 board. When determining a winner or a draw, the system is expected to make an equally quick determination. The performance requirements in an AI versus AI game will depend largely on the networking between the two clients. In this situation, the system will be expected to make decisions and determine the winner as quickly as in a player versus AI from when the data reaches the system. It will send the moves out in an additional time-frame of about 1 second, or a time unnoticeable to the observers.
 
   3.4 Software System Attributes 
 
@@ -149,13 +151,19 @@ Department of Computer Science, University of Central Oklahoma
 
       <Factors that guarantee a certain level of availability such as restart procedures. In this subsection we may also enlist requirements regarding fault tolerance (with respect to both hardware failures and software failures.>
 
+      The desktop client will be available for player versus AI games as long as the hardware the system is running on is avalable. FOr any demonstration, the system will be running on one of plasmaJET's personal computers. Between the team members, we can promise 95% uptime. With respect to AI vs AI, we can promise 95% uptime for our application, but can make promises about uptime outside of our specific system due to uncontrollable variables.
+
     3.4.2 Security
 
       <Requirements regarding unauthorized access and other forms of misuse. Certain cryptographic techniques may be prescribed, and we may put constraints on the communication between different parts of the system.>
 
+      The system will be able to check and prevent a user from performing illegal moves and adjust accordingly for player versus AI games. In AI versus AI games, any outgoing communications will be encrypted using an as-to-be determined public key system. In these games the system will also look for external systems attempting to cheat or alter any game elements.
+
     3.4.3 Maintainability
 
       <Requirements to guarantee a certain level of maintainability of the system, such as a maximum allowable coupling between components.>
+
+      The system will have well produced documentation using Java's built-in documentation feature that will come alongside any version of the application. This documentation, along with designing alongside typical Object Oriented patterns and standards, will guarentee maintainability for any future work.
 
   3.5 Design Constraints -----JOHNATHAN
 
