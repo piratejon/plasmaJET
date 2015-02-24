@@ -136,6 +136,7 @@ Department of Computer Science, University of Central Oklahoma
 
     3.2.2 AI Must Win or Draw
       3.2.2.1 Introduction
+        In the normal mode of the tic-tac-toe game, under normal starting conditions, the computer decision algorithm does not admit the possibility of defeat. This claim is permissible under the standard rules of tic-tac-toe. A proof is outlined showing that at any point in the sequence of tic-tac-toe game moves consisting of alternating plays by each player, it is possible for either player to determine a best move which, when supported by subsequent best moves, yields no outcome worse than a draw for that player. Additionally it is shown that by following this procedure from the very beginning of the game, no state can be entered from which it is impossible to direct the game toward a win or draw from the player whose perspective is considered. It follows that by identifying and choosing from among only the possible moves which precipitate the best possible outcome available at each state, it is not possible for the player to lose, only to win or draw, and that when two players both employ this strategy precisely, the game will always result in a draw.
       3.2.2.2 Inputs
       3.2.2.3 Processing
       3.2.2.4 Outputs
