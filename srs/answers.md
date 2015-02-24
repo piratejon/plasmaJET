@@ -93,8 +93,6 @@ Department of Computer Science, University of Central Oklahoma
 
     3.1.3 Software Interfaces
 
-# I'm skipping this since we probably need to have a team conversation first -- wouldn't it be fun to do our project on a microcontroller or FPGA!! (LOGAN - I have an unused raspberry pi we can use)
-
       <Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.>
 
     3.1.4 Communications Interfaces
