@@ -164,7 +164,7 @@ Department of Computer Science, University of Central Oklahoma
 
       The system will have well produced documentation using Java's built-in documentation feature that will come alongside any version of the application. This documentation, along with designing alongside typical Object Oriented patterns and standards, will guarentee maintainability for any future work.
 
-  3.5 Design Constraints -----JOHNATHAN
+  3.5 Design Constraints
 
     <Design constraints may result from such things as the prescribed use of certain standards or hardware.>
 
