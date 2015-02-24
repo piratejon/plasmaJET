@@ -199,3 +199,4 @@ Department of Computer Science, University of Central Oklahoma
 Appendix A: Issues List
 
   < This is a dynamic list of the open requirements issues that remain to be resolved, including TBDs, pending decisions, information that is needed, conflicts awaiting resolution, and the like.>
+  * Our user-facing use cases should be compatible, with minimal modifications, with whatever protocol is decided upon by the protocol design team. However the specific protocol implementation details are as-yet-unknown and these may require unanticipated adjustments.
