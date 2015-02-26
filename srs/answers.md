@@ -58,7 +58,7 @@ Department of Computer Science, University of Central Oklahoma
 
   2.4 Assumptions and Dependencies
 
-    It is assumed that all external components will operate according to their documented purposes and specifications and that an escalation path exists for any failures to do so which inhibit Team PlasmaJET's ability to capitalize on their utility for the purpose of implementing the client.
+    It is assumed that all external components will operate according to their documented purposes and specifications. The Super Tic Tac Toe depends on a stable internet conection and it assumes that the opposing team's system will also comply with the chosen protocol decided by the class. It also assumes that an escalation path exists for any failures which inhibit Team PlasmaJET's ability to capitalize on their utility for the purpose of implementing the client.
 
 3. Specific Requirements
 
