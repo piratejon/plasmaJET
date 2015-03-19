@@ -61,6 +61,30 @@ void test_increment_string(void) {
   ASSERT(0 == strcmp(a, "         "), "string failed to increment");
 }
 
+void test_winner_bits(void) {
+  struct TttBoard t;
+  ttt_board_from_string("xxoo    x", &t);
+  ASSERT(ttt_winner_bits(t.xs) == false, "bad winner bits");
+  ttt_board_from_string("xxxo    o", &t);
+  ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
+  ttt_board_from_string("  oxxx  o", &t);
+  ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
+  ttt_board_from_string("  o   xxx", &t);
+  ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
+  ttt_board_from_string("x ox  x  ", &t);
+  ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
+  ttt_board_from_string("x o   x  ", &t);
+  ASSERT(ttt_winner_bits(t.xs) == false, "bad winner bits");
+  ttt_board_from_string("oxooxo x ", &t);
+  ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
+  ttt_board_from_string("oxxoxx  x", &t);
+  ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
+  ttt_board_from_string("x o xo  x", &t);
+  ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
+  ttt_board_from_string("o x xox o", &t);
+  ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
+}
+
 void test_final_position(void) {
   char b[] = "xxoo  xox";
   ASSERT(sizeof(b) == 10, "wrong sizeof(b)");
@@ -87,5 +111,6 @@ void do_tests(void) {
   TEST(test_increment_string);
   TEST(test_final_position);
   TEST(test_board_string_to_bitmask);
+  TEST(test_winner_bits);
 }
 

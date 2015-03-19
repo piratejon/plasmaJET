@@ -16,6 +16,22 @@ void ttt_string_increment(char * s, size_t t) {
   }
 }
 
+bool check_mask(int b, int mask) {
+  return (b & mask) == mask;
+}
+
+bool ttt_winner_bits(int b) {
+  return
+    check_mask(b, 0x0007)
+    || check_mask(b, 0x0038)
+    || check_mask(b, 0x01c0)
+    || check_mask(b, 0x0124)
+    || check_mask(b, 0x0092)
+    || check_mask(b, 0x0049)
+    || check_mask(b, 0x0111)
+    || check_mask(b, 0x0054);
+}
+
 char ttt_winner(char * board) {
   return ' ';
 }
