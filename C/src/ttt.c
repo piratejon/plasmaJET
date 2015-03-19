@@ -8,3 +8,11 @@ char ttt_position_increment(char p) {
   return -1;
 }
 
+void ttt_string_increment(char * s, size_t t) {
+  s[0] = 'x';
+  /*
+  for (i = 0; i < t; i += 1) {
+  }
+  */
+}
+
