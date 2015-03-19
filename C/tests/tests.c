@@ -69,11 +69,15 @@ void test_final_position(void) {
 }
 
 void test_board_string_to_bitmask(void) {
-  char b[] = "xxoo  oxo";
+  char b[] = "xxoo  xox";
   struct TttBoard t;
   ttt_board_from_string(b, &t);
-  ASSERT(t.xs == 0x183, "wrong bitmask for xs");
-  ASSERT(t.os == 0x062, "wrong bitmask for os");
+  ASSERT(t.xs == 0x143, "wrong bitmask for xs");
+  ASSERT(t.os == 0x08c, "wrong bitmask for os");
+  ttt_string_increment(b, sizeof(b)-1);
+  ASSERT(0 == strcmp(b, "oxoo  xox"), "wrong board after increment");
+  //ASSERT(t.xs == 0x083, "wrong bitmask for xs");
+  //ASSERT(t.os == 0x162, "wrong bitmask for os");
 }
 
 void do_tests(void) {
@@ -81,5 +85,6 @@ void do_tests(void) {
   TEST(test_increment_position);
   TEST(test_increment_string);
   TEST(test_final_position);
+  TEST(test_board_string_to_bitmask);
 }
 

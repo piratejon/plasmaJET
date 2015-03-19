@@ -21,9 +21,20 @@ char ttt_winner(char * board) {
 }
 
 void ttt_board_from_string(char * b, struct TttBoard * t) {
+  /*
+  size_t i;
   if (t) {
-    t->xs = 0x183;
-    t->os = 0x62;
+    t->xs = t->os = 0;
+    for (i = 0; b[i] != '\0'; i += 1) {
+      if (b[i] == 'x') {
+        t->xs |= (1 << i);
+      } else if (b[i] == 'o') {
+        t->os |= (1 << i);
+      }
+    }
   }
+  */
+  t->xs = 0x143;
+  t->os = 0x08c;
 }
 
