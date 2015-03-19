@@ -9,10 +9,10 @@ char ttt_position_increment(char p) {
 }
 
 void ttt_string_increment(char * s, size_t t) {
-  s[0] = 'x';
-  /*
+  size_t i;
   for (i = 0; i < t; i += 1) {
+    s[i] = ttt_position_increment(s[i]);
+    if (s[i] != ' ') break;
   }
-  */
 }
 
