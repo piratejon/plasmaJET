@@ -115,11 +115,20 @@ void test_set_open_positions(void) {
   ASSERT(ttt_fetch_position(&t, 8) == ' ', "wrong tile at 0");
 }
 
+void test_board_position_setters(void) {
+  struct TttBoard t;
+  ttt_board_from_string("         ", &t);
+  ASSERT(t.xs == 0, "xs should not be set");
+  ASSERT(t.os == 0, "os should not be set");
+  ASSERT(t.fs == 0x1ff, "should be entirely empty");
+}
+
 void do_tests(void) {
   TEST(test_increment_position);
   TEST(test_increment_string);
   TEST(test_board_string_to_bitmask);
   TEST(test_winner_bits);
   TEST(test_set_open_positions);
+  TEST(test_board_position_setters);
 }
 
