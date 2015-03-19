@@ -20,6 +20,10 @@ bool check_mask(int b, int mask) {
   return (b & mask) == mask;
 }
 
+bool check_bit(int b, int p) {
+  return (b & (1 << p)) != 0;
+}
+
 bool ttt_winner_bits(int b) {
   return
     check_mask(b, 0x0007)
@@ -53,6 +57,6 @@ void ttt_board_from_string(char * b, struct TttBoard * t) {
 }
 
 bool ttt_is_position_open(struct TttBoard * t, size_t pos) {
-  return check_mask(t->fs, pos);
+  return check_bit(t->fs, pos);
 }
 

@@ -99,7 +99,10 @@ void test_set_open_positions(void) {
   struct TttBoard t;
   ttt_board_from_string("xx oox   ", &t);
 
-  ASSERT(ttt_is_position_open(&t, 0), "0 missing from positions list");
+  ASSERT(ttt_is_position_open(&t, 2), "2 missing from positions list");
+  ASSERT(ttt_is_position_open(&t, 6), "6 missing from positions list");
+  ASSERT(ttt_is_position_open(&t, 7), "7 missing from positions list");
+  ASSERT(ttt_is_position_open(&t, 8), "8 missing from positions list");
 }
 
 void do_tests(void) {
