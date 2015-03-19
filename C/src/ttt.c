@@ -60,3 +60,9 @@ bool ttt_is_position_open(struct TttBoard * t, size_t pos) {
   return check_bit(t->fs, pos);
 }
 
+char ttt_fetch_position(struct TttBoard * t, size_t pos) {
+  if (check_bit(t->xs, pos)) return 'x';
+  else if (check_bit(t->os, pos)) return 'o';
+  else return ' ';
+}
+

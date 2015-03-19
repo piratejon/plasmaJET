@@ -16,6 +16,7 @@ void ttt_board_from_string(char *, struct TttBoard *);
 bool ttt_winner_bits(int);
 void ttt_list_open_positions(char *, char *);
 bool ttt_is_position_open(struct TttBoard *, size_t);
+char ttt_fetch_position(struct TttBoard *, size_t);
 
 #endif // _PLASMAJET_TTT_H
 

@@ -103,6 +103,16 @@ void test_set_open_positions(void) {
   ASSERT(ttt_is_position_open(&t, 6), "6 missing from positions list");
   ASSERT(ttt_is_position_open(&t, 7), "7 missing from positions list");
   ASSERT(ttt_is_position_open(&t, 8), "8 missing from positions list");
+
+  ASSERT(ttt_fetch_position(&t, 0) == 'x', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 1) == 'x', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 2) == ' ', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 3) == 'o', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 4) == 'o', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 5) == 'x', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 6) == ' ', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 7) == ' ', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 8) == ' ', "wrong tile at 0");
 }
 
 void do_tests(void) {
