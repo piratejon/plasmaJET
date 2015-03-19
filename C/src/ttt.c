@@ -61,8 +61,14 @@ bool ttt_is_position_open(struct TttBoard * t, size_t pos) {
 }
 
 char ttt_fetch_position(struct TttBoard * t, size_t pos) {
-  if (check_bit(t->xs, pos)) return 'x';
-  else if (check_bit(t->os, pos)) return 'o';
+  if (check_bit(t->xs, 8 - pos)) return 'x';
+  else if (check_bit(t->os, 8 - pos)) return 'o';
   else return ' ';
+}
+
+void ttt_set_x(struct TttBoard * t, size_t pos) {
+  t->xs |= (1 << (8 - pos));
+  t->os &= (0x1ff & (1 << (8 - pos)));
+  t->fs &= (0x1ff & (1 << (8 - pos)));
 }
 
