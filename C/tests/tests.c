@@ -127,9 +127,13 @@ void test_board_position_setters(void) {
   ttt_set_x(&t, 3);
   ASSERT(ttt_fetch_position(&t, 3) == 'x', "position 3 should be x");
 
-  // ttt_set_o(&t, 3);
-  // ASSERT(ttt_fetch_position(&t, 3 == 'o'), "position 3 should be o");
-  // ttt_set_o(&t, 5);
+  ASSERT(t.os == 0, "os have wrong value prior to reset");
+  ASSERT(t.xs == 0x020, "xs have wrong value prior to reset");
+  ASSERT(t.fs == 0x1df, "fs have wrong value prior to reset");
+  ttt_set_o(&t, 3);
+  ASSERT(ttt_fetch_position(&t, 3) == 'o', "position 3 should be o");
+  ttt_set_o(&t, 5);
+  ASSERT(ttt_fetch_position(&t, 5) == 'o', "position 5 should be o");
 }
 
 void do_tests(void) {

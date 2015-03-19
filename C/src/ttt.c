@@ -68,7 +68,13 @@ char ttt_fetch_position(struct TttBoard * t, size_t pos) {
 
 void ttt_set_x(struct TttBoard * t, size_t pos) {
   t->xs |= (1 << (8 - pos));
-  t->os &= (0x1ff & (1 << (8 - pos)));
-  t->fs &= (0x1ff & (1 << (8 - pos)));
+  t->os &= ~(0x1ff & (1 << (8 - pos)));
+  t->fs &= ~(0x1ff & (1 << (8 - pos)));
+}
+
+void ttt_set_o(struct TttBoard * t, size_t pos) {
+  t->xs &= ~(0x1ff & (1 << (8 - pos)));
+  t->os |= (1 << (8 - pos));
+  t->fs &= ~(0x1ff & (1 << (8 - pos)));
 }
 
