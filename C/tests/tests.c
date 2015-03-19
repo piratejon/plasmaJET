@@ -68,6 +68,14 @@ void test_final_position(void) {
   ASSERT(ttt_winner(b) == ' ', "wrong winner identified");
 }
 
+void test_board_string_to_bitmask(void) {
+  char b[] = "xxoo  oxo";
+  struct TttBoard t;
+  ttt_board_from_string(b, &t);
+  ASSERT(t.xs == 0x183, "wrong bitmask for xs");
+  ASSERT(t.os == 0x062, "wrong bitmask for os");
+}
+
 void do_tests(void) {
   TEST(test_one);
   TEST(test_increment_position);

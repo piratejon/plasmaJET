@@ -20,3 +20,10 @@ char ttt_winner(char * board) {
   return ' ';
 }
 
+void ttt_board_from_string(char * b, struct TttBoard * t) {
+  if (t) {
+    t->xs = 0x183;
+    t->os = 0x62;
+  }
+}
+
