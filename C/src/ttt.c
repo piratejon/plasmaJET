@@ -36,7 +36,9 @@ bool ttt_winner_bits(int b) {
     || check_mask(b, 0x0054);
 }
 
-char ttt_winner(char * board) {
+char ttt_winner(struct TttBoard * t) {
+  if (ttt_winner_bits(t->xs)) return 'x';
+  if (ttt_winner_bits(t->os)) return 'o';
   return ' ';
 }
 

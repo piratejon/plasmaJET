@@ -137,6 +137,7 @@ void test_board_position_setters(void) {
 void test_base_case_score(void) {
   struct TttBoard t;
   ttt_board_from_string("xxxoo    ", &t);
+  ASSERT(ttt_winner(&t) == 'x', "wrong winner identified");
   ASSERT(ttt_board_score(&t) == 7, "wrong score determined");
 }
 

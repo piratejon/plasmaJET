@@ -11,7 +11,6 @@ struct TttBoard {
 
 char ttt_position_increment(char);
 void ttt_string_increment(char *, size_t);
-char ttt_winner(char *);
 void ttt_board_from_string(char *, struct TttBoard *);
 bool ttt_winner_bits(int);
 void ttt_list_open_positions(char *, char *);
@@ -20,6 +19,7 @@ char ttt_fetch_position(struct TttBoard *, size_t);
 void ttt_set_x(struct TttBoard *, size_t);
 void ttt_set_o(struct TttBoard *, size_t);
 int ttt_board_score(struct TttBoard *);
+char ttt_winner(struct TttBoard *);
 
 #endif // _PLASMAJET_TTT_H
 
