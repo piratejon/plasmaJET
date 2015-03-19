@@ -6,6 +6,7 @@
 
 char ttt_position_increment(char);
 void ttt_string_increment(char *, size_t);
+char ttt_winner(char *);
 
 #endif // _PLASMAJET_TTT_H
 

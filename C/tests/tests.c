@@ -61,9 +61,17 @@ void test_increment_string(void) {
   ASSERT(0 == strcmp(a, "         "), "string failed to increment");
 }
 
+void test_final_position(void) {
+  char b[] = "xxoo  xox";
+  ASSERT(sizeof(b) == 10, "wrong sizeof(b)");
+
+  ASSERT(ttt_winner(b) == ' ', "wrong winner identified");
+}
+
 void do_tests(void) {
   TEST(test_one);
   TEST(test_increment_position);
   TEST(test_increment_string);
+  TEST(test_final_position);
 }
 
