@@ -85,13 +85,6 @@ void test_winner_bits(void) {
   ASSERT(ttt_winner_bits(t.xs) == true, "bad winner bits");
 }
 
-void test_final_position(void) {
-  char b[] = "xxoo  xox";
-  ASSERT(sizeof(b) == 10, "wrong sizeof(b)");
-
-  ASSERT(ttt_winner(b) == ' ', "wrong winner identified");
-}
-
 void test_board_string_to_bitmask(void) {
   char b[] = "xxoo  xox";
   struct TttBoard t;
@@ -109,7 +102,6 @@ void do_tests(void) {
   TEST(test_one);
   TEST(test_increment_position);
   TEST(test_increment_string);
-  TEST(test_final_position);
   TEST(test_board_string_to_bitmask);
   TEST(test_winner_bits);
 }
