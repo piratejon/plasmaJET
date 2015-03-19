@@ -122,8 +122,6 @@ void test_board_position_setters(void) {
   ASSERT(t.os == 0, "os should not be set");
   ASSERT(t.fs == 0x1ff, "should be entirely empty");
 
-  // ASSERT(
-
   ttt_set_x(&t, 3);
   ASSERT(ttt_fetch_position(&t, 3) == 'x', "position 3 should be x");
 
@@ -136,6 +134,12 @@ void test_board_position_setters(void) {
   ASSERT(ttt_fetch_position(&t, 5) == 'o', "position 5 should be o");
 }
 
+void test_base_case_score(void) {
+  struct TttBoard t;
+  ttt_board_from_string("xxxoo    ", &t);
+  ASSERT(ttt_board_score(&t) == 7, "wrong score determined");
+}
+
 void do_tests(void) {
   TEST(test_increment_position);
   TEST(test_increment_string);
@@ -143,5 +147,6 @@ void do_tests(void) {
   TEST(test_winner_bits);
   TEST(test_set_open_positions);
   TEST(test_board_position_setters);
+  TEST(test_base_case_score);
 }
 

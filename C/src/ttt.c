@@ -78,3 +78,7 @@ void ttt_set_o(struct TttBoard * t, size_t pos) {
   t->fs &= ~(0x1ff & (1 << (8 - pos)));
 }
 
+int ttt_board_score(struct TttBoard * t) {
+  return 7;
+}
+

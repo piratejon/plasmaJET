@@ -19,6 +19,7 @@ bool ttt_is_position_open(struct TttBoard *, size_t);
 char ttt_fetch_position(struct TttBoard *, size_t);
 void ttt_set_x(struct TttBoard *, size_t);
 void ttt_set_o(struct TttBoard *, size_t);
+int ttt_board_score(struct TttBoard *);
 
 #endif // _PLASMAJET_TTT_H
 
