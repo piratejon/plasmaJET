@@ -76,8 +76,9 @@ void test_board_string_to_bitmask(void) {
   ASSERT(t.os == 0x08c, "wrong bitmask for os");
   ttt_string_increment(b, sizeof(b)-1);
   ASSERT(0 == strcmp(b, "oxoo  xox"), "wrong board after increment");
-  //ASSERT(t.xs == 0x083, "wrong bitmask for xs");
-  //ASSERT(t.os == 0x162, "wrong bitmask for os");
+  ttt_board_from_string(b, &t);
+  ASSERT(t.xs == 0x142, "wrong bitmask for xs");
+  ASSERT(t.os == 0x08d, "wrong bitmask for os");
 }
 
 void do_tests(void) {
