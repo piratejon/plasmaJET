@@ -10,9 +10,11 @@ void test_one(void) {
 void test_increment_position(void) {
   char a = ' ';
   ASSERT(ttt_position_increment(a) == 'x', "Position failed to increment properly.");
+  ASSERT(ttt_position_increment('x') == 'o', "Position failed to increment properly.");
 }
 
 void do_tests(void) {
   TEST(test_one);
+  TEST(test_increment_position);
 }
 

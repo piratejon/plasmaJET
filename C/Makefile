@@ -8,7 +8,7 @@ all:
 
 check: tests/tests
 
-tests/tests: tests/test_main.c tests/tests.c tests/tests.h
+tests/tests: tests/test_main.c tests/tests.c tests/tests.h $(SOURCES)
 	$(CC) $(CFLAGS) $(TEST_SOURCES) $(SOURCES) -o $@
 	tests/tests
 
