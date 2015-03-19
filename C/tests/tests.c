@@ -1,13 +1,10 @@
 
+#include <strings.h>
 #include <string.h>
 
 #include "tests.h"
 
 #include "ttt.h"
-
-void test_one(void) {
-  ASSERT(1==1, "One failed to be equal to one.");
-}
 
 void test_increment_position(void) {
   char a = ' ';
@@ -98,11 +95,18 @@ void test_board_string_to_bitmask(void) {
   ASSERT(t.os == 0x08d, "wrong bitmask for os");
 }
 
+void test_set_open_positions(void) {
+  struct TttBoard t;
+  ttt_board_from_string("xx oox   ", &t);
+
+  ASSERT(ttt_is_position_open(&t, 0), "0 missing from positions list");
+}
+
 void do_tests(void) {
-  TEST(test_one);
   TEST(test_increment_position);
   TEST(test_increment_string);
   TEST(test_board_string_to_bitmask);
   TEST(test_winner_bits);
+  TEST(test_set_open_positions);
 }
 

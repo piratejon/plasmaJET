@@ -39,14 +39,20 @@ char ttt_winner(char * board) {
 void ttt_board_from_string(char * b, struct TttBoard * t) {
   size_t i;
   if (t) {
-    t->xs = t->os = 0;
+    t->xs = t->os = t->fs = 0;
     for (i = 0; b[i] != '\0'; i += 1) {
       if (b[i] == 'x') {
         t->xs |= (1 << i);
       } else if (b[i] == 'o') {
         t->os |= (1 << i);
+      } else {
+        t->fs |= (1 << i);
       }
     }
   }
+}
+
+bool ttt_is_position_open(struct TttBoard * t, size_t pos) {
+  return check_mask(t->fs, pos);
 }
 
