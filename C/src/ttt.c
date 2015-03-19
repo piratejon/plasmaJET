@@ -17,6 +17,6 @@ void ttt_string_increment(char * s, size_t t) {
 }
 
 char ttt_winner(char * board) {
-  return 'x';
+  return ' ';
 }
 
