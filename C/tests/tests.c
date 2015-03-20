@@ -104,15 +104,15 @@ void test_set_open_positions(void) {
   ASSERT(ttt_is_position_open(&t, 7), "7 missing from positions list");
   ASSERT(ttt_is_position_open(&t, 8), "8 missing from positions list");
 
-  ASSERT(ttt_fetch_position(&t, 8) == 'x', "wrong tile at 8");
-  ASSERT(ttt_fetch_position(&t, 7) == 'x', "wrong tile at 7");
-  ASSERT(ttt_fetch_position(&t, 6) == ' ', "wrong tile at 6");
-  ASSERT(ttt_fetch_position(&t, 5) == 'o', "wrong tile at 5");
+  ASSERT(ttt_fetch_position(&t, 0) == 'x', "wrong tile at 8");
+  ASSERT(ttt_fetch_position(&t, 1) == 'x', "wrong tile at 7");
+  ASSERT(ttt_fetch_position(&t, 2) == ' ', "wrong tile at 6");
+  ASSERT(ttt_fetch_position(&t, 3) == 'o', "wrong tile at 5");
   ASSERT(ttt_fetch_position(&t, 4) == 'o', "wrong tile at 4");
-  ASSERT(ttt_fetch_position(&t, 3) == 'x', "wrong tile at 3");
-  ASSERT(ttt_fetch_position(&t, 2) == ' ', "wrong tile at 2");
-  ASSERT(ttt_fetch_position(&t, 1) == ' ', "wrong tile at 1");
-  ASSERT(ttt_fetch_position(&t, 0) == ' ', "wrong tile at 0");
+  ASSERT(ttt_fetch_position(&t, 5) == 'x', "wrong tile at 3");
+  ASSERT(ttt_fetch_position(&t, 6) == ' ', "wrong tile at 2");
+  ASSERT(ttt_fetch_position(&t, 7) == ' ', "wrong tile at 1");
+  ASSERT(ttt_fetch_position(&t, 8) == ' ', "wrong tile at 0");
 }
 
 void test_board_position_setters(void) {
@@ -126,8 +126,8 @@ void test_board_position_setters(void) {
   ASSERT(ttt_fetch_position(&t, 3) == 'x', "position 3 should be x");
 
   ASSERT(t.os == 0, "os have wrong value prior to reset");
-  ASSERT(t.xs == 0x020, "xs have wrong value prior to reset");
-  ASSERT(t.fs == 0x1df, "fs have wrong value prior to reset");
+  ASSERT(t.xs == 0x008, "xs have wrong value prior to reset");
+  ASSERT(t.fs == 0x1f7, "fs have wrong value prior to reset");
   ttt_set_o(&t, 3);
   ASSERT(ttt_fetch_position(&t, 3) == 'o', "position 3 should be o");
   ttt_set_o(&t, 5);
@@ -168,6 +168,11 @@ void test_one_up_from_base(void) {
      */
 
   // the case, solved
+  ASSERT(ttt_is_position_open(&t, 2) == true, "cannot see the hole in the board");
+  ttt_set_x(&t, 2);
+  ASSERT(ttt_is_position_open(&t, 2) == false, "found a hole where it shouldn't");
+  ttt_set_blank(&t, 2);
+  ASSERT(ttt_is_position_open(&t, 2) == true, "cannot see the hole in the board");
   ASSERT(ttt_pick_next_move(&t, 'x') == 2, "picked the wrong move");
 
   // harder case: "x    o xo" since o can win on the next turn

@@ -18,6 +18,8 @@ bool ttt_is_position_open(struct TttBoard *, size_t);
 char ttt_fetch_position(struct TttBoard *, size_t);
 void ttt_set_x(struct TttBoard *, size_t);
 void ttt_set_o(struct TttBoard *, size_t);
+void ttt_set_blank(struct TttBoard *, size_t);
+void ttt_set(struct TttBoard *, size_t, char);
 int ttt_board_score(struct TttBoard *);
 char ttt_winner(struct TttBoard *);
 int count_bits(int);

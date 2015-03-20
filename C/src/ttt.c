@@ -63,21 +63,36 @@ bool ttt_is_position_open(struct TttBoard * t, size_t pos) {
 }
 
 char ttt_fetch_position(struct TttBoard * t, size_t pos) {
-  if (check_bit(t->xs, 8 - pos)) return 'x';
-  else if (check_bit(t->os, 8 - pos)) return 'o';
+  if (check_bit(t->xs, pos)) return 'x';
+  else if (check_bit(t->os, pos)) return 'o';
   else return ' ';
 }
 
 void ttt_set_x(struct TttBoard * t, size_t pos) {
-  t->xs |= (1 << (8 - pos));
-  t->os &= ~(0x1ff & (1 << (8 - pos)));
-  t->fs &= ~(0x1ff & (1 << (8 - pos)));
+  t->xs |= (1 <<  pos);
+  t->os &= ~(0x1ff & (1 << pos));
+  t->fs &= ~(0x1ff & (1 << pos));
 }
 
 void ttt_set_o(struct TttBoard * t, size_t pos) {
-  t->xs &= ~(0x1ff & (1 << (8 - pos)));
-  t->os |= (1 << (8 - pos));
-  t->fs &= ~(0x1ff & (1 << (8 - pos)));
+  t->xs &= ~(0x1ff & (1 << pos));
+  t->os |= (1 << pos);
+  t->fs &= ~(0x1ff & (1 << pos));
+}
+
+void ttt_set_blank(struct TttBoard * t, size_t pos) {
+  t->xs &= ~(0x1ff & (1 << pos));
+  t->os &= ~(0x1ff & (1 << pos));
+  t->fs |= (1 << pos);
+}
+void ttt_set(struct TttBoard * t, size_t pos, char w) {
+  if (w == 'x') {
+    ttt_set_x(t, pos);
+  } else if (w == 'o') {
+    ttt_set_o(t, pos);
+  } else {
+    ttt_set_blank(t, pos);
+  }
 }
 
 int ttt_board_score(struct TttBoard * t) {
@@ -93,6 +108,16 @@ int count_bits(int x) {
 }
 
 int ttt_pick_next_move(struct TttBoard * t, char w) {
-  return 2;
+  int i;
+  for ( i = 0; i < 9; i += 1 ) {
+    if ( ttt_is_position_open(t, i) ) {
+      ttt_set(t, i, w);
+      if (ttt_winner(t) == w) {
+        return i;
+      }
+      ttt_set_blank(t, i);
+    }
+  }
+  return -1;
 }
 
