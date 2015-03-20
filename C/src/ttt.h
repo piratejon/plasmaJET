@@ -20,6 +20,7 @@ void ttt_set_x(struct TttBoard *, size_t);
 void ttt_set_o(struct TttBoard *, size_t);
 int ttt_board_score(struct TttBoard *);
 char ttt_winner(struct TttBoard *);
+int count_bits(int);
 
 #endif // _PLASMAJET_TTT_H
 
