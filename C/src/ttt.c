@@ -107,17 +107,34 @@ int count_bits(int x) {
   return count;
 }
 
-int ttt_pick_next_move(struct TttBoard * t, char w) {
+int ttt_pick_next_move(struct TttBoard * t, char player, char opponent) {
   int i;
+
+  // can we win from here?
   for ( i = 0; i < 9; i += 1 ) {
     if ( ttt_is_position_open(t, i) ) {
-      ttt_set(t, i, w);
-      if (ttt_winner(t) == w) {
+      ttt_set(t, i, player);
+      if (ttt_winner(t) == player) {
+        ttt_set_blank(t, i);
         return i;
       }
       ttt_set_blank(t, i);
     }
   }
+
+  // might we lose from here?
+  for ( i = 0; i < 9; i += 1 ) {
+    if ( ttt_is_position_open(t, i) ) {
+      ttt_set(t, i, opponent);
+      // opponent will win so we have to play here
+      if (ttt_winner(t) == opponent) {
+        ttt_set_blank(t, i);
+        return i;
+      }
+      ttt_set_blank(t, i);
+    }
+  }
+
   return -1;
 }
 

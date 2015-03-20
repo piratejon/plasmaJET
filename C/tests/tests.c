@@ -173,7 +173,7 @@ void test_one_up_from_base(void) {
   ASSERT(ttt_is_position_open(&t, 2) == false, "found a hole where it shouldn't");
   ttt_set_blank(&t, 2);
   ASSERT(ttt_is_position_open(&t, 2) == true, "cannot see the hole in the board");
-  ASSERT(ttt_pick_next_move(&t, 'x') == 2, "picked the wrong move");
+  ASSERT(ttt_pick_next_move(&t, 'x', 'o') == 2, "picked the wrong move");
 
   // harder case: "x    o xo" since o can win on the next turn
   //   harder because the move is necessitated not by an immediate win
@@ -182,6 +182,10 @@ void test_one_up_from_base(void) {
   // x gains the upper hand:   "xox  oxxo"
   // o blocks but still loses: "xoxo oxxo" or "xox ooxxo"
   // followed by:              "xoXoXoXxo" or "XoxXooXxo" 
+
+  // pick something where o has to block
+  ttt_board_from_string("xx oox xo", &t);
+  ASSERT(ttt_pick_next_move(&t, 'o', 'x') == 2, "o picked the wrong move and lost");
 }
 
 void do_tests(void) {
