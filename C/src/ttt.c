@@ -81,11 +81,14 @@ void ttt_set_o(struct TttBoard * t, size_t pos) {
 }
 
 int ttt_board_score(struct TttBoard * t) {
-   // return 10 - count_bits(t->fs);
-  return 5;
+  return 9 - count_bits(t->fs);
 }
 
 int count_bits(int x) {
-  return 5;
+  int count;
+  for ( count = 0; (x & 0xffffffff) != 0; x >>= 1 ) {
+    count += (x & 1);
+  }
+  return count;
 }
 

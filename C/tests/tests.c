@@ -144,6 +144,8 @@ void test_base_case_score(void) {
 void test_count_bits(void) {
   int x = 0x01a5; // 0b0000_0001_1010_0101 = 5 bits
   ASSERT(count_bits(x) == 5, "wrong number of bits in 0x01a5");
+  ASSERT(count_bits(0xff) == 8, "wrong number of bits in -1");
+  ASSERT(count_bits(0x0fffffff) == 28, "wrong number of bits in -1");
 }
 
 void do_tests(void) {
