@@ -155,8 +155,28 @@ void test_count_bits(void) {
 void test_one_up_from_base(void) {
   struct TttBoard t;
   ttt_board_from_string("xx ooxoxo", &t);
+  
+  // preconditions for the case solved here
+  ASSERT(ttt_winner(&t) == ' ', "but there is no winner");
+  ASSERT(ttt_board_score(&t) == 2, "wrong number of points for this board");
 
+  /*
+     pick next move will iterate through the open spaces for whose turn it is
+     and see if that one would let them win.
+     score is defined as number of free squares left at the end + 1.
+     any next-winning-moves have the same score.
+     */
+
+  // the case, solved
   ASSERT(ttt_pick_next_move(&t, 'x') == 2, "picked the wrong move");
+
+  // harder case: "x    o xo" since o can win on the next turn
+  //   harder because the move is necessitated not by an immediate win
+  // x response is to block o: "x x  o xo"
+  // o response is to block x: "xox  o xo"
+  // x gains the upper hand:   "xox  oxxo"
+  // o blocks but still loses: "xoxo oxxo" or "xox ooxxo"
+  // followed by:              "xoXoXoXxo" or "XoxXooXxo" 
 }
 
 void do_tests(void) {
