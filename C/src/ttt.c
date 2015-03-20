@@ -92,3 +92,7 @@ int count_bits(int x) {
   return count;
 }
 
+int ttt_pick_next_move(struct TttBoard * t, char w) {
+  return 2;
+}
+
