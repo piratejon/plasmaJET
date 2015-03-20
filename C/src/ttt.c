@@ -69,20 +69,20 @@ char ttt_fetch_position(struct TttBoard * t, size_t pos) {
 }
 
 void ttt_set_x(struct TttBoard * t, size_t pos) {
-  t->xs |= (1 <<  pos);
-  t->os &= ~(0x1ff & (1 << pos));
-  t->fs &= ~(0x1ff & (1 << pos));
+  t->xs |= (1 << pos);
+  t->os &= ~(1 << pos);
+  t->fs &= ~(1 << pos);
 }
 
 void ttt_set_o(struct TttBoard * t, size_t pos) {
-  t->xs &= ~(0x1ff & (1 << pos));
+  t->xs &= ~(1 << pos);
   t->os |= (1 << pos);
-  t->fs &= ~(0x1ff & (1 << pos));
+  t->fs &= ~(1 << pos);
 }
 
 void ttt_set_blank(struct TttBoard * t, size_t pos) {
-  t->xs &= ~(0x1ff & (1 << pos));
-  t->os &= ~(0x1ff & (1 << pos));
+  t->xs &= ~(1 << pos);
+  t->os &= ~(1 << pos);
   t->fs |= (1 << pos);
 }
 void ttt_set(struct TttBoard * t, size_t pos, char w) {
@@ -141,20 +141,32 @@ int ttt_pick_next_move(struct TttBoard * t, char player, char opponent) {
     if ( ttt_is_position_open(t, i) ) {
       int tmp_opponent_move, tmp_score;
       ttt_set(t, i, player); // we shouldn't win because of the first loop
-      tmp_opponent_move = ttt_pick_next_move(t, opponent, player);
-      tmp_score = ttt_board_score(t);
-      if (ttt_winner(t) == opponent) tmp_score = 0 - tmp_score;
-      ttt_set(t, tmp_opponent_move, opponent);
-      if (tmp_score > best_score) {
-        best_score = tmp_score;
-        best_position = i;
-      }
-      ttt_set_blank(t, tmp_opponent_move);
+        tmp_opponent_move = ttt_pick_next_move(t, opponent, player);
+        tmp_score = ttt_board_score(t);
+        if (ttt_winner(t) == opponent) tmp_score = 0 - tmp_score;
+        ttt_set(t, tmp_opponent_move, opponent);
+          if (tmp_score > best_score) {
+            best_score = tmp_score;
+            best_position = i;
+          }
+        ttt_set_blank(t, tmp_opponent_move);
       ttt_set_blank(t, i);
     }
   }
 
   // couldn't find a move, what?
   return best_position;
+}
+
+void ttt_board_to_string(struct TttBoard * t, char * s) {
+  s[0] = ttt_fetch_position(t, 0);
+  s[1] = ttt_fetch_position(t, 1);
+  s[2] = ttt_fetch_position(t, 2);
+  s[3] = ttt_fetch_position(t, 3);
+  s[4] = ttt_fetch_position(t, 4);
+  s[5] = ttt_fetch_position(t, 5);
+  s[6] = ttt_fetch_position(t, 6);
+  s[7] = ttt_fetch_position(t, 7);
+  s[8] = ttt_fetch_position(t, 8);
 }
 

@@ -99,10 +99,21 @@ void test_set_open_positions(void) {
   struct TttBoard t;
   ttt_board_from_string("xx oox   ", &t);
 
+  ASSERT(ttt_is_position_open(&t, 0) == false, "but we put x there");
+  ASSERT(ttt_is_position_open(&t, 1) == false, "but we put x there");
   ASSERT(ttt_is_position_open(&t, 2), "2 missing from positions list");
+  ASSERT(ttt_is_position_open(&t, 3) == false, "but we put o there");
+  ASSERT(ttt_is_position_open(&t, 4) == false, "but we put o there");
+  ASSERT(ttt_is_position_open(&t, 5) == false, "but we put x there");
   ASSERT(ttt_is_position_open(&t, 6), "6 missing from positions list");
   ASSERT(ttt_is_position_open(&t, 7), "7 missing from positions list");
   ASSERT(ttt_is_position_open(&t, 8), "8 missing from positions list");
+
+  ttt_set(&t, 2, 'x');
+  ASSERT(ttt_fetch_position(&t, 2) == 'x', "but we put x there");
+  ASSERT(ttt_is_position_open(&t, 2) == false, "2 now has x");
+
+  ttt_set_blank(&t, 2);
 
   ASSERT(ttt_fetch_position(&t, 0) == 'x', "wrong tile at 8");
   ASSERT(ttt_fetch_position(&t, 1) == 'x', "wrong tile at 7");
@@ -117,21 +128,32 @@ void test_set_open_positions(void) {
 
 void test_board_position_setters(void) {
   struct TttBoard t;
+  char b[10] = {0};
+
   ttt_board_from_string("         ", &t);
+  ttt_board_to_string(&t, b);
+  ASSERT(0 == strcmp(b, "         "), "board should be empty");
   ASSERT(t.xs == 0, "xs should not be set");
   ASSERT(t.os == 0, "os should not be set");
   ASSERT(t.fs == 0x1ff, "should be entirely empty");
 
-  ttt_set_x(&t, 3);
-  ASSERT(ttt_fetch_position(&t, 3) == 'x', "position 3 should be x");
+  ttt_set_x(&t, 0);
+  ttt_board_to_string(&t, b);
+  ASSERT(0 == strcmp(b, "x        "), "x should be at position 0");
+  ASSERT(ttt_fetch_position(&t, 0) == 'x', "position 0 should be x");
+  ttt_set_o(&t, 0);
+  ttt_board_to_string(&t, b);
+  ASSERT(0 == strcmp(b, "o        "), "x should be at position 0");
+  ASSERT(ttt_fetch_position(&t, 0) == 'o', "position 0 should be x");
 
-  ASSERT(t.os == 0, "os have wrong value prior to reset");
-  ASSERT(t.xs == 0x008, "xs have wrong value prior to reset");
-  ASSERT(t.fs == 0x1f7, "fs have wrong value prior to reset");
+  ttt_set_x(&t, 3);
+  ttt_board_to_string(&t, b);
+  ASSERT(0 == strcmp(b, "o  x     "), "x should be at position 3");
+  ASSERT(ttt_fetch_position(&t, 3) == 'x', "position 3 should be x");
   ttt_set_o(&t, 3);
-  ASSERT(ttt_fetch_position(&t, 3) == 'o', "position 3 should be o");
-  ttt_set_o(&t, 5);
-  ASSERT(ttt_fetch_position(&t, 5) == 'o', "position 5 should be o");
+  ttt_board_to_string(&t, b);
+  ASSERT(0 == strcmp(b, "o  o     "), "o should be at position 3");
+  ASSERT(ttt_fetch_position(&t, 3) == 'o', "position 0 should be x");
 }
 
 void test_base_case_score(void) {
@@ -186,6 +208,24 @@ void test_one_up_from_base(void) {
   // pick something where o has to block
   ttt_board_from_string("xx oox xo", &t);
   ASSERT(ttt_pick_next_move(&t, 'o', 'x') == 2, "o picked the wrong move and lost");
+
+  // try that hard case now
+  ttt_board_from_string("xoxo  x  ", &t);
+  ASSERT(ttt_pick_next_move(&t, 'o', 'x') == 4, "o failed to block");
+
+  ttt_board_from_string("         ", &t);
+  ASSERT(ttt_pick_next_move(&t, 'x', 'o') == 0, "found a best starting move");
+
+  ttt_set_x(&t, 0);
+  ASSERT(ttt_is_position_open(&t, 0) == false, "but we placed x there");
+  ASSERT(ttt_fetch_position(&t, 0) == 'x', "x did not get placed");
+  ASSERT(ttt_pick_next_move(&t, 'o', 'x') == 1, "wrong move, o");
+
+  ttt_set_o(&t, 1);
+  ASSERT(ttt_is_position_open(&t, 0) == false, "but we placed x there");
+  ASSERT(ttt_fetch_position(&t, 0) == 'x', "x did not get placed");
+  ASSERT(ttt_fetch_position(&t, 1) == 'o', "o did not get placed");
+  ASSERT(ttt_pick_next_move(&t, 'x', 'o') == 2, "wrong move, x");
 }
 
 void do_tests(void) {

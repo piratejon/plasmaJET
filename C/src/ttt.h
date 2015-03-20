@@ -24,6 +24,7 @@ int ttt_board_score(struct TttBoard *);
 char ttt_winner(struct TttBoard *);
 int count_bits(int);
 int ttt_pick_next_move(struct TttBoard *, char, char);
+void ttt_board_to_string(struct TttBoard *, char *);
 
 #endif // _PLASMAJET_TTT_H
 
