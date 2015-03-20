@@ -135,6 +135,26 @@ int ttt_pick_next_move(struct TttBoard * t, char player, char opponent) {
     }
   }
 
-  return -1;
+  // if neither of those things then i guess we brute force
+  int best_score = 0, best_position = 0;
+  for ( i = 0; i < 9; i += 1 ) {
+    if ( ttt_is_position_open(t, i) ) {
+      int tmp_opponent_move, tmp_score;
+      ttt_set(t, i, player); // we shouldn't win because of the first loop
+      tmp_opponent_move = ttt_pick_next_move(t, opponent, player);
+      tmp_score = ttt_board_score(t);
+      if (ttt_winner(t) == opponent) tmp_score = 0 - tmp_score;
+      ttt_set(t, tmp_opponent_move, opponent);
+      if (tmp_score > best_score) {
+        best_score = tmp_score;
+        best_position = i;
+      }
+      ttt_set_blank(t, tmp_opponent_move);
+      ttt_set_blank(t, i);
+    }
+  }
+
+  // couldn't find a move, what?
+  return best_position;
 }
 
