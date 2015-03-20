@@ -138,7 +138,11 @@ void test_base_case_score(void) {
   struct TttBoard t;
   ttt_board_from_string("xxxoo    ", &t);
   ASSERT(ttt_winner(&t) == 'x', "wrong winner identified");
-  ASSERT(ttt_board_score(&t) == 5, "wrong score determined");
+  ASSERT(ttt_board_score(&t) == 5, "wrong score computed");
+
+  ttt_board_from_string("xo ooxxox", &t);
+  ASSERT(ttt_winner(&t) == 'o', "wrong winner identified");
+  ASSERT(ttt_board_score(&t) == 2, "wrong score computed");
 }
 
 void test_count_bits(void) {
