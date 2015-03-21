@@ -99,6 +99,13 @@ int ttt_board_score(struct TttBoard * t) {
   return count_bits(t->fs) + 1;
 }
 
+int ttt_game_score(struct TttBoard * t, char player, char opponent) {
+  char winner = ttt_winner(t);
+  if (winner == player) return 10 - ttt_board_score(t);
+  if (winner == opponent) return ttt_board_score(t) - 10;
+  return 0;
+}
+
 int count_bits(int x) {
   int count;
   for ( count = 0; (x & 0xffffffff) != 0; x >>= 1 ) {
@@ -107,8 +114,10 @@ int count_bits(int x) {
   return count;
 }
 
-int ttt_pick_next_move(struct TttBoard * t, char player, char opponent) {
+int ttt_pick_next_move(struct TttBoard * _t, char player, char opponent) {
   int i;
+  struct TttBoard t2 = {.xs = _t->xs, .os = _t->os, .fs = _t->fs};
+  struct TttBoard * t = &t2;
 
   // can we win from here?
   for ( i = 0; i < 9; i += 1 ) {
@@ -168,5 +177,43 @@ void ttt_board_to_string(struct TttBoard * t, char * s) {
   s[6] = ttt_fetch_position(t, 6);
   s[7] = ttt_fetch_position(t, 7);
   s[8] = ttt_fetch_position(t, 8);
+}
+
+int _fake_score(struct TttBoard * t, char player, char opponent, int depth) {
+  if (ttt_winner(t) == player) return 10 - depth;
+  if (ttt_winner(t) == opponent) return depth - 10;
+  return 0;
+}
+
+int minimax(struct TttBoard * t, char player, char opponent, int depth) {
+  int best_score = 0, best_move = 0, i;
+  struct TttBoard t2;
+
+  int score_stack[10] = {-1};
+  int position_stack[10] = {-1};
+
+  if (depth == 9) {
+    // game over
+    best_move = -1;
+  } else {
+    int tmp_score = 0, tmp_move = 0;
+    for (i = 0; i < 9; i += 1) {
+      t2.xs = t->xs;
+      t2.os = t->os;
+      t2.fs = t->fs;
+      if (ttt_is_position_open(&t2, i)) {
+        ttt_set(&t2, i, player);
+        tmp_move = minimax(&t2, opponent, player, depth + 1);
+        ttt_set(&t2, tmp_move, opponent);
+        tmp_score = _fake_score(&t2, opponent, player, depth + 1);
+        if (tmp_score > best_score) {
+          best_score = tmp_score;
+          best_move = tmp_move;
+        }
+      }
+    }
+  }
+
+  return best_move;
 }
 

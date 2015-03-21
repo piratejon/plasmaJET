@@ -176,6 +176,7 @@ void test_count_bits(void) {
 
 void test_one_up_from_base(void) {
   struct TttBoard t;
+  char b[10] = {0};
   ttt_board_from_string("xx ooxoxo", &t);
   
   // preconditions for the case solved here
@@ -214,18 +215,42 @@ void test_one_up_from_base(void) {
   ASSERT(ttt_pick_next_move(&t, 'o', 'x') == 4, "o failed to block");
 
   ttt_board_from_string("         ", &t);
+  ttt_board_to_string(&t, b); ASSERT(0 == strcmp(b, "         "), "board is wrong!");
   ASSERT(ttt_pick_next_move(&t, 'x', 'o') == 0, "found a best starting move");
 
   ttt_set_x(&t, 0);
+  ttt_board_to_string(&t, b); ASSERT(0 == strcmp(b, "x        "), "board is wrong!");
   ASSERT(ttt_is_position_open(&t, 0) == false, "but we placed x there");
   ASSERT(ttt_fetch_position(&t, 0) == 'x', "x did not get placed");
   ASSERT(ttt_pick_next_move(&t, 'o', 'x') == 1, "wrong move, o");
 
   ttt_set_o(&t, 1);
+  ttt_board_to_string(&t, b); ASSERT(0 == strcmp(b, "xo       "), "board is wrong!");
   ASSERT(ttt_is_position_open(&t, 0) == false, "but we placed x there");
   ASSERT(ttt_fetch_position(&t, 0) == 'x', "x did not get placed");
   ASSERT(ttt_fetch_position(&t, 1) == 'o', "o did not get placed");
   ASSERT(ttt_pick_next_move(&t, 'x', 'o') == 2, "wrong move, x");
+
+  ttt_set_x(&t, 2);
+  ttt_board_to_string(&t, b); ASSERT(0 == strcmp(b, "xox      "), "board is wrong!");
+
+  ASSERT(ttt_pick_next_move(&t, 'o', 'x') == 3, "o will lose!");
+  ttt_set_o(&t, 3);
+  ttt_board_to_string(&t, b); ASSERT(0 == strcmp(b, "xoxo     "), "board is wrong!");
+
+  ASSERT(ttt_pick_next_move(&t, 'x', 'o') == 4, "o will lose!");
+  ttt_set_x(&t, 4);
+  ttt_board_to_string(&t, b); ASSERT(0 == strcmp(b, "xoxox    "), "board is wrong!");
+
+  ASSERT(ttt_pick_next_move(&t, 'o', 'x') == 6, "o will lose!");
+  ttt_set_x(&t, 6);
+  // ttt_board_to_string(&t, b); ASSERT(0 == strcmp(b, "xoxox    "), "board is wrong!");
+
+  ttt_board_from_string(" x   xoox", &t);
+  ttt_set_o(&t, 2);
+  ttt_board_to_string(&t, b);
+  ASSERT(0 == strcmp(b, " xo  xoox"), "wrong thing was inserted");
+  ASSERT(minimax(&t, 'o', 'x', 2) == 2, "o played wrong by minimax!");
 }
 
 void do_tests(void) {

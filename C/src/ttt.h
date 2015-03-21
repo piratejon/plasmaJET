@@ -26,5 +26,7 @@ int count_bits(int);
 int ttt_pick_next_move(struct TttBoard *, char, char);
 void ttt_board_to_string(struct TttBoard *, char *);
 
+int minimax(struct TttBoard *, char, char, int);
+
 #endif // _PLASMAJET_TTT_H
 
