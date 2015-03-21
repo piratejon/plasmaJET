@@ -250,7 +250,18 @@ void test_one_up_from_base(void) {
   ttt_set_o(&t, 2);
   ttt_board_to_string(&t, b);
   ASSERT(0 == strcmp(b, " xo  xoox"), "wrong thing was inserted");
-  ASSERT(minimax(&t, 'o', 'x', 2) == 2, "o played wrong by minimax!");
+  /* | xo|
+     |  x|
+     |oox| */
+  ASSERT(identify_minimax_best_move(&t, 'x', 'o') == 4, "x played wrong by minimax!");
+
+  ttt_board_from_string(" x   xoox", &t);
+  ttt_board_to_string(&t, b);
+  ASSERT(0 == strcmp(b, " x   xoox"), "wrong thing was inserted");
+  /* | x |
+     |  x|
+     |oox| */
+  ASSERT(identify_minimax_best_move(&t, 'o', 'x') == 2, "o played wrong by minimax!");
 }
 
 void do_tests(void) {

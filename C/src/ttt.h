@@ -27,6 +27,7 @@ int ttt_pick_next_move(struct TttBoard *, char, char);
 void ttt_board_to_string(struct TttBoard *, char *);
 
 int minimax(struct TttBoard *, char, char, int);
+int identify_minimax_best_move(struct TttBoard *, char, char);
 
 #endif // _PLASMAJET_TTT_H
 
