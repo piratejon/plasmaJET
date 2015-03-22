@@ -16,3 +16,8 @@ TttGame::checkWinner() {
   return this->hasWinner;
 }
 
+void
+TttGame::playMove(int p) {
+  this->turnNumber += 1;
+}
+
