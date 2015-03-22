@@ -69,6 +69,7 @@ TEST_F(TttTest, TttGameCopyConstructor) {
 
   TttGame h(g);
   ASSERT_EQ(g.getTurnNumber(), 3);
+  ASSERT_EQ(h.getTurnNumber(), 3);
 }
 
 int main(int argc, char **argv) {
