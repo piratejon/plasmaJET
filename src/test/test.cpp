@@ -25,12 +25,16 @@ TEST_F(TttTest, TttBoardConstructor) {
 
 TEST(TttTest, TttBoardGetterSetter) {
   TttBoard b = TttBoard();
+
+  // show that when we write to a space we can retrieve it
   b.setSpace(1, 'x');
   ASSERT_EQ(b.getSpace(1), 'x');
 
+  // ... again
   b.setSpace(5, 'o');
   ASSERT_EQ(b.getSpace(5), 'o');
 
+  // ensure that when we over-write something it sticks
   b.setSpace(5, 'x');
   ASSERT_EQ(b.getSpace(5), 'x');
 }
