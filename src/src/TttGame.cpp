@@ -8,11 +8,11 @@ TttGame::TttGame() {
 
 int
 TttGame::getTurnNumber() {
-  return 0;
+  return this->turnNumber;
 }
 
 bool
 TttGame::checkWinner() {
-  return false;
+  return this->hasWinner;
 }
 
