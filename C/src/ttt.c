@@ -236,7 +236,11 @@ int minimax(struct TttBoard * t, char player, char opponent, int depth) {
           printdent(depth);printf("mm%d: mm result when %d<-%c: %d\n", depth, i, player, mm_result);
           printdent(depth);printf("mm%d: %c tmp_score: %d\n", depth, player, tmp_score);
         ttt_set_blank(t, i);
-        if (tmp_score > best_score) {
+        if (player == 'x' && tmp_score > best_score) {
+          printdent(depth);printf("mm%d: %c->%d=%d better than %c->%d=%d\n", depth, player, i, tmp_score, player, best_move, best_score);
+          best_score = tmp_score;
+          best_move = i;
+        } else if (player == 'o' && tmp_score < best_score) {
           printdent(depth);printf("mm%d: %c->%d=%d better than %c->%d=%d\n", depth, player, i, tmp_score, player, best_move, best_score);
           best_score = tmp_score;
           best_move = i;
@@ -273,12 +277,16 @@ int identify_minimax_best_move(struct TttBoard * t, char player, char opponent) 
       int mm_result;
       printf("open, %c->%d\n", player, i);
       ttt_set(t, i, player);
-      mm_result = minimax(t, opponent, player, depth + 1);
-      tmp_score = 0 - mm_result;
+      tmp_score = mm_result = minimax(t, opponent, player, depth + 1);
+      // tmp_score = 0 - mm_result;
       printdent(depth);printf("imbm mm result when %d<-%c: %d\n", i, player, mm_result);
       printdent(depth);printf("imbm %c tmp_score=%d\n", player, tmp_score);
       ttt_set_blank(t, i);
-      if (tmp_score > best_score) {
+      if (player == 'x' && tmp_score > best_score) {
+        printdent(depth);printf("imbm %c->%d=%d better than %c->%d=%d\n", player, i, tmp_score, player, best_move, best_score);
+        best_score = tmp_score;
+        best_move = i;
+      } else if (player == 'o' && tmp_score < best_score) {
         printdent(depth);printf("imbm %c->%d=%d better than %c->%d=%d\n", player, i, tmp_score, player, best_move, best_score);
         best_score = tmp_score;
         best_move = i;
