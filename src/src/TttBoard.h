@@ -9,8 +9,14 @@ class TttBoard {
     TttSpace space[9];
 
   public:
+    TttBoard(); // empty board
+    TttBoard(const char *); // preconfigured board
+    TttBoard(TttBoard &); // copied board
     char getSpace(int);
     void setSpace(int, char);
+
+    char decodeSpace(TttSpace);
+    TttSpace encodeSpace(char);
 };
 
 #endif // PLASMAJET_TTTSPACE_H

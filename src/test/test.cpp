@@ -3,7 +3,7 @@
 
 #include "catch.hpp"
 
-// #include "TttBoard.h"
+#include "TttBoard.h"
 #include "TttGame.h"
 #include "AchiGame.h"
 
@@ -11,19 +11,29 @@ TEST_CASE("are we alive?", "[dummy]") {
   REQUIRE(0 == 0);
 }
 
-/*
-TEST_CASE("constructs a TttBoard", "[TttBoard]") {
-  TttBoard b1 = TttBoard(); // create empty board
-  REQUIRE(b.getSpace(0) == ' ');
-  REQUIRE(b.getSpace(7) == ' ');
+TEST_CASE("encodes and decodes space identifiers", "[TttBoard]") {
+  TttBoard b;
+  REQUIRE(b.encodeSpace(' ') == Blank);
+  REQUIRE(b.encodeSpace('x') == X);
+  REQUIRE(b.encodeSpace('o') == O);
 
-  TttBoard b = TttBoard("xx oo xo "); // board with spots already
-  REQUIRE(b.getSpace(0) == 'x');
-  REQUIRE(b.getSpace(4) == 'o');
+  REQUIRE(b.decodeSpace(X) == 'x');
+  REQUIRE(b.decodeSpace(O) == 'o');
+  REQUIRE(b.decodeSpace(Blank) == ' ');
 }
 
-TEST("responds to getters and setters", "[TttBoard]") {
-  TttBoard b = TttBoard();
+TEST_CASE("constructs a TttBoard", "[TttBoard]") {
+  TttBoard b1; // create empty board
+  REQUIRE(b1.getSpace(0) == ' ');
+  REQUIRE(b1.getSpace(7) == ' ');
+
+  TttBoard b2("xx oo xo "); // board with spots already
+  REQUIRE(b2.getSpace(0) == 'x');
+  REQUIRE(b2.getSpace(4) == 'o');
+}
+
+TEST_CASE("responds to getters and setters", "[TttBoard]") {
+  TttBoard b;
 
   // show that when we write to a space we can retrieve it
   b.setSpace(1, 'x');
@@ -37,7 +47,6 @@ TEST("responds to getters and setters", "[TttBoard]") {
   b.setSpace(5, 'x');
   REQUIRE(b.getSpace(5) == 'x');
 }
-*/
 
 TEST_CASE("constructor initializes fields", "[TttGame]") {
   TttGame g;

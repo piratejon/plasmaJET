@@ -1,7 +1,7 @@
 
 CXX=clang
 CXXFLAGS=-std=c++11 -Isrc -Igtest
-CXX_SOURCES=src/TttGame.cpp src/AchiGame.cpp #src/TttBoard.cpp src/AchiGame.cpp
+CXX_SOURCES=src/TttGame.cpp src/AchiGame.cpp src/TttBoard.cpp
 LDFLAGS=-lgtest -lstdc++
 
 all: test
