@@ -12,7 +12,7 @@ TEST_CASE("are we alive?", "[dummy]") {
 }
 
 /*
-TEST_CASE(TttTest, TttBoardConstructor) {
+TEST_CASE("constructs a TttBoard", "[TttBoard]") {
   TttBoard b1 = TttBoard(); // create empty board
   REQUIRE(b.getSpace(0) == ' ');
   REQUIRE(b.getSpace(7) == ' ');
@@ -22,7 +22,7 @@ TEST_CASE(TttTest, TttBoardConstructor) {
   REQUIRE(b.getSpace(4) == 'o');
 }
 
-TEST(TttTest, TttBoardGetterSetter) {
+TEST("responds to getters and setters", "[TttBoard]") {
   TttBoard b = TttBoard();
 
   // show that when we write to a space we can retrieve it
