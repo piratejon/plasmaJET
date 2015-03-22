@@ -2,10 +2,13 @@
 #if ! defined(PLASMAJET_TTTGAME_H)
 #define PLASMAJET_TTTGAME_H
 
+#include "TttBoard.h"
+
 class TttGame {
   private:
     int turnNumber; // 0-indexed; even=X, odd=O
     bool hasWinner; // set by playMove() when a winning condition occurs
+    TttBoard b;
 
   private:
     int getNextMove();
