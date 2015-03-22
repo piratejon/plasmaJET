@@ -93,6 +93,20 @@ TEST_F(TttTest, TttAchiGameInheritedMembers) {
 
   g.playMove();
   ASSERT_EQ(g.getTurnNumber(), 1);
+
+  AchiGame h(g);
+  ASSERT_EQ(g.getTurnNumber(), 1);
+  ASSERT_EQ(h.getTurnNumber(), 1);
+
+  g.playMove();
+  ASSERT_EQ(g.getTurnNumber(), 2);
+  ASSERT_EQ(h.getTurnNumber(), 1);
+
+  h.playMove();
+  h.playMove();
+  h.playMove();
+  ASSERT_EQ(g.getTurnNumber(), 2);
+  ASSERT_EQ(h.getTurnNumber(), 4);
 }
 
 int main(int argc, char **argv) {
