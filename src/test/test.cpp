@@ -46,8 +46,7 @@ TEST_CASE("constructor initializes fields", "[TttGame]") {
   REQUIRE(g.checkWinner() == false);
 }
 
-/*
-TEST_CASE(TttTest, TttGamePlaySanityCheck) {
+TEST_CASE("increments turn number", "[TttGame]") {
   TttGame g;
 
   REQUIRE(g.getTurnNumber() == 0);
@@ -57,7 +56,7 @@ TEST_CASE(TttTest, TttGamePlaySanityCheck) {
   REQUIRE(g.getTurnNumber() == 2);
 }
 
-TEST_CASE(TttTest, TttGameCopyConstructor) {
+TEST_CASE("copy constructor works", "[TttGame]") {
   TttGame g;
 
   REQUIRE(g.getTurnNumber() == 0);
@@ -84,7 +83,7 @@ TEST_CASE(TttTest, TttGameCopyConstructor) {
   REQUIRE(h.getTurnNumber() == 6);
 }
 
-TEST_CASE(TttTest, TttAchiGameInheritedMembers) {
+TEST_CASE("copy constructor works for derived class", "[AchiGame]") {
   AchiGame g;
   REQUIRE(g.getTurnNumber() == 0);
   REQUIRE(g.checkWinner() == false);
@@ -107,7 +106,7 @@ TEST_CASE(TttTest, TttAchiGameInheritedMembers) {
   REQUIRE(h.getTurnNumber() == 4);
 }
 
-TEST_CASE(TttTest, TttMinimaxBaseCase) {
+TEST_CASE("figures out the last move", "[TttGame]") {
   TttGame g;
   g.playMove(4); // x plays in the middle
   g.playMove(5); // o plays on the side -- DUMB!
@@ -119,11 +118,4 @@ TEST_CASE(TttTest, TttMinimaxBaseCase) {
   // now x should figure out to play 2 to win
   REQUIRE(g.computeNextMove() == 2);
 }
-*/
 
-/*
-int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
-*/
