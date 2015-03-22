@@ -9,6 +9,7 @@ class TttBoard {
   public:
     TttBoard(const char *);
     char at(const int);
+    void set(const int, const char);
 };
 
 #endif // PLASMAJET_TTTBOARD_H

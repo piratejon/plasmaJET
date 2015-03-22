@@ -13,3 +13,8 @@ TttBoard::at(const int i) {
   return board[i];
 }
 
+void
+TttBoard::set(const int i, const char c) {
+  board[i] = c;
+}
+

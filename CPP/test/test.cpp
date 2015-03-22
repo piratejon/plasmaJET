@@ -22,6 +22,15 @@ TEST_F(TttTest, BoardIsWinning) {
   ASSERT_EQ(r.winner(), ' ');
 }
 
+TEST_F(TttTest, BoardSetters) {
+  TttBoard t = TttBoard("xx oo xox");
+  ASSERT_EQ(t.at(2), ' ');
+  t.set(2, 'x');
+  ASSERT_EQ(t.at(2), 'x');
+  t.set(2, 'o');
+  ASSERT_EQ(t.at(2), 'o');
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
