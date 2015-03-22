@@ -187,50 +187,70 @@ int _fake_score(struct TttBoard * t, char player, char opponent, int depth) {
   return 0;
 }
 
-void print_board(struct TttBoard * t, char player) {
-  printf("%c's turn\n%c|%c|%c\n-----\n%c|%c|%c\n-----\n%c|%c|%c\n", player,
+void printdent(int i) {
+  while ( i-- > 0 ) printf("    ");
+}
+
+void print_board(struct TttBoard * t, char player, int depth) {
+  printdent(depth);printf("%c's turn\n", player);
+  printdent(depth);printf("%c|%c|%c\n",
       ttt_fetch_position(t, 0),
       ttt_fetch_position(t, 1),
-      ttt_fetch_position(t, 2),
+      ttt_fetch_position(t, 2));
+      
+      printdent(depth);printf("%c|%c|%c\n", 
       ttt_fetch_position(t, 3),
       ttt_fetch_position(t, 4),
-      ttt_fetch_position(t, 5),
+      ttt_fetch_position(t, 5));
+        
+        printdent(depth);printf("%c|%c|%c\n",
       ttt_fetch_position(t, 6),
       ttt_fetch_position(t, 7),
       ttt_fetch_position(t, 8));
 }
 
 int minimax(struct TttBoard * t, char player, char opponent, int depth) {
-  if (ttt_winner(t) == player) {
-    printf("[called minimax with self winning]");
-    return depth;
-  }
-  if (ttt_winner(t) == opponent) {
-    printf("[called minimax with opponent winning]");
-    return 10 - depth;
-  }
-
-  printf("[minimax gets a chance! depth=%d]\n", depth);
-  print_board(t, player);
-
-  int best_move = -1, best_score = -10, i;
+  int best_move, best_score = -10, i;
   int tmp_score;
 
-  for (i = 0; i < 9; i += 1) {
-    if (ttt_is_position_open(t, i)) {
-      ttt_set(t, i, player);
-        tmp_score = 0 - minimax(t, opponent, player, depth + 1);
-      ttt_set_blank(t, i);
-      if (tmp_score > best_score) {
-        best_score = tmp_score;
-        best_move = i;
+  printdent(depth);printf("mm%d: minimax entered with depth=%d\n", depth, depth);
+  print_board(t, player, depth);
+
+  if (ttt_winner(t) == player) {
+    printdent(depth);printf("mm%d: player (%c) winning\n", depth, player);
+    best_move = -1;
+    best_score = depth;
+  } else if (ttt_winner(t) == opponent) {
+    printdent(depth);printf("mm%d: opponent (%c) winning\n", depth, opponent);
+    best_move = -1;
+    best_score = 0 - depth;
+  } else {
+    for (i = 0; i < 9; i += 1) {
+      printdent(depth);printf("mm%d: checking position %d: ", depth, i);
+      if (ttt_is_position_open(t, i)) {
+        int mm_result;
+        printf("open, %c->%d\n", player, i);
+        ttt_set(t, i, player);
+          mm_result = minimax(t, opponent, player, depth + 1);
+          tmp_score = 0 - mm_result;
+          printdent(depth);printf("mm%d: mm result when %d<-%c: %d\n", depth, i, player, mm_result);
+          printdent(depth);printf("mm%d: %c tmp_score: %d\n", depth, player, tmp_score);
+        ttt_set_blank(t, i);
+        if (tmp_score > best_score) {
+          best_score = tmp_score;
+          best_move = i;
+        }
+      } else {
+        printf("closed\n");
       }
     }
   }
 
   if (best_move == -1) {
-    printf("FAILED TO FIND A BEST MOVE!");
-    return 0;
+    printdent(depth);printf("mm%d: FAILED TO FIND A BEST MOVE!\n", depth);
+    // best_score = 0;
+  } else {
+    printdent(depth);printf("mm%d: minimax returing best score=%d with position=%d\n", depth, best_score, best_move);
   }
   return best_score;
 }
@@ -241,29 +261,33 @@ int identify_minimax_best_move(struct TttBoard * t, char player, char opponent) 
   int best_move = -1, best_score = -99, i;
   int tmp_score;
 
-  printf("imbm starts; depth=%d\n", depth);
-  print_board(t, player);
+  printdent(depth);printf("imbm starts; depth=*%d*\n", depth);
+  print_board(t, player, depth);
 
   for (i = 0; i < 9; i += 1) {
-    printf("imbm: checking position %d: ", i);
+    printdent(depth);printf("imbm: checking position %d: ", i);
     if (ttt_is_position_open(t, i)) {
-      printf("open; ");
+      int mm_result;
+      printf("open, %c->%d\n", player, i);
       ttt_set(t, i, player);
-      tmp_score = 0 - minimax(t, opponent, player, depth + 1);
-      printf("tmp_score=%d\n", tmp_score);
+      mm_result = minimax(t, opponent, player, depth + 1);
+      tmp_score = 0 - mm_result;
+      printdent(depth);printf("imbm mm result when %d<-%c: %d\n", i, player, mm_result);
+      printdent(depth);printf("%c tmp_score=%d\n", player, tmp_score);
       ttt_set_blank(t, i);
       if (tmp_score > best_score) {
+        printdent(depth);printf("%c->%d=%d better than %c->%d=%d\n", player, i, tmp_score, player, best_move, best_score);
         best_score = tmp_score;
         best_move = i;
       } else {
-        printf("\tmove at %d has score %d not better than move at %d with score %d\n", i, tmp_score, best_move, best_score);
+        printdent(depth);printf("%c->%d=%d not better than %c->%d=%d\n", player, i, tmp_score, player, best_move, best_score);
       }
     } else {
       printf("closed\n");
     }
   }
 
-  printf("imbm: found best move %d\n", best_move);
+  printdent(depth);printf("imbm: found best move %d\n", best_move);
 
   return best_move;
 }
