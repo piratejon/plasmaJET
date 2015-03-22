@@ -5,6 +5,8 @@
 #include "TttBoard.h"
 
 class TttGame {
+  private:
+    TttBoard * b;
   public:
     TttGame(TttBoard &);
     char winner();

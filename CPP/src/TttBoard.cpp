@@ -9,7 +9,7 @@ TttBoard::TttBoard(const char * str) {
 }
 
 char
-TttBoard::at(const int i) {
+TttBoard::at(const int i) const {
   return board[i];
 }
 

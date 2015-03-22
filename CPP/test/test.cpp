@@ -20,6 +20,8 @@ TEST_F(TttTest, BoardIsWinning) {
   TttBoard t = TttBoard("xx oo xox");
   TttGame r = TttGame(t);
   ASSERT_EQ(r.winner(), ' ');
+  t.set(2, 'x');
+  ASSERT_EQ(r.winner(), 'x');
 }
 
 TEST_F(TttTest, BoardSetters) {
