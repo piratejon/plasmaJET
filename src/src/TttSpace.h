@@ -6,7 +6,7 @@ enum TttSpace {
   X = 0,
   O,
   Blank
-}
+};
 
 #endif // PLASMAJET_TTTSPACE_H
 
