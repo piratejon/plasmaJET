@@ -24,11 +24,26 @@ TttGame::checkWinner() {
 
 void
 TttGame::playMove(int p) {
+
+  if (this->turnNumber & 1) { // odd, O
+  } else { // even, X
+  }
+
   this->turnNumber += 1;
 }
 
 int
 TttGame::computeNextMove() {
-  return 2;
+  int i;
+  int best_move = -1;
+  int best_score = 0; // worse for either max (pos) or min (neg)
+
+  // do we already have a winner? if so, don't move
+  if (this->hasWinner) return best_move;
+
+  for (i = 0; i < 9; i += 1) {
+    if (board.getSpace(i) == ' ') {
+    }
+  }
 }
 
