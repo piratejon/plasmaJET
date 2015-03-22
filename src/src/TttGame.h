@@ -18,7 +18,7 @@ class TttGame {
     bool checkWinner();
 
     TttGame(); // start with empty board
-    TttGame(TttGame &);
+    TttGame(TttGame &); // copy another game configuration
 
     int computeNextMove();
 };
