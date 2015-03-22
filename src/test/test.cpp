@@ -41,7 +41,7 @@ TEST(TttTest, TttBoardGetterSetter) {
 }
 */
 
-TEST(TttTest, TttGameInit) {
+TEST_F(TttTest, TttGameInit) {
   TttGame g;
 
   ASSERT_EQ(g.getTurnNumber(), 0);
