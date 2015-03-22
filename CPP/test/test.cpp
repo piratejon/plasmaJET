@@ -50,6 +50,34 @@ TEST_F(TttTest, ComputeNextMove) {
   ASSERT_EQ(g.computeNextMove(), 5);
 }
 
+TEST_F(TttTest, TestOpenPositionsIterator) {
+  TttBoard t = TttBoard("x o x x o"); // open=1,3,5,7
+  NextMoveIterator it = TttMoveIterator(t).begin();
+
+  ASSERT_EQ(it, it.begin());
+  ASSERT_NE(it, it.end());
+  ASSERT_EQ(*it, 1);
+  it ++;
+
+  ASSERT_NE(it, it.begin());
+  ASSERT_NE(it, it.end());
+  ASSERT_EQ(*it, 3);
+  it ++;
+
+  ASSERT_NE(it, it.begin());
+  ASSERT_NE(it, it.end());
+  ASSERT_EQ(*it, 5);
+  it ++;
+
+  ASSERT_NE(it, it.begin());
+  ASSERT_NE(it, it.end());
+  ASSERT_EQ(*it, 7);
+  it ++;
+
+  ASSERT_NE(it, it.begin());
+  ASSERT_EQ(it, it.end());
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
