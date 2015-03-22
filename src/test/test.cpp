@@ -58,11 +58,18 @@ TEST_F(TttTest, TttGamePlaySanityCheck) {
   ASSERT_EQ(g.getTurnNumber(), 2);
 }
 
-/*
 TEST_F(TttTest, TttGameCopyConstructor) {
   TttGame g;
+
+  ASSERT_EQ(g.getTurnNumber(), 0);
+  g.playMove(2);
+  g.playMove(0);
+  g.playMove(3);
+  ASSERT_EQ(g.getTurnNumber(), 3);
+
+  TttGame h(g);
+  ASSERT_EQ(g.getTurnNumber(), 3);
 }
-*/
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

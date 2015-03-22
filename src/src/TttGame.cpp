@@ -6,6 +6,12 @@ TttGame::TttGame() {
   this->hasWinner = false;
 }
 
+TttGame::TttGame(TttGame &src) {
+  this->turnNumber = src.turnNumber;
+  this->hasWinner = src.hasWinner;
+  this->board = src.board;
+}
+
 int
 TttGame::getTurnNumber() {
   return this->turnNumber;
