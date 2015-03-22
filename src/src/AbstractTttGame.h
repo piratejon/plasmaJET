@@ -1,8 +1,0 @@
-
-#if ! defined(PLASMAJET_ABSTRACTTTTGAME_H)
-#define PLASMAJET_ABSTRACTTTTGAME_H
-
-#include "TttSpace.h"
-
-#endif // PLASMAJET_ABSTRACTTTTGAME_H
-
