@@ -13,6 +13,7 @@ class TttGame {
     TttGame(TttBoard &, const char);
     char winner() const;
     char turn() const;
+    int computeNextMove() const;
 };
 
 #endif // PLASMAJET_TTTGAME_H

@@ -35,3 +35,8 @@ TttGame::winner() const {
   return ' ';
 }
 
+int
+TttGame::computeNextMove() const {
+  return 5;
+}
+
