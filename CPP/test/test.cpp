@@ -12,6 +12,7 @@ TEST_F(TttTest, BoardFromString) {
   TttBoard t = TttBoard("xx oo xox");
   ASSERT_EQ(t.at(0), 'x');
   ASSERT_EQ(t.at(1), 'x');
+  ASSERT_EQ(t.at(2), ' ');
 }
 
 int main(int argc, char **argv) {
