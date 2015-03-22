@@ -67,9 +67,22 @@ TEST_F(TttTest, TttGameCopyConstructor) {
   g.playMove(3);
   ASSERT_EQ(g.getTurnNumber(), 3);
 
+  // show equivalence after copy
   TttGame h(g);
   ASSERT_EQ(g.getTurnNumber(), 3);
   ASSERT_EQ(h.getTurnNumber(), 3);
+
+  // show independence of src
+  g.playMove(4);
+  ASSERT_EQ(g.getTurnNumber(), 4);
+  ASSERT_EQ(h.getTurnNumber(), 3);
+
+  // show independence of dst
+  h.playMove(7);
+  h.playMove(8);
+  h.playMove(1);
+  ASSERT_EQ(g.getTurnNumber(), 4);
+  ASSERT_EQ(h.getTurnNumber(), 6);
 }
 
 int main(int argc, char **argv) {
