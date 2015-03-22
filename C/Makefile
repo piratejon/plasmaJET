@@ -1,6 +1,6 @@
 
 CC=clang
-CFLAGS=-std=c99 -pedantic -Wall -Isrc
+CFLAGS=-std=c99 -pedantic -Wall -Isrc -Werror
 SOURCES=src/ttt.c
 TEST_SOURCES=tests/test_main.c tests/tests.c
 
