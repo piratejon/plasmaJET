@@ -38,6 +38,12 @@ TEST_F(TttTest, BoardSetters) {
   ASSERT_EQ(t.at(2), 'o');
 }
 
+TEST_F(TttTest, TrackTurn) {
+  TttBoard t = TttBoard("xx oo xox");
+  TttGame g = TttGame(t, 'o');
+  ASSERT_EQ(g.turn(), 'o');
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

@@ -7,9 +7,12 @@
 class TttGame {
   private:
     TttBoard * b;
+    char player;
   public:
     TttGame(TttBoard &);
-    char winner();
+    TttGame(TttBoard &, const char);
+    char winner() const;
+    char turn() const;
 };
 
 #endif // PLASMAJET_TTTGAME_H

@@ -3,10 +3,21 @@
 
 TttGame::TttGame(TttBoard & b) {
   this->b = &b;
+  player = 'x';
+}
+
+TttGame::TttGame(TttBoard & b, char p) {
+  this->b = &b;
+  this->player = p;
 }
 
 char
-TttGame::winner() {
+TttGame::turn() const {
+  return this->player;
+}
+
+char
+TttGame::winner() const {
   if (b->at(0) == 'x' || b->at(0) == 'o') {
     if (b->at(0) == b->at(1) && b->at(1) == b->at(2)) return b->at(0);
     if (b->at(0) == b->at(3) && b->at(3) == b->at(6)) return b->at(0);
