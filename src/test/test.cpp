@@ -109,6 +109,19 @@ TEST_F(TttTest, TttAchiGameInheritedMembers) {
   ASSERT_EQ(h.getTurnNumber(), 4);
 }
 
+TEST_F(TttTest, TttMinimaxBaseCase) {
+  TttGame g;
+  g.playMove(4); // x plays in the middle
+  g.playMove(5); // o plays on the side -- DUMB!
+  g.playMove(1); // x plays on the top
+  g.playMove(7); // o tries to block -- DUMB!
+  g.playMove(0); // x sets himself up for victory
+  g.playMove(8); // o can block but it's too late
+  
+  // now x should figure out to play 2 to win
+  ASSERT_EQ(g.computeNextMove(), 2);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

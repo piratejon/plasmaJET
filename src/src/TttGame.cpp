@@ -27,3 +27,8 @@ TttGame::playMove(int p) {
   this->turnNumber += 1;
 }
 
+int
+TttGame::computeNextMove() {
+  return 2;
+}
+
