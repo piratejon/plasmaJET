@@ -14,8 +14,25 @@ TEST_F(TttTest, ValidateTestFramework) {
 }
 
 TEST_F(TttTest, TttBoardConstructor) {
-  TttBoard b = TttBoard("xx oo xo ");
+  TttBoard b1 = TttBoard(); // create empty board
+  ASSERT_EQ(b.getSpace(0), ' ');
+  ASSERT_EQ(b.getSpace(7), ' ');
+
+  TttBoard b = TttBoard("xx oo xo "); // board with spots already
   ASSERT_EQ(b.getSpace(0), 'x');
+  ASSERT_EQ(b.getSpace(4), 'o');
+}
+
+TEST(TttTest, TttBoardGetterSetter) {
+  TttBoard b = TttBoard();
+  b.setSpace(1, 'x');
+  ASSERT_EQ(b.getSpace(1), 'x');
+
+  b.setSpace(5, 'o');
+  ASSERT_EQ(b.getSpace(5), 'o');
+
+  b.setSpace(5, 'x');
+  ASSERT_EQ(b.getSpace(5), 'x');
 }
 
 int main(int argc, char **argv) {
