@@ -1,5 +1,5 @@
 
-#include <gtest/gtest.h>
+#include "catch.hpp"
 
 // #include "TttBoard.h"
 #include "TttGame.h"
@@ -10,12 +10,12 @@ namespace {
   };
 }
 
-TEST_F(TttTest, ValidateTestFramework) {
+TEST_CASE(TttTest, ValidateTestFramework) {
   ASSERT_EQ(0, 0);
 }
 
 /*
-TEST_F(TttTest, TttBoardConstructor) {
+TEST_CASE(TttTest, TttBoardConstructor) {
   TttBoard b1 = TttBoard(); // create empty board
   ASSERT_EQ(b.getSpace(0), ' ');
   ASSERT_EQ(b.getSpace(7), ' ');
@@ -42,14 +42,14 @@ TEST(TttTest, TttBoardGetterSetter) {
 }
 */
 
-TEST_F(TttTest, TttGameInit) {
+TEST_CASE(TttTest, TttGameInit) {
   TttGame g;
 
   ASSERT_EQ(g.getTurnNumber(), 0);
   ASSERT_EQ(g.checkWinner(), false);
 }
 
-TEST_F(TttTest, TttGamePlaySanityCheck) {
+TEST_CASE(TttTest, TttGamePlaySanityCheck) {
   TttGame g;
 
   ASSERT_EQ(g.getTurnNumber(), 0);
@@ -59,7 +59,7 @@ TEST_F(TttTest, TttGamePlaySanityCheck) {
   ASSERT_EQ(g.getTurnNumber(), 2);
 }
 
-TEST_F(TttTest, TttGameCopyConstructor) {
+TEST_CASE(TttTest, TttGameCopyConstructor) {
   TttGame g;
 
   ASSERT_EQ(g.getTurnNumber(), 0);
@@ -86,7 +86,7 @@ TEST_F(TttTest, TttGameCopyConstructor) {
   ASSERT_EQ(h.getTurnNumber(), 6);
 }
 
-TEST_F(TttTest, TttAchiGameInheritedMembers) {
+TEST_CASE(TttTest, TttAchiGameInheritedMembers) {
   AchiGame g;
   ASSERT_EQ(g.getTurnNumber(), 0);
   ASSERT_EQ(g.checkWinner(), false);
@@ -109,7 +109,7 @@ TEST_F(TttTest, TttAchiGameInheritedMembers) {
   ASSERT_EQ(h.getTurnNumber(), 4);
 }
 
-TEST_F(TttTest, TttMinimaxBaseCase) {
+TEST_CASE(TttTest, TttMinimaxBaseCase) {
   TttGame g;
   g.playMove(4); // x plays in the middle
   g.playMove(5); // o plays on the side -- DUMB!
