@@ -8,6 +8,7 @@ class TttBoard {
 
   public:
     TttBoard(const char *);
+    void from_string(const char *);
     char at(const int) const;
     void set(const int, const char);
 };
