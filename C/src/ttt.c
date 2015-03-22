@@ -187,16 +187,37 @@ int _fake_score(struct TttBoard * t, char player, char opponent, int depth) {
   return 0;
 }
 
+void print_board(struct TttBoard * t, char player) {
+  printf("%c's turn\n%c|%c|%c\n-----\n%c|%c|%c\n-----\n%c|%c|%c\n", player,
+      ttt_fetch_position(t, 0),
+      ttt_fetch_position(t, 1),
+      ttt_fetch_position(t, 2),
+      ttt_fetch_position(t, 3),
+      ttt_fetch_position(t, 4),
+      ttt_fetch_position(t, 5),
+      ttt_fetch_position(t, 6),
+      ttt_fetch_position(t, 7),
+      ttt_fetch_position(t, 8));
+}
+
 int minimax(struct TttBoard * t, char player, char opponent, int depth) {
-  if (ttt_winner(t) == player) return depth;
-  if (ttt_winner(t) == opponent) return 10 - depth;
+  if (ttt_winner(t) == player) {
+    printf("[called minimax with self winning]");
+    return depth;
+  }
+  if (ttt_winner(t) == opponent) {
+    printf("[called minimax with opponent winning]");
+    return 10 - depth;
+  }
+
+  printf("[minimax gets a chance! depth=%d]\n", depth);
+  print_board(t, player);
 
   int best_move = -1, best_score = -10, i;
   int tmp_score;
 
   for (i = 0; i < 9; i += 1) {
     if (ttt_is_position_open(t, i)) {
-      // struct TttBoard t2 = { .xs = t->xs, .os = t->os, .fs = t->fs };
       ttt_set(t, i, player);
         tmp_score = 0 - minimax(t, opponent, player, depth + 1);
       ttt_set_blank(t, i);
@@ -207,26 +228,35 @@ int minimax(struct TttBoard * t, char player, char opponent, int depth) {
     }
   }
 
+  if (best_move == -1) {
+    printf("FAILED TO FIND A BEST MOVE!");
+    return 0;
+  }
   return best_score;
 }
 
 int identify_minimax_best_move(struct TttBoard * t, char player, char opponent) {
-  int depth = ttt_board_score(t);
+  int depth = 10 - ttt_board_score(t);
 
   int best_move = -1, best_score = -99, i;
   int tmp_score;
+
+  printf("imbm starts; depth=%d\n", depth);
+  print_board(t, player);
 
   for (i = 0; i < 9; i += 1) {
     printf("imbm: checking position %d: ", i);
     if (ttt_is_position_open(t, i)) {
       printf("open; ");
       ttt_set(t, i, player);
-      tmp_score = minimax(t, opponent, player, depth + 1);
+      tmp_score = 0 - minimax(t, opponent, player, depth + 1);
       printf("tmp_score=%d\n", tmp_score);
       ttt_set_blank(t, i);
-      if (tmp_score >= best_score) {
+      if (tmp_score > best_score) {
         best_score = tmp_score;
         best_move = i;
+      } else {
+        printf("\tmove at %d has score %d not better than move at %d with score %d\n", i, tmp_score, best_move, best_score);
       }
     } else {
       printf("closed\n");
