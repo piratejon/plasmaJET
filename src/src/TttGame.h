@@ -5,7 +5,7 @@
 #include "TttBoard.h"
 
 class TttGame {
-  private:
+  protected:
     int turnNumber; // 0-indexed; even=X, odd=O
     bool hasWinner; // set by playMove() when a winning condition occurs
     TttBoard board;

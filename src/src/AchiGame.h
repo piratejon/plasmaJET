@@ -1,12 +1,14 @@
 
-#if ! defined(PLASMAJET_ABSTRACTTTTGAME_H)
-#define PLASMAJET_ABSTRACTTTTGAME_H
+#if ! defined(PLASMAJET_ACHIGAME_H)
+#define PLASMAJET_ACHIGAME_H
 
-#include "TTTGame.cpp"
+#include "TttGame.h"
 
-class AchiGame : public TTTGame {
+class AchiGame : public TttGame {
   public:
-    int getNextMove();
+    int computeNextMove();
+    void playMove();
 };
-#endif // PLASMAJET_ABSTRACTTTTGAME_H
+
+#endif // PLASMAJET_ACHIGAME_H
 

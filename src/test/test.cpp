@@ -3,6 +3,7 @@
 
 // #include "TttBoard.h"
 #include "TttGame.h"
+#include "AchiGame.h"
 
 namespace {
   class TttTest : public ::testing::Test {
@@ -83,6 +84,15 @@ TEST_F(TttTest, TttGameCopyConstructor) {
   h.playMove(1);
   ASSERT_EQ(g.getTurnNumber(), 4);
   ASSERT_EQ(h.getTurnNumber(), 6);
+}
+
+TEST_F(TttTest, TttAchiGameInheritedMembers) {
+  AchiGame g;
+  ASSERT_EQ(g.getTurnNumber(), 0);
+  ASSERT_EQ(g.checkWinner(), false);
+
+  g.playMove();
+  ASSERT_EQ(g.getTurnNumber(), 1);
 }
 
 int main(int argc, char **argv) {
