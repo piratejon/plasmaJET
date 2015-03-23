@@ -8,9 +8,12 @@ class TttGame {
   protected:
     int turnNumber; // 0-indexed; even=X, odd=O
     bool hasWinner; // set by playMove() when a winning condition occurs
-    TttBoard board;
+
+    int minimax();
+    bool check_for_win();
 
   public:
+    TttBoard board;
     int getNextMove();
     int getTurnNumber();
 
