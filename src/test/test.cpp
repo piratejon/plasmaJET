@@ -156,7 +156,7 @@ TEST_CASE("figures out the last move", "[TttGame]") {
   g.playMove(8); // o can block but it's too late
   
   // now x should figure out to play 2 to win
-  // REQUIRE(g.computeNextMove() == 2);
+  REQUIRE(g.computeNextMove() == 2);
 }
 
 TEST_CASE("correctly detects the winner", "[TttGame]") {
@@ -184,6 +184,9 @@ TEST_CASE("correctly detects the winner", "[TttGame]") {
   h.playMove(3); // x deliberately screws up for test purposes
   REQUIRE(h.checkWinner() == false);
   h.playMove(2); // o exploits x's foolishness and seizes victory
+  REQUIRE(h.board.getSpace(2) == 'o');
+  REQUIRE(h.board.getSpace(5) == 'o');
+  REQUIRE(h.board.getSpace(8) == 'o');
   REQUIRE(h.checkWinner() == true);
- }
+}
 
