@@ -31,18 +31,20 @@ TttBoard::operator=(const TttBoard &src) {
   }
   return *this;
 }
+
+char
 TttBoard::getSpace(int space) {
   char value;
   switch(space) {
-    case 0 : value = this->space[0]; break;
-    case 1 : value = this->space[1]; break;
-    case 2 : value = this->space[2]; break;
-    case 3 : value = this->space[3]; break;
-    case 4 : value = this->space[4]; break;
-    case 5 : value = this->space[5]; break;
-    case 6 : value = this->space[6]; break;
-    case 7 : value = this->space[7]; break;
-    case 8 : value = this->space[8]; break;
+    case 0 : value = decodeSpace(this->space[0]); break;
+    case 1 : value = decodeSpace(this->space[1]); break;
+    case 2 : value = decodeSpace(this->space[2]); break;
+    case 3 : value = decodeSpace(this->space[3]); break;
+    case 4 : value = decodeSpace(this->space[4]); break;
+    case 5 : value = decodeSpace(this->space[5]); break;
+    case 6 : value = decodeSpace(this->space[6]); break;
+    case 7 : value = decodeSpace(this->space[7]); break;
+    case 8 : value = decodeSpace(this->space[8]); break;
   }
 
   return value;
