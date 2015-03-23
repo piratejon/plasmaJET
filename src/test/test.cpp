@@ -159,6 +159,18 @@ TEST_CASE("figures out the last move", "[TttGame]") {
   REQUIRE(g.computeNextMove() == 2);
 }
 
+TEST_CASE("figures out a couple moves", "[TttGame]") {
+  TttGame g;
+  g.playMove(2);
+  g.playMove(0);
+  g.playMove(3);
+  g.playMove(7);
+  g.playMove(6);
+  g.playMove(8);
+
+  REQUIRE(g.computeNextMove() == 4);
+}
+
 TEST_CASE("correctly detects the winner", "[TttGame]") {
   TttGame g;
   g.playMove(4); // x plays in the middle
