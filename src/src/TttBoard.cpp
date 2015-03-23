@@ -56,6 +56,7 @@ TttBoard::setSpace(int space, char player) {
   switch(player) {
     case 'x' : this->space[space] = X; break;
     case 'o' : this->space[space] = O; break;
+    case ' ' : this->space[space] = Blank; break;
   }
 
   return;
