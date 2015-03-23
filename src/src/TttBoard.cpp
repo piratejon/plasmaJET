@@ -59,14 +59,14 @@ TttBoard::decodeSpace(TttSpace space) {
 }
 
 // look into when this is called to see where the value should be going
-void
+TttSpace
 TttBoard::encodeSpace(char space) {
-  int value;
+  TttSpace tttspace;
 //  case(space) {
 //    case 'x' : value = 0;
 //    case 'y' : value = 1;
 //    case ' ' : value = 2;
 //  }
 
-  return;
+  return tttspace;
 }
