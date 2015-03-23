@@ -1,6 +1,6 @@
 
 CXX=clang
-CXXFLAGS=-std=c++11 -Isrc -Wall
+CXXFLAGS=-std=c++11 -Isrc -Wall -g3
 CXX_SOURCES=src/TttGame.cpp src/AchiGame.cpp src/TttBoard.cpp
 LDFLAGS=-lstdc++
 
