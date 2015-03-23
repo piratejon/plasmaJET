@@ -7,13 +7,23 @@ TttBoard::TttBoard() {
 //  }
 }
 
+//preconfigured board
 TttBoard::TttBoard(const char *src) {
 
 }
 
+//Copied board
 TttBoard::TttBoard(TttBoard &src) {
 
 }
+
+TttBoard &
+TttBoard::operator=(const TttBoard &src) {
+
+  return *this;
+}
+
+//last two functions share a unmade copy function
 
 char
 TttBoard::getSpace(int space) {
