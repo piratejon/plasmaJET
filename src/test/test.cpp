@@ -184,6 +184,17 @@ TEST_CASE("o wins too", "[TttGame]") {
   REQUIRE(g.computeNextMove() == 4);
 }
 
+TEST_CASE("o does not give up too soon", "[TttGame]") {
+  TttGame g;
+  g.playMove(1);
+  g.playMove(7);
+  g.playMove(5);
+  g.playMove(6);
+  g.playMove(8);
+
+  REQUIRE(g.computeNextMove() == 2);
+}
+
 TEST_CASE("correctly detects the winner", "[TttGame]") {
   TttGame g;
   g.playMove(4); // x plays in the middle
