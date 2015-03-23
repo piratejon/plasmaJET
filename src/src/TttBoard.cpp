@@ -31,14 +31,6 @@ TttBoard::operator=(const TttBoard &src) {
   }
   return *this;
 }
-
-//last two functions share a unmade copy function
-void
-copy() {
-
-}
-
-char
 TttBoard::getSpace(int space) {
   char value;
   switch(space) {
