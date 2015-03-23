@@ -7,11 +7,13 @@
 class TttBoard {
   private:
     TttSpace space[9];
+    void copy(const TttBoard &);
 
   public:
     TttBoard(); // empty board
     TttBoard(const char *); // preconfigured board
     TttBoard(TttBoard &); // copied board
+    TttBoard& operator=(const TttBoard&); // another way to copy the board
     char getSpace(int);
     void setSpace(int, char);
 

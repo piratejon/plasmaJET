@@ -48,6 +48,37 @@ TEST_CASE("responds to getters and setters", "[TttBoard]") {
   REQUIRE(b.getSpace(5) == 'x');
 }
 
+TEST_CASE("has a copy constructor and assignment operator", "[TttBoard]") {
+  TttBoard b("xx ox xoo");
+  TttBoard c(b);
+  REQUIRE(b.getSpace(0) == c.getSpace(0));
+  REQUIRE(b.getSpace(1) == c.getSpace(1));
+  REQUIRE(b.getSpace(2) == c.getSpace(2));
+  REQUIRE(b.getSpace(3) == c.getSpace(3));
+  REQUIRE(b.getSpace(4) == c.getSpace(4));
+  REQUIRE(b.getSpace(5) == c.getSpace(5));
+  REQUIRE(b.getSpace(6) == c.getSpace(6));
+  REQUIRE(b.getSpace(7) == c.getSpace(7));
+  REQUIRE(b.getSpace(8) == c.getSpace(8));
+
+  c.setSpace(4, ' ');
+  REQUIRE(b.getSpace(4) != c.getSpace(4));
+
+  TttBoard d = c;
+  REQUIRE(c.getSpace(0) == d.getSpace(0));
+  REQUIRE(c.getSpace(1) == d.getSpace(1));
+  REQUIRE(c.getSpace(2) == d.getSpace(2));
+  REQUIRE(c.getSpace(3) == d.getSpace(3));
+  REQUIRE(c.getSpace(4) == d.getSpace(4));
+  REQUIRE(c.getSpace(5) == d.getSpace(5));
+  REQUIRE(c.getSpace(6) == d.getSpace(6));
+  REQUIRE(c.getSpace(7) == d.getSpace(7));
+  REQUIRE(c.getSpace(8) == d.getSpace(8));
+
+  d.setSpace(8, 'x');
+  REQUIRE(c.getSpace(8) != d.getSpace(8));
+}
+
 TEST_CASE("constructor initializes fields", "[TttGame]") {
   TttGame g;
 
@@ -126,5 +157,36 @@ TEST_CASE("figures out the last move", "[TttGame]") {
   
   // now x should figure out to play 2 to win
   REQUIRE(g.computeNextMove() == 2);
+}
+
+TEST_CASE("correctly detects the winner", "[TttGame]") {
+  TttGame g;
+  g.playMove(4); // x plays in the middle
+  REQUIRE(g.board.getSpace(4) == 'x');
+  g.playMove(5); // o plays on the side -- DUMB!
+  g.playMove(1); // x plays on the top
+  g.playMove(7); // o tries to block -- DUMB!
+  g.playMove(0); // x sets himself up for victory
+  g.playMove(8); // o can block but it's too late
+
+  REQUIRE(g.checkWinner() == false);
+
+  TttGame h(g); // save a copy of the incomplete game
+  REQUIRE(h.checkWinner() == false);
+
+  g.playMove(2); // x wins
+  REQUIRE(g.board.getSpace(0) == 'x');
+  REQUIRE(g.board.getSpace(1) == 'x');
+  REQUIRE(g.board.getSpace(2) == 'x');
+  REQUIRE(g.checkWinner() == true);
+
+  REQUIRE(h.checkWinner() == false);
+  h.playMove(3); // x deliberately screws up for test purposes
+  REQUIRE(h.checkWinner() == false);
+  h.playMove(2); // o exploits x's foolishness and seizes victory
+  REQUIRE(h.board.getSpace(2) == 'o');
+  REQUIRE(h.board.getSpace(5) == 'o');
+  REQUIRE(h.board.getSpace(8) == 'o');
+  REQUIRE(h.checkWinner() == true);
 }
 
