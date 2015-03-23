@@ -18,7 +18,7 @@ class TttBoard {
     void setSpace(int, char);
 
     char decodeSpace(TttSpace);
-    void encodeSpace(char);
+    TttSpace encodeSpace(char);
 };
 
 #endif // PLASMAJET_TTTSPACE_H
