@@ -236,6 +236,15 @@ TEST_CASE("scores the winning board", "[TttGame]") {
   REQUIRE(g.score() == 0);
   g.playMove(2);
   REQUIRE(g.score() == 3);
+
+  TttGame h;
+  h.playMove(4);
+  h.playMove(0);
+  h.playMove(6);
+  h.playMove(1);
+  h.playMove(8);
+  h.playMove(2);
+  REQUIRE(h.score() == -4);
 }
 
 
