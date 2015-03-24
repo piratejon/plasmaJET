@@ -24,6 +24,7 @@ class TttGame {
     TttGame(TttGame &); // copy another game configuration
 
     int computeNextMove();
+    int score();
 };
 
 #endif // PLASMAJET_TTTGAME_H
