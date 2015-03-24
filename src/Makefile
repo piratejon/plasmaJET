@@ -8,6 +8,6 @@ all: test
 
 .PHONY: test
 test:
-	$(CXX) $(CXXFLAGS) $(CXX_SOURCES) $(LDFLAGS) test/test.cpp -o test/test
+	$(CXX) $(CXXFLAGS) -I../Catch/include $(CXX_SOURCES) $(LDFLAGS) test/test_main.cpp test/test.cpp -o test/test
 	test/test
 
