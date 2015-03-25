@@ -83,24 +83,32 @@ TttGame::minimax() {
     }
   }
 
+  // return 0 if board full/draw achieved
   for (i = 0; i < 9; i += 1) {
     if (board.getSpace(i) == ' ') {
       TttGame tmp(*this);
       int tmp_score;
 
+      // this is the opponent's move
       tmp.playMove(i);
 
       std::cout << "mm" << this->turnNumber << "; calling mm move=" << i << "\n";
-      tmp_score = 0 - tmp.minimax();
+      tmp_score = tmp.minimax();
+
+      if (best_score == 0) {
+        std::cout << "mm" << this->turnNumber << "updated best_move=" << best_move << ", best_score=" << best_score << " as a default\n";
+        best_score = tmp_score;
+        best_move = i;
+      }
 
       if (tmp.getTurnNumber() & 1) { // odd = O, minimize
-        if (best_score > tmp_score) {
+        if (tmp_score > best_score) {
           best_score = tmp_score;
           best_move = i;
           std::cout << "mm" << this->turnNumber << "updated best_move=" << best_move << ", best_score=" << best_score << "\n";
         }
       } else { // even = X, maximize
-        if (best_score < tmp_score) {
+        if (tmp_score < best_score) {
           best_score = tmp_score;
           best_move = i;
           std::cout << "mm" << this->turnNumber << "updated best_move=" << best_move << ", best_score=" << best_score << "\n";
@@ -131,10 +139,16 @@ TttGame::computeNextMove() {
 
       std::cout << "cm" << this->turnNumber << "; calling mm move=" << i << "\n";
 
-      tmp_score = 0 - tmp.minimax();
+      tmp_score = tmp.minimax();
+
+      if (best_score == 0) {
+        std::cout << "cm" << this->turnNumber << "updated best_move=" << best_move << ", best_score=" << best_score << " as a default\n";
+        best_score = tmp_score;
+        best_move = i;
+      }
 
       if (tmp.getTurnNumber() & 1) { // odd = O, minimize
-        if (best_score > tmp_score) {
+        if (best_score < tmp_score) {
           best_score = tmp_score;
           best_move = i;
           std::cout << "cm" << this->turnNumber << " updated best_move=" << best_move << ", best_score=" << best_score << "\n";
@@ -142,7 +156,7 @@ TttGame::computeNextMove() {
           std::cout << "cm" << this->turnNumber << " did not update best_move=" << best_move << ", best_score=" << best_score << "\n";
         }
       } else { // even = X, maximize
-        if (best_score < tmp_score) {
+        if (best_score > tmp_score) {
           best_score = tmp_score;
           best_move = i;
           std::cout << "cm" << this->turnNumber << " updated best_move=" << best_move << ", best_score=" << best_score << "\n";

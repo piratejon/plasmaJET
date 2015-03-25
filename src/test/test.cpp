@@ -190,7 +190,7 @@ TEST_CASE("o does not give up too soon", "[TttGame]") {
   g.playMove(6);
   g.playMove(8);
 
-  // REQUIRE(g.computeNextMove() == 2);
+  REQUIRE(g.computeNextMove() == 2);
 }
 
 TEST_CASE("correctly detects the winner", "[TttGame]") {
