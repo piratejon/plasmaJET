@@ -66,108 +66,41 @@ TttGame::playMove(int p) {
 }
 
 int
-TttGame::minimax() {
+TttGame::computeNextMove(int depth) {
   int i;
   int best_move = -1;
-  int best_score = 0;
+  int best_score = this->score();
+  int tmp_score;
 
-  if (this->hasWinner) {
-    if (this->turnNumber & 1) { // it's O's turn, so X won
-      best_score = 10 - turnNumber;
-      std::cout << "mm" << this->turnNumber << " X won with score=" << best_score << "\n";
-      return best_score;
-    } else { // it is X's turn so O won
-      best_score = turnNumber - 10;
-      std::cout << "mm" << this->turnNumber << " O won with score=" << best_score << "\n";
-      return best_score;
-    }
-  }
+  if (!this->hasWinner) {
+    for (i = 0; i < 9; i += 1) {
+      if (board.getSpace(i) == ' ') {
+        TttGame tmp(*this);
+        tmp.playMove(i);
 
-  // return 0 if board full/draw achieved
-  for (i = 0; i < 9; i += 1) {
-    if (board.getSpace(i) == ' ') {
-      TttGame tmp(*this);
-      int tmp_score;
+        tmp_score = tmp.computeNextMove(depth + 1);
 
-      // this is the opponent's move
-      tmp.playMove(i);
-
-      std::cout << "mm" << this->turnNumber << "; calling mm move=" << i << "\n";
-      tmp_score = tmp.minimax();
-
-      if (best_score == 0) {
-        std::cout << "mm" << this->turnNumber << "updated best_move=" << best_move << ", best_score=" << best_score << " as a default\n";
-        best_score = tmp_score;
-        best_move = i;
-      }
-
-      if (tmp.getTurnNumber() & 1) { // odd = O, minimize
-        if (tmp_score > best_score) {
+        if (best_move == -1) {
           best_score = tmp_score;
           best_move = i;
-          std::cout << "mm" << this->turnNumber << "updated best_move=" << best_move << ", best_score=" << best_score << "\n";
         }
-      } else { // even = X, maximize
-        if (tmp_score < best_score) {
-          best_score = tmp_score;
-          best_move = i;
-          std::cout << "mm" << this->turnNumber << "updated best_move=" << best_move << ", best_score=" << best_score << "\n";
+
+        if (this->getTurnNumber() & 1) { // odd = O, minimize
+          if (tmp_score < best_score) {
+            best_score = tmp_score;
+            best_move = i;
+          }
+        } else { // even = X, maximize
+          if (tmp_score > best_score) {
+            best_score = tmp_score;
+            best_move = i;
+          }
         }
       }
     }
   }
 
-  return best_score;
-}
-
-int
-TttGame::computeNextMove() {
-  int i;
-  int best_move = -1;
-  int best_score = 0; // worse for either max (pos) or min (neg)
-
-  // do we already have a winner? shouldn't have called us if so!
-  // if (this->hasWinner) return best_move;
-
-  std::cout << "*** cm" << this->turnNumber << "\n";
-  for (i = 0; i < 9; i += 1) {
-    if (board.getSpace(i) == ' ') {
-      TttGame tmp(*this);
-      int tmp_score;
-
-      tmp.playMove(i);
-
-      std::cout << "cm" << this->turnNumber << "; calling mm move=" << i << "\n";
-
-      tmp_score = tmp.minimax();
-
-      if (best_score == 0) {
-        std::cout << "cm" << this->turnNumber << "updated best_move=" << best_move << ", best_score=" << best_score << " as a default\n";
-        best_score = tmp_score;
-        best_move = i;
-      }
-
-      if (tmp.getTurnNumber() & 1) { // odd = O, minimize
-        if (best_score < tmp_score) {
-          best_score = tmp_score;
-          best_move = i;
-          std::cout << "cm" << this->turnNumber << " updated best_move=" << best_move << ", best_score=" << best_score << "\n";
-        } else {
-          std::cout << "cm" << this->turnNumber << " did not update best_move=" << best_move << ", best_score=" << best_score << "\n";
-        }
-      } else { // even = X, maximize
-        if (best_score > tmp_score) {
-          best_score = tmp_score;
-          best_move = i;
-          std::cout << "cm" << this->turnNumber << " updated best_move=" << best_move << ", best_score=" << best_score << "\n";
-        } else {
-          std::cout << "cm" << this->turnNumber << " did not update best_move=" << best_move << ", best_score=" << best_score << "\n";
-        }
-      }
-    }
-  }
-
-  return best_move;
+  return depth == 0 ? best_move : best_score;
 }
 
 int

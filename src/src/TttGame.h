@@ -9,7 +9,6 @@ class TttGame {
     int turnNumber; // 0-indexed; even=X, odd=O
     bool hasWinner; // set by playMove() when a winning condition occurs
 
-    int minimax();
     bool check_for_win();
 
   public:
@@ -23,7 +22,7 @@ class TttGame {
     TttGame(); // start with empty board
     TttGame(TttGame &); // copy another game configuration
 
-    int computeNextMove();
+    int computeNextMove(int depth = 0);
     int score();
 };
 

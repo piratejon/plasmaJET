@@ -247,4 +247,6 @@ TEST_CASE("scores the winning board", "[TttGame]") {
   REQUIRE(h.score() == -4);
 }
 
+TEST_CASE("fails to beat itself", "[TttGame]") {
+}
 
