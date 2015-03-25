@@ -12,6 +12,7 @@ AchiGame::computeNextMove() {
 
 void
 AchiGame::playMove(int i) {
+  this->space = -1;
   this->turnNumber += 1;
 }
 
