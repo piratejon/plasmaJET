@@ -7,10 +7,21 @@ TttGame::TttGame() {
   this->hasWinner = false;
 }
 
-TttGame::TttGame(TttGame &src) {
+void
+TttGame::copy_from(const TttGame &src) {
   this->turnNumber = src.turnNumber;
   this->hasWinner = src.hasWinner;
   this->board = src.board;
+}
+
+TttGame::TttGame(const TttGame &src) {
+  copy_from(src);
+}
+
+TttGame &
+TttGame::operator= (const TttGame &src) {
+  copy_from(src);
+  return *this;
 }
 
 int

@@ -10,6 +10,7 @@ class TttGame {
     bool hasWinner; // set by playMove() when a winning condition occurs
 
     bool check_for_win();
+    void copy_from(const TttGame &);
 
   public:
     TttBoard board;
@@ -20,7 +21,8 @@ class TttGame {
     bool checkWinner();
 
     TttGame(); // start with empty board
-    TttGame(TttGame &); // copy another game configuration
+    TttGame(const TttGame &); // copy another game configuration
+    TttGame & operator= (const TttGame &);
 
     int computeNextMove(int depth = 0);
     int score();
