@@ -3,9 +3,7 @@
 
 int
 AchiGame::computeNextMove() {
-      //not yet implemnted
-
-    return 0;
+  return 3;
 }
 
 void

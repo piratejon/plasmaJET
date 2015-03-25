@@ -259,5 +259,7 @@ TEST_CASE("make the right achi choice at the end of the game", "[TttGame]") {
   a.playMove(6); // x
   a.playMove(7); // o
   REQUIRE(a.board.getSpace(4) == ' ');
+
+  REQUIRE(a.computeNextMove() == 3);
 }
 
