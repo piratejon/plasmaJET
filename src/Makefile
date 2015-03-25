@@ -1,9 +1,9 @@
 
-CXX=clang
-CXXFLAGS=-std=c++11 -Isrc -Wall -g3 -stdlib=libstdc++
+CXX=clang++
+CXXFLAGS=-std=c++11 -Isrc -Wall -g3 -stdlib=libc++
 TEST_FLAGS=-I../Catch/include
 CXX_SOURCES=src/TttGame.cpp src/AchiGame.cpp src/TttBoard.cpp
-LDFLAGS=-lstdc++
+LDFLAGS=-lc++ -lc++abi
 
 all: check
 
