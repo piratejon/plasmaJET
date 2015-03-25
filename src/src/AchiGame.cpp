@@ -9,7 +9,7 @@ AchiGame::computeNextMove() {
 }
 
 void
-AchiGame::playMove() {
+AchiGame::playMove(int i) {
   this->turnNumber += 1;
 }
 

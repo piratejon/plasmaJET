@@ -126,20 +126,20 @@ TEST_CASE("copy constructor works for derived class", "[AchiGame]") {
   REQUIRE(g.getTurnNumber() == 0);
   REQUIRE(g.checkWinner() == false);
 
-  g.playMove();
+  g.playMove(8);
   REQUIRE(g.getTurnNumber() == 1);
 
   AchiGame h(g);
   REQUIRE(g.getTurnNumber() == 1);
   REQUIRE(h.getTurnNumber() == 1);
 
-  g.playMove();
+  g.playMove(3);
   REQUIRE(g.getTurnNumber() == 2);
   REQUIRE(h.getTurnNumber() == 1);
 
-  h.playMove();
-  h.playMove();
-  h.playMove();
+  h.playMove(2);
+  h.playMove(1);
+  h.playMove(6);
   REQUIRE(g.getTurnNumber() == 2);
   REQUIRE(h.getTurnNumber() == 4);
 }
@@ -247,6 +247,17 @@ TEST_CASE("scores the winning board", "[TttGame]") {
   REQUIRE(h.score() == -4);
 }
 
-TEST_CASE("fails to beat itself", "[TttGame]") {
+TEST_CASE("make the right achi choice at the end of the game", "[TttGame]") {
+  AchiGame a;
+
+  a.playMove(2); // x
+  a.playMove(0); // o
+  a.playMove(3); // x
+  a.playMove(1); // o
+  a.playMove(0); // x
+  a.playMove(5); // o
+  a.playMove(6); // x
+  a.playMove(7); // o
+  REQUIRE(a.board.getSpace(4) == ' ');
 }
 

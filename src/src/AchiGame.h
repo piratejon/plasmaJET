@@ -7,7 +7,7 @@
 class AchiGame : public TttGame {
   public:
     int computeNextMove();
-    void playMove();
+    void playMove(int);
 };
 
 #endif // PLASMAJET_ACHIGAME_H
