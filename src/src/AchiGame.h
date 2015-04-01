@@ -9,6 +9,7 @@ class AchiGame : public TttGame {
     int space; // simpler to set the free space in playmove
 
     void copy_from(const AchiGame &);
+    void updateBlankSpace();
 
   public:
     AchiGame();

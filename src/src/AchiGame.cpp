@@ -11,27 +11,26 @@ AchiGame::computeNextMove() {
 }
 
 void
+AchiGame::updateBlankSpace() {
+  if (this->turnNumber > 7) {
+    this->space = this->computeBlankSpot();
+  } else {
+    this->space = -1;
+  }
+}
+
+void
 AchiGame::playMove(int i) {
-  if (this->turnNumber >= 7) {
+  if (this->turnNumber < 8) {
     if (this->turnNumber & 1) {
       this->board.setSpace(i, 'o');
     } else {
       this->board.setSpace(i, 'x');
-    }
-
-    if (this->space == -1) {
-      this->space = this->computeBlankSpot();
-    } else {
-      this->space = i;
     }
   } else {
-    if (this->turnNumber & 1) {
-      this->board.setSpace(i, 'o');
-    } else {
-      this->board.setSpace(i, 'x');
-    }
   }
   this->turnNumber += 1;
+  updateBlankSpace();
 }
 
 void
