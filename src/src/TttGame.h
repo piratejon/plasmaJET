@@ -6,10 +6,11 @@
 
 class TttGame {
   protected:
+    int score_base = 10;
     int turnNumber; // 0-indexed; even=X, odd=O
     bool hasWinner; // set by playMove() when a winning condition occurs
 
-    bool check_for_win();
+    bool check_for_win() const;
     void copy_from(const TttGame &);
 
   public:
@@ -25,7 +26,8 @@ class TttGame {
     TttGame & operator= (const TttGame &);
 
     int computeNextMove(int depth = 0);
-    int score();
+    int score(int base) const;
+    int score() const;
 };
 
 #endif // PLASMAJET_TTTGAME_H

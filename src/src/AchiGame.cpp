@@ -2,6 +2,7 @@
 #include "AchiGame.h"
 
 AchiGame::AchiGame() {
+  this->score_base = 1000;
   this->space = -1;
 }
 
@@ -40,6 +41,7 @@ void
 AchiGame::copy_from(const AchiGame & src) {
   TttGame::copy_from(src);
   this->space = src.space;
+  this->score_base = src.score_base;
 }
 
 AchiGame::AchiGame(const AchiGame & src) : TttGame(src) {

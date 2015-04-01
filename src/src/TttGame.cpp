@@ -35,7 +35,7 @@ TttGame::checkWinner() {
 }
 
 bool
-TttGame::check_for_win() {
+TttGame::check_for_win() const {
   if (board.getSpace(0) == 'x' || board.getSpace(0) == 'o') {
     if (board.getSpace(0) == board.getSpace(1) && board.getSpace(1) == board.getSpace(2)) return true; // 012
     if (board.getSpace(0) == board.getSpace(3) && board.getSpace(3) == board.getSpace(6)) return true; // 036
@@ -80,7 +80,7 @@ int
 TttGame::computeNextMove(int depth) {
   int i;
   int best_move = -1;
-  int best_score = this->score();
+  int best_score = this->score(this->score_base);
   int tmp_score;
 
   if (!this->hasWinner) {
@@ -115,15 +115,19 @@ TttGame::computeNextMove(int depth) {
 }
 
 int
-TttGame::score() {
+TttGame::score(int base) const {
   if (check_for_win()) {
     if (turnNumber & 1) { // X played last so they must have won
-      return 10 - turnNumber;
+      return base - turnNumber;
     } else { // O played last so they must have won
-      return turnNumber - 10;
+      return turnNumber - base;
     }
   }
 
   return 0;
+}
+
+int TttGame::score() const {
+  return this->score(this->score_base);
 }
 
