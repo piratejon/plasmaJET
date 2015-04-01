@@ -7,7 +7,7 @@ AchiGame::AchiGame() {
 
 int
 AchiGame::computeNextMove() {
-  return 3;
+  return 7;
 }
 
 char
