@@ -34,6 +34,15 @@ TttGame::checkWinner() const {
   return this->hasWinner;
 }
 
+char
+TttGame::playerByTurn() const {
+  if (this->turnNumber & 1) {
+    return 'o';
+  } else {
+    return 'x';
+  }
+}
+
 bool
 TttGame::check_for_win() const {
   if (board.getSpace(0) == 'x' || board.getSpace(0) == 'o') {

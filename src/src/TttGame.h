@@ -12,6 +12,7 @@ class TttGame {
 
     bool check_for_win() const;
     void copy_from(const TttGame &);
+    char playerByTurn() const;
 
   public:
     TttBoard board;

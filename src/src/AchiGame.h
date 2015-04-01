@@ -10,7 +10,6 @@ class AchiGame : public TttGame {
 
     void copy_from(const AchiGame &);
     void updateBlankSpace();
-    char playerByTurn() const;
 
     bool achiAdjacent(int, int) const;
     bool tttFillMode() const;

@@ -6,15 +6,6 @@ AchiGame::AchiGame() {
   this->space = -1;
 }
 
-char
-AchiGame::playerByTurn() const {
-  if (this->turnNumber & 1) {
-    return 'o';
-  } else {
-    return 'x';
-  }
-}
-
 bool
 AchiGame::tttFillMode() const {
   return this->getTurnNumber() < 8;
