@@ -70,3 +70,8 @@ AchiGame::computeBlankSpot() const {
   return blank;
 }
 
+bool
+AchiGame::isValidMove(int i) const {
+  return false;
+}
+

@@ -20,6 +20,7 @@ class AchiGame : public TttGame {
     void playMove(int);
     int getBlankSpot() const;
     int computeBlankSpot() const;
+    bool isValidMove(int) const;
 };
 
 #endif // PLASMAJET_ACHIGAME_H
