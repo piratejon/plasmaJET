@@ -10,12 +10,12 @@ AchiGame::computeNextMove() {
   return 3;
 }
 
-void
-AchiGame::turnBasedTokenToBoard(int i) {
+char
+AchiGame::playerByTurn() {
   if (this->turnNumber & 1) {
-    this->board.setSpace(i, 'o');
+    return 'o';
   } else {
-    this->board.setSpace(i, 'x');
+    return 'x';
   }
 }
 
@@ -30,9 +30,11 @@ AchiGame::updateBlankSpace() {
 
 void
 AchiGame::playMove(int i) {
-  this->turnBasedTokenToBoard(i);
-  if (this->turnNumber >= 8) {
-    this->board.setSpace(this->space, ' ');
+  if (this->turnNumber < 8) {
+    this->board.setSpace(i, this->playerByTurn());
+  } else {
+    this->board.setSpace(this->space, this->board.getSpace(i));
+    this->board.setSpace(i, ' ');
   }
   this->turnNumber += 1;
   updateBlankSpace();

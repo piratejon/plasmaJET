@@ -10,7 +10,7 @@ class AchiGame : public TttGame {
 
     void copy_from(const AchiGame &);
     void updateBlankSpace();
-    void turnBasedTokenToBoard(int);
+    char playerByTurn();
 
   public:
     AchiGame();
