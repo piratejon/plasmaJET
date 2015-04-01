@@ -17,6 +17,7 @@ class AchiGame : public TttGame {
     int getEmptySquare();
     int computeNextMove();
     void playMove(int);
+    int getBlankSpot();
 };
 
 #endif // PLASMAJET_ACHIGAME_H

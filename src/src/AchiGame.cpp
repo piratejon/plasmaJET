@@ -37,3 +37,8 @@ AchiGame::operator= (const AchiGame & src) {
   return *this;
 }
 
+int
+AchiGame::getBlankSpot() {
+  return 4;
+}
+
