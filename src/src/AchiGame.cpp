@@ -13,16 +13,25 @@ AchiGame::computeNextMove() {
 void
 AchiGame::playMove(int i) {
   if (this->turnNumber >= 7) {
-    this->space = 4;
+    if (this->turnNumber & 1) {
+      this->board.setSpace(i, 'o');
+    } else {
+      this->board.setSpace(i, 'x');
+    }
+
+    if (this->space == -1) {
+      this->space = this->computeBlankSpot();
+    } else {
+      this->space = i;
+    }
   } else {
-    this->space = -1;
+    if (this->turnNumber & 1) {
+      this->board.setSpace(i, 'o');
+    } else {
+      this->board.setSpace(i, 'x');
+    }
   }
   this->turnNumber += 1;
-}
-
-int
-AchiGame::getEmptySquare() {
-  return this->space;
 }
 
 void
@@ -42,7 +51,16 @@ AchiGame::operator= (const AchiGame & src) {
 }
 
 int
-AchiGame::getBlankSpot() {
+AchiGame::getBlankSpot() const {
   return this->space;
+}
+
+int
+AchiGame::computeBlankSpot() const {
+  int blank = -1, i;
+  for (i = 0; i < 9; i += 1) {
+    if (board.getSpace(i) == ' ') blank = i;
+  }
+  return blank;
 }
 

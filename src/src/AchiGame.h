@@ -14,10 +14,10 @@ class AchiGame : public TttGame {
     AchiGame();
     AchiGame(const AchiGame &src);
     AchiGame & operator= (const AchiGame &);
-    int getEmptySquare();
     int computeNextMove();
     void playMove(int);
-    int getBlankSpot();
+    int getBlankSpot() const;
+    int computeBlankSpot() const;
 };
 
 #endif // PLASMAJET_ACHIGAME_H
