@@ -28,6 +28,7 @@ class TttGame {
     int computeNextMove(int depth = 0);
     int score(int base) const;
     int score() const;
+    bool isValidMove(int) const;
 };
 
 #endif // PLASMAJET_TTTGAME_H

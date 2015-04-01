@@ -76,6 +76,11 @@ TttGame::playMove(int p) {
   this->turnNumber += 1;
 }
 
+bool
+TttGame::isValidMove(int i) const {
+  return board.getSpace(i) == ' ';
+}
+
 int
 TttGame::computeNextMove(int depth) {
   int i;
@@ -85,7 +90,7 @@ TttGame::computeNextMove(int depth) {
 
   if (!this->hasWinner) {
     for (i = 0; i < 9; i += 1) {
-      if (board.getSpace(i) == ' ') {
+      if (this->isValidMove(i)) {
         TttGame tmp(*this);
         tmp.playMove(i);
 

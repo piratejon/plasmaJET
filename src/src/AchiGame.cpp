@@ -90,8 +90,3 @@ AchiGame::achiAdjacent(int src, int dst) const {
   return src >= 0 && src < 9 && dst >= 0 && dst < 9 && achi_adjacent[src][dst];
 }
 
-int
-AchiGame::computeNextMove() {
-  return 7;
-}
-

@@ -18,7 +18,7 @@ class AchiGame : public TttGame {
     AchiGame();
     AchiGame(const AchiGame &src);
     AchiGame & operator= (const AchiGame &);
-    int computeNextMove();
+    // int computeNextMove();
     void playMove(int);
     int getBlankSpot() const;
     int computeBlankSpot() const;
