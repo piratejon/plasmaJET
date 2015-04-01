@@ -65,14 +65,14 @@ int
 AchiGame::computeBlankSpot() const {
   int blank = -1, i;
   for (i = 0; i < 9; i += 1) {
-    if (board.getSpace(i) == ' ') blank = i;
+    if (this->board.getSpace(i) == ' ') blank = i;
   }
   return blank;
 }
 
 bool
 AchiGame::isValidMove(int i) const {
-  return board.getSpace(i) == this->playerByTurn() && achiAdjacent(i, this->getBlankSpot());
+  return board.getSpace(i) == this->playerByTurn() && this->achiAdjacent(i, this->getBlankSpot());
 }
 
 bool
