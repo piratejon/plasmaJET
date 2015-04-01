@@ -14,11 +14,11 @@ class TttBoard {
     TttBoard(const char *); // preconfigured board
     TttBoard(TttBoard &); // copied board
     TttBoard& operator=(const TttBoard&); // another way to copy the board
-    char getSpace(int);
+    char getSpace(int) const;
     void setSpace(int, char);
 
-    char decodeSpace(TttSpace);
-    TttSpace encodeSpace(char);
+    char decodeSpace(TttSpace) const;
+    TttSpace encodeSpace(char) const;
 };
 
 #endif // PLASMAJET_TTTSPACE_H

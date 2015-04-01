@@ -33,7 +33,7 @@ TttBoard::operator=(const TttBoard &src) {
 }
 
 char
-TttBoard::getSpace(int space) {
+TttBoard::getSpace(int space) const {
   char value;
   switch(space) {
     case 0 : value = decodeSpace(this->space[0]); break;
@@ -63,7 +63,7 @@ TttBoard::setSpace(int space, char player) {
 }
 
 char
-TttBoard::decodeSpace(TttSpace space) {
+TttBoard::decodeSpace(TttSpace space) const {
   char value;
   switch(space) {
     case X : value = 'x'; break;
@@ -75,7 +75,7 @@ TttBoard::decodeSpace(TttSpace space) {
 }
 
 TttSpace
-TttBoard::encodeSpace(char space) {
+TttBoard::encodeSpace(char space) const {
   TttSpace tttspace;
   switch(space) {
     case 'x' : tttspace = X; break;
