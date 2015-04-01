@@ -12,7 +12,11 @@ AchiGame::computeNextMove() {
 
 void
 AchiGame::playMove(int i) {
-  this->space = -1;
+  if (this->turnNumber >= 7) {
+    this->space = 4;
+  } else {
+    this->space = -1;
+  }
   this->turnNumber += 1;
 }
 
@@ -39,6 +43,6 @@ AchiGame::operator= (const AchiGame & src) {
 
 int
 AchiGame::getBlankSpot() {
-  return 4;
+  return this->space;
 }
 
