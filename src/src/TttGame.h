@@ -16,16 +16,16 @@ class TttGame {
   public:
     TttBoard board;
     int getNextMove();
-    int getTurnNumber();
+    int getTurnNumber() const;
 
     void playMove(int);
-    bool checkWinner();
+    bool checkWinner() const;
 
     TttGame(); // start with empty board
     TttGame(const TttGame &); // copy another game configuration
     TttGame & operator= (const TttGame &);
 
-    int computeNextMove(int depth = 0);
+    int computeNextMove(int depth = 0) const;
     int score(int base) const;
     int score() const;
     bool isValidMove(int) const;

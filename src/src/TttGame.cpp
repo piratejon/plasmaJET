@@ -25,12 +25,12 @@ TttGame::operator= (const TttGame &src) {
 }
 
 int
-TttGame::getTurnNumber() {
+TttGame::getTurnNumber() const {
   return this->turnNumber;
 }
 
 bool
-TttGame::checkWinner() {
+TttGame::checkWinner() const {
   return this->hasWinner;
 }
 
@@ -82,7 +82,7 @@ TttGame::isValidMove(int i) const {
 }
 
 int
-TttGame::computeNextMove(int depth) {
+TttGame::computeNextMove(int depth) const {
   int i;
   int best_move = -1;
   int best_score = this->score(this->score_base);
