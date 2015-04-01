@@ -248,7 +248,7 @@ TEST_CASE("scores the winning board", "[TttGame]") {
   REQUIRE(h.score() == -4);
 }
 
-TEST_CASE("make the right achi choice at the end of the game", "[TttGame]") {
+TEST_CASE("tells what achi possible moves exist", "[AchiGame]") {
   AchiGame a;
 
   a.playMove(2); // x
@@ -276,12 +276,33 @@ TEST_CASE("make the right achi choice at the end of the game", "[TttGame]") {
   REQUIRE(a.board.getSpace(3) == ' ');
   REQUIRE(a.getBlankSpot() == 3);
   REQUIRE(a.board.getSpace(4) == 'x');
+  REQUIRE(a.checkWinner() == true);
+}
+
+TEST_CASE("picks a good move for o", "[AchiGame]") {
+  AchiGame a;
+  a.playMove(0); // x
+  a.playMove(1); // o
+  a.playMove(5); // x
+  a.playMove(2); // o
+  a.playMove(7); // x
+  a.playMove(8); // o
+  a.playMove(6); // x
+  a.playMove(3); // o
+  REQUIRE(a.getBlankSpot() == 4);
   REQUIRE(a.checkWinner() == false);
 
-  a.playMove(5); // o
-  REQUIRE(a.board.getSpace(5) == ' ');
-  REQUIRE(a.getBlankSpot() == 5);
-  REQUIRE(a.board.getSpace(3) == 'o');
-  REQUIRE(a.checkWinner() == false);
+  AchiGame b(a);
+  b.playMove(7);
+  REQUIRE(b.getBlankSpot() == 7);
+  REQUIRE(b.checkWinner() == false);
+  b.playMove(8);
+  REQUIRE(b.getBlankSpot() == 8);
+  REQUIRE(b.checkWinner() == false);
+  b.playMove(5);
+  REQUIRE(b.getBlankSpot() == 5);
+  REQUIRE(b.checkWinner() == true);
+
+  // X should play 7->4, forcing O 8->7, so X can play 5->8 to win
 }
 

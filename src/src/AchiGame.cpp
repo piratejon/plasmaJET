@@ -37,6 +37,7 @@ AchiGame::playMove(int i) {
     this->board.setSpace(i, ' ');
   }
   this->turnNumber += 1;
+  this->hasWinner = this->check_for_win();
   updateBlankSpace();
 }
 
