@@ -270,6 +270,7 @@ TEST_CASE("make the right achi choice at the end of the game", "[TttGame]") {
   REQUIRE(a.getBlankSpot() == 4);
   REQUIRE(a.checkWinner() == false);
   REQUIRE((a.isValidMove(0) | a.isValidMove(1) | a.isValidMove(4) | a.isValidMove(5) | a.isValidMove(7))  == false);
+  REQUIRE((a.isValidMove(2) & a.isValidMove(3) & a.isValidMove(6) | a.isValidMove(8))  == true);
 
   a.playMove(3); // x
   REQUIRE(a.board.getSpace(3) == ' ');
