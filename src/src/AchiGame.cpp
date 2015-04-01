@@ -11,7 +11,7 @@ AchiGame::computeNextMove() {
 }
 
 char
-AchiGame::playerByTurn() {
+AchiGame::playerByTurn() const {
   if (this->turnNumber & 1) {
     return 'o';
   } else {
@@ -72,6 +72,23 @@ AchiGame::computeBlankSpot() const {
 
 bool
 AchiGame::isValidMove(int i) const {
-  return false;
+  return board.getSpace(i) == this->playerByTurn() && achiAdjacent(i, this->getBlankSpot());
+}
+
+bool
+AchiGame::achiAdjacent(int src, int dst) const {
+  static const bool achi_adjacent[9][9] = {
+    { false,  true, false,  true,  true, false, false, false, false }, // 0 adjacent to 1,3,4
+    { false,  true,  true, false,  true, false, false, false, false }, // 1 adjacent to 1,2,4 
+    { false,  true, false, false,  true,  true, false, false, false }, // 2 adjacent to 1,4,5
+    { false,  true, false, false,  true, false,  true, false, false }, // 3 adjacent to 0,4,6
+    {  true,  true,  true,  true,  true,  true,  true,  true,  true }, // 4 adjacent to everybody!
+    { false, false,  true, false,  true, false, false, false,  true }, // 5 adjacent to 2,4,8
+    { false, false, false,  true,  true, false, false,  true, false }, // 6 adjacent to 3,4,7
+    { false, false, false, false,  true, false,  true, false,  true }, // 7 adjacent to 4,6,8
+    { false, false, false, false,  true,  true, false,  true, false }, // 8 adjacent to 4,5,7
+  };
+
+  return src >= 0 && src < 9 && dst >= 0 && dst < 9 && achi_adjacent[src][dst];
 }
 
