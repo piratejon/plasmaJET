@@ -15,18 +15,23 @@ AchiGame::playerByTurn() const {
   }
 }
 
+bool
+AchiGame::tttFillMode() const {
+  return this->getTurnNumber() < 8;
+}
+
 void
 AchiGame::updateBlankSpace() {
-  if (this->turnNumber > 7) {
-    this->space = this->computeBlankSpot();
-  } else {
+  if (this->tttFillMode()) {
     this->space = -1;
+  } else {
+    this->space = this->computeBlankSpot();
   }
 }
 
 void
 AchiGame::playMove(int i) {
-  if (this->turnNumber < 8) {
+  if (this->tttFillMode()) {
     this->board.setSpace(i, this->playerByTurn());
   } else {
     this->board.setSpace(this->space, this->board.getSpace(i));
@@ -70,7 +75,11 @@ AchiGame::computeBlankSpot() const {
 
 bool
 AchiGame::isValidMove(int i) const {
-  return board.getSpace(i) == this->playerByTurn() && this->achiAdjacent(i, this->getBlankSpot());
+  if (this->tttFillMode()) {
+    return TttGame::isValidMove(i);
+  } else {
+    return board.getSpace(i) == this->playerByTurn() && this->achiAdjacent(i, this->getBlankSpot());
+  }
 }
 
 bool

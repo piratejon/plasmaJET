@@ -13,6 +13,7 @@ class AchiGame : public TttGame {
     char playerByTurn() const;
 
     bool achiAdjacent(int, int) const;
+    bool tttFillMode() const;
 
   public:
     AchiGame();
