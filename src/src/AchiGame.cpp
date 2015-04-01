@@ -5,11 +5,6 @@ AchiGame::AchiGame() {
   this->space = -1;
 }
 
-int
-AchiGame::computeNextMove() {
-  return 7;
-}
-
 char
 AchiGame::playerByTurn() const {
   if (this->turnNumber & 1) {
@@ -91,5 +86,10 @@ AchiGame::achiAdjacent(int src, int dst) const {
   };
 
   return src >= 0 && src < 9 && dst >= 0 && dst < 9 && achi_adjacent[src][dst];
+}
+
+int
+AchiGame::computeNextMove() {
+  return 7;
 }
 
