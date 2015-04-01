@@ -268,17 +268,18 @@ TEST_CASE("make the right achi choice at the end of the game", "[TttGame]") {
   a.playMove(7); // o
   REQUIRE(a.board.getSpace(4) == ' ');
   REQUIRE(a.getBlankSpot() == 4);
+  REQUIRE(a.checkWinner() == false);
 
   a.playMove(3); // x
   REQUIRE(a.board.getSpace(3) == ' ');
   REQUIRE(a.getBlankSpot() == 3);
   REQUIRE(a.board.getSpace(4) == 'x');
+  REQUIRE(a.checkWinner() == false);
 
   a.playMove(5); // o
   REQUIRE(a.board.getSpace(5) == ' ');
   REQUIRE(a.getBlankSpot() == 5);
   REQUIRE(a.board.getSpace(3) == 'o');
-
-  // REQUIRE(a.computeNextMove() == 3);
+  REQUIRE(a.checkWinner() == false);
 }
 
