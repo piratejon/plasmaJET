@@ -17,5 +17,8 @@ test/test: test/test_main.o test/test.o $(CXX_SOURCES)
 check: test/test
 
 clean:
-	- rm -rf test/test_main.o test/test.o test/test
+	- rm -rf test/test.o test/test
+
+superclean: clean
+	- rm -rf test/test_main.o
 
