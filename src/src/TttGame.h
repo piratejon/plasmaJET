@@ -16,7 +16,6 @@ class TttGame {
 
   public:
     TttBoard board;
-    int getNextMove();
     int getTurnNumber() const;
 
     void playMove(int);
