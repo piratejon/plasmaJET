@@ -282,13 +282,21 @@ TEST_CASE("tells what achi possible moves exist", "[AchiGame]") {
 TEST_CASE("picks a good move for o", "[AchiGame]") {
   AchiGame a;
   a.playMove(0); // x
+  REQUIRE(a.tttFillMode() == true);
   a.playMove(1); // o
+  REQUIRE(a.tttFillMode() == true);
   a.playMove(5); // x
+  REQUIRE(a.tttFillMode() == true);
   a.playMove(2); // o
+  REQUIRE(a.tttFillMode() == true);
   a.playMove(7); // x
+  REQUIRE(a.tttFillMode() == true);
   a.playMove(8); // o
+  REQUIRE(a.tttFillMode() == true);
   a.playMove(6); // x
+  REQUIRE(a.tttFillMode() == true);
   a.playMove(3); // o
+  REQUIRE(a.tttFillMode() == false);
   REQUIRE(a.getBlankSpot() == 4);
   REQUIRE(a.checkWinner() == false);
   REQUIRE(a.score() == 0);
@@ -297,15 +305,19 @@ TEST_CASE("picks a good move for o", "[AchiGame]") {
   b.playMove(7);
   REQUIRE(b.getBlankSpot() == 7);
   REQUIRE(b.checkWinner() == false);
+  REQUIRE(a.tttFillMode() == false);
   b.playMove(8);
   REQUIRE(b.getBlankSpot() == 8);
   REQUIRE(b.checkWinner() == false);
+  REQUIRE(a.tttFillMode() == false);
   b.playMove(5);
   REQUIRE(b.getBlankSpot() == 5);
   REQUIRE(b.checkWinner() == true);
   REQUIRE(b.score() == 989);
+  REQUIRE(a.tttFillMode() == false);
 
   // X should play 7->4, forcing O 8->7, so X can play 5->8 to win
+  REQUIRE(a.tttFillMode() == false);
   // REQUIRE(a.computeNextMove() == 7);
   a.playMove(7);
   REQUIRE(a.checkWinner() == false);
