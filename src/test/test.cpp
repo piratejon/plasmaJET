@@ -335,8 +335,35 @@ TEST_CASE("picks a good move for o", "[AchiGame]") {
   */
 }
 
+TEST_CASE("sets the board using the =string operator", "[TttBoard]") {
+  TttBoard b;
+  b = "xx  oo ox";
+  REQUIRE(b.getSpace(0) == 'x');
+  REQUIRE(b.getSpace(1) == 'x');
+  REQUIRE(b.getSpace(2) == ' ');
+  REQUIRE(b.getSpace(3) == ' ');
+  REQUIRE(b.getSpace(4) == 'o');
+  REQUIRE(b.getSpace(5) == 'o');
+  REQUIRE(b.getSpace(6) == ' ');
+  REQUIRE(b.getSpace(7) == 'o');
+  REQUIRE(b.getSpace(8) == 'x');
+
+  b = "ooxx  x o";
+  REQUIRE(b.getSpace(0) == 'o');
+  REQUIRE(b.getSpace(1) == 'o');
+  REQUIRE(b.getSpace(2) == 'x');
+  REQUIRE(b.getSpace(3) == 'x');
+  REQUIRE(b.getSpace(4) == ' ');
+  REQUIRE(b.getSpace(5) == ' ');
+  REQUIRE(b.getSpace(6) == 'x');
+  REQUIRE(b.getSpace(7) == ' ');
+  REQUIRE(b.getSpace(8) == 'o');
+}
+
 TEST_CASE("serializes the board", "[TttBoard]") {
   TttBoard b;
   REQUIRE(b.serialize() == 0);
+
+  b = "xx oo  ox";
 }
 
