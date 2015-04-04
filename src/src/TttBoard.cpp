@@ -84,3 +84,9 @@ TttBoard::encodeSpace(char space) const {
   }
   return tttspace;
 }
+
+int
+TttBoard::serialize() const {
+  return 0;
+}
+

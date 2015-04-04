@@ -335,3 +335,8 @@ TEST_CASE("picks a good move for o", "[AchiGame]") {
   */
 }
 
+TEST_CASE("serializes the board", "[TttBoard]") {
+  TttBoard b;
+  REQUIRE(b.serialize() == 0);
+}
+

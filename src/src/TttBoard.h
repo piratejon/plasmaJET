@@ -19,6 +19,8 @@ class TttBoard {
 
     char decodeSpace(TttSpace) const;
     TttSpace encodeSpace(char) const;
+
+    int serialize() const;
 };
 
 #endif // PLASMAJET_TTTSPACE_H
