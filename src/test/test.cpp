@@ -368,6 +368,10 @@ TEST_CASE("serializes the board", "[TttBoard]") {
   REQUIRE(b.serialize() == 1);
 
   b = "xoxoxoxox";
+  int i = b.serialize();
+  TttBoard c(i);
+  REQUIRE(b == c);
+
   b.deserialize(1);
   REQUIRE(b == "        o");
 }

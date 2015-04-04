@@ -12,12 +12,14 @@ class TttBoard {
 
   public:
     TttBoard(); // empty board
+    TttBoard(int);
     TttBoard(const char (&)[10]); // preconfigured board
     TttBoard(TttBoard &); // copied board
-    TttBoard& operator=(const TttBoard&); // another way to copy the board
+    TttBoard& operator=(const TttBoard &); // another way to copy the board
     TttBoard& operator=(const char (&)[10]); // allow to set the board
 
     int operator==(const char (&)[10]) const; // compare with a string!
+    int operator==(const TttBoard &) const;
     char getSpace(int) const;
     void setSpace(int, char);
 

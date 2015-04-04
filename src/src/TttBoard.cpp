@@ -132,3 +132,18 @@ TttBoard::deserialize (int s) {
   }
 }
 
+int
+TttBoard::operator== (const TttBoard & t) const {
+  int i;
+  for (i = 0; i < 9; i += 1) {
+    if (this->space[i] != t.space[i]) {
+      return this->space[i] - t.space[i];
+    }
+  }
+  return 0;
+}
+
+TttBoard::TttBoard (int s) {
+  this->deserialize(s);
+}
+
