@@ -16,6 +16,8 @@ class TttBoard {
     TttBoard(TttBoard &); // copied board
     TttBoard& operator=(const TttBoard&); // another way to copy the board
     TttBoard& operator=(const char (&)[10]); // allow to set the board
+
+    int operator==(const char (&)[10]) const; // compare with a string!
     char getSpace(int) const;
     void setSpace(int, char);
 
@@ -23,6 +25,7 @@ class TttBoard {
     TttSpace encodeSpace(char) const;
 
     int serialize() const;
+    void deserialize(int);
 };
 
 #endif // PLASMAJET_TTTSPACE_H

@@ -101,14 +101,34 @@ TttBoard::serialize() const {
   int s = 0, i;
 
   for (i = 0; i < 9; i += 1) {
+    s <<= 2;
     switch(this->space[i]) {
       case X: s |= 3; break;
       case O: s |= 1; break;
-      case Blank: {} // nothing!
+      case Blank: break; // nothing!
     }
-    s <<= 2;
   }
 
   return s;
+}
+
+int
+TttBoard::operator== (const char (&s)[10]) const {
+  int i;
+  for (i = 0; i < 9; i += 1) {
+    char c = this->decodeSpace(this->space[i]);
+    if (c != s[i]) return c - s[i];
+  }
+  return 0;
+}
+
+void
+TttBoard::deserialize (int s) {
+  int i;
+  for (i = 8; i >= 0; i -= 1) {
+    if ((s & 3) == 3) this->space[i] = X;
+    else if ((s & 1) == 1) this->space[i] = O;
+    else this->space[i] = Blank;
+  }
 }
 
