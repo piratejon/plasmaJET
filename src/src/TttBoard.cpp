@@ -87,6 +87,17 @@ TttBoard::encodeSpace(char space) const {
 
 int
 TttBoard::serialize() const {
-  return 0;
+  int s = 0, i;
+
+  for (i = 0; i < 9; i += 1) {
+    switch(this->space[i]) {
+      case X: s |= 3; break;
+      case O: s |= 1; break;
+      case Blank: {} // nothing!
+    }
+    s <<= 2;
+  }
+
+  return s;
 }
 
