@@ -90,3 +90,55 @@ AchiGame::achiAdjacent(int src, int dst) const {
   return src >= 0 && src < 9 && dst >= 0 && dst < 9 && achi_adjacent[src][dst];
 }
 
+int
+AchiGame::computeNextMove(int depth) const {
+  int i;
+  int best_move = -1;
+  int best_score = this->score(this->score_base);
+  int tmp_score;
+
+  if (!this->hasWinner) {
+    // only loop scenario i have found has an out which is a one-move win
+    // so check for wins first
+
+    for (i = 0; i < 9; i += 1) {
+      if (this->isValidMove(i)) {
+        AchiGame tmp(*this);
+        tmp.playMove(i);
+        if (this->hasWinner) {
+          // we won!
+          return depth == 0 ? i : this->score(this->score_base);
+        }
+      }
+    }
+
+    for (i = 0; i < 9; i += 1) {
+      if (this->isValidMove(i)) {
+        AchiGame tmp(*this);
+        tmp.playMove(i);
+
+        tmp_score = tmp.computeNextMove(depth + 1);
+
+        if (best_move == -1) {
+          best_score = tmp_score;
+          best_move = i;
+        }
+
+        if (this->getTurnNumber() & 1) { // odd = O, minimize
+          if (tmp_score < best_score) {
+            best_score = tmp_score;
+            best_move = i;
+          }
+        } else { // even = X, maximize
+          if (tmp_score > best_score) {
+            best_score = tmp_score;
+            best_move = i;
+          }
+        }
+      }
+    }
+  }
+
+  return depth == 0 ? best_move : best_score;
+}
+

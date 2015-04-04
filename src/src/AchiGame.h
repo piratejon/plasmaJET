@@ -12,16 +12,16 @@ class AchiGame : public TttGame {
     void updateBlankSpace();
 
     bool achiAdjacent(int, int) const;
-    bool tttFillMode() const;
 
   public:
     AchiGame();
     AchiGame(const AchiGame &src);
     AchiGame & operator= (const AchiGame &);
-    // int computeNextMove();
+    int computeNextMove(int depth = 0) const;
     void playMove(int);
     int getBlankSpot() const;
     int computeBlankSpot() const;
+    bool tttFillMode() const;
     bool isValidMove(int) const;
 };
 
