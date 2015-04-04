@@ -367,7 +367,7 @@ TEST_CASE("serializes the board", "[TttBoard]") {
   b = "        o";
   REQUIRE(b.serialize() == 1);
   b.deserialize(1);
-  REQUIRE(b == "o        ");
+  REQUIRE(b == "        o");
 
   b = "xoxoxoxox";
   REQUIRE(b.serialize() == 0x37777);
@@ -396,5 +396,8 @@ TEST_CASE("serializes the board", "[TttBoard]") {
   c.setSpace(8, 'o');
   REQUIRE(c != b);
   REQUIRE(c.serialize() == 0xc01);
+
+  b.deserialize(0x0c0);
+  REQUIRE(b == "     x   ");
 }
 

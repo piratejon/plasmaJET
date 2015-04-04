@@ -125,7 +125,7 @@ TttBoard::operator== (const char (&s)[10]) const {
 void
 TttBoard::deserialize (int s) {
   int i;
-  for (i = 0; i < 9; i += 1, s >>= 2) {
+  for (i = 8; i >= 0; i -= 1, s >>= 2) {
     if ((s & 3) == 3) this->space[i] = X;
     else if ((s & 1) == 1) this->space[i] = O;
     else this->space[i] = Blank;
