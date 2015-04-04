@@ -8,12 +8,14 @@ class TttBoard {
   private:
     TttSpace space[9];
     void copy(const TttBoard &);
+    void setFromString(const char (&)[10]);
 
   public:
     TttBoard(); // empty board
-    TttBoard(const char *); // preconfigured board
+    TttBoard(const char (&)[10]); // preconfigured board
     TttBoard(TttBoard &); // copied board
     TttBoard& operator=(const TttBoard&); // another way to copy the board
+    TttBoard& operator=(const char (&)[10]); // allow to set the board
     char getSpace(int) const;
     void setSpace(int, char);
 

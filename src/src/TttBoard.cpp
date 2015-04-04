@@ -7,12 +7,17 @@ TttBoard::TttBoard() {
   }
 }
 
-//preconfigured board
-TttBoard::TttBoard(const char *src) {
+void
+TttBoard::setFromString(const char (&s)[10]) {
   int i;
   for(i = 0; i < 9; i++) {
-    this->space[i] = encodeSpace(src[i]);
+    this->space[i] = encodeSpace(s[i]);
   }
+}
+
+//preconfigured board
+TttBoard::TttBoard(const char (&src)[10]) {
+  this->setFromString(src);
 }
 
 //Copied board
@@ -83,6 +88,12 @@ TttBoard::encodeSpace(char space) const {
     case ' ' : tttspace = Blank; break;
   }
   return tttspace;
+}
+
+TttBoard &
+TttBoard::operator= (const char (&s)[10]) {
+  this->setFromString(s);
+  return *this;
 }
 
 int
