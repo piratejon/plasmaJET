@@ -366,16 +366,34 @@ TEST_CASE("serializes the board", "[TttBoard]") {
 
   b = "        o";
   REQUIRE(b.serialize() == 1);
+  b.deserialize(1);
+  REQUIRE(b == "o        ");
 
   b = "xoxoxoxox";
   int i = b.serialize();
+  REQUIRE(i == 0x37777);
   TttBoard c(i);
+  REQUIRE(c.serialize() == 0x37777);
   REQUIRE(b == c);
-
-  b.deserialize(1);
-  REQUIRE(b == "        o");
+  c = "xox      ";
+  REQUIRE(b != c);
 
   b = "xxxxxxxxx";
   REQUIRE(b.serialize() == 262143);
+  b.setSpace(0, ' ');
+  REQUIRE(b == " xxxxxxxx");
+  REQUIRE(b.serialize() == 0xffff);
+
+  b.deserialize(0x300);
+  REQUIRE(b == "    x    ");
+  b = "   x     ";
+  REQUIRE(b.serialize() == 0xc00);
+
+  c = b;
+  REQUIRE(b == c);
+  REQUIRE(c.serialize() == 0xc00);
+  c.setSpace(8, 'o');
+  REQUIRE(c != b);
+  REQUIRE(c.serialize() == 0xc01);
 }
 

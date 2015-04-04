@@ -112,35 +112,40 @@ TttBoard::serialize() const {
   return s;
 }
 
-int
+bool
 TttBoard::operator== (const char (&s)[10]) const {
   int i;
   for (i = 0; i < 9; i += 1) {
     char c = this->decodeSpace(this->space[i]);
-    if (c != s[i]) return c - s[i];
+    if (c != s[i]) return false;
   }
-  return 0;
+  return true;
 }
 
 void
 TttBoard::deserialize (int s) {
   int i;
-  for (i = 8; i >= 0; i -= 1) {
+  for (i = 0; i < 9; i += 1, s >>= 2) {
     if ((s & 3) == 3) this->space[i] = X;
     else if ((s & 1) == 1) this->space[i] = O;
     else this->space[i] = Blank;
   }
 }
 
-int
+bool
 TttBoard::operator== (const TttBoard & t) const {
   int i;
   for (i = 0; i < 9; i += 1) {
     if (this->space[i] != t.space[i]) {
-      return this->space[i] - t.space[i];
+      return false;
     }
   }
-  return 0;
+  return true;
+}
+
+bool
+TttBoard::operator!= (const TttBoard & t) const {
+  return !((*this) == t);
 }
 
 TttBoard::TttBoard (int s) {
