@@ -180,23 +180,26 @@ AchiGame::computeNextMove(int depth) const {
         AchiGame tmp(*this);
         tmp.playMove(i);
 
-        // tmp_score = tmp.computeNextMove(depth + 1);
-        tmp_score = tmp.alpha_beta(depth + 1, 0 - this->score_base, this->score_base);
+        if (!this->seenBefore(tmp.bundle())) {
 
-        if (best_move == -1) {
-          best_score = tmp_score;
-          best_move = i;
-        }
+          tmp_score = tmp.computeNextMove(depth + 1);
+          // tmp_score = tmp.alpha_beta(depth + 1, 0 - this->score_base, this->score_base);
 
-        if (this->getTurnNumber() & 1) { // odd = O, minimize
-          if (tmp_score < best_score) {
+          if (best_move == -1) {
             best_score = tmp_score;
             best_move = i;
           }
-        } else { // even = X, maximize
-          if (tmp_score > best_score) {
-            best_score = tmp_score;
-            best_move = i;
+
+          if (this->getTurnNumber() & 1) { // odd = O, minimize
+            if (tmp_score < best_score) {
+              best_score = tmp_score;
+              best_move = i;
+            }
+          } else { // even = X, maximize
+            if (tmp_score > best_score) {
+              best_score = tmp_score;
+              best_move = i;
+            }
           }
         }
       }

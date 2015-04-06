@@ -319,8 +319,12 @@ TEST_CASE("picks a good move for o", "[AchiGame]") {
   // X should play 7->4, forcing O 8->7, so X can play 5->8 to win
   REQUIRE(a.tttFillMode() == false);
   // REQUIRE(a.computeNextMove() == 7);
-  a.playMove(7);
+  // a.playMove(7);
+  a.playMove(6);
   REQUIRE(a.checkWinner() == false);
+  REQUIRE(a.computeNextMove() == 3);
+  a.playMove(3);
+  REQUIRE(a.computeNextMove() == 0);
 
   /*
   // O's only valid move
