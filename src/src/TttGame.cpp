@@ -91,6 +91,38 @@ TttGame::isValidMove(int i) const {
 }
 
 int
+TttGame::alpha_beta(int depth, int alpha, int beta) const {
+  int i, v, tmp_score;
+  if (this->hasWinner) {
+    v = this->score(this->score_base);
+  } else {
+    if (this->getTurnNumber() & 1) { // odd, minimize
+      v = this->score_base;
+      for (i = 0; i < 9; i += 1) {
+        TttGame tmp(*this);
+        tmp.playMove(i);
+        tmp_score = tmp.alpha_beta(depth + 1, alpha, beta);
+        if (tmp_score < v) v = tmp_score;
+        if (v < beta) beta = v;
+        if (beta <= alpha) break;
+      }
+    } else { // even, maximize
+      v = 0 - this->score_base; // assume worst possible score for player
+      for (i = 0; i < 9; i += 1) {
+        TttGame tmp(*this);
+        tmp.playMove(i);
+        tmp_score = tmp.alpha_beta(depth + 1, alpha, beta);
+        if (tmp_score > v) v = tmp_score;
+        if (v > alpha) alpha = v;
+        if (beta <= alpha) break;
+      }
+    }
+  }
+
+  return v;
+}
+
+int
 TttGame::computeNextMove(int depth) const {
   int i;
   int best_move = -1;

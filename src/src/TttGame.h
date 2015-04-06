@@ -14,6 +14,8 @@ class TttGame {
     void copy_from(const TttGame &);
     char playerByTurn() const;
 
+    int alpha_beta(int, int, int) const;
+
   public:
     TttBoard board;
     int getTurnNumber() const;
