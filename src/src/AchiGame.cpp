@@ -40,6 +40,7 @@ AchiGame::copy_from(const AchiGame & src) {
   TttGame::copy_from(src);
   this->space = src.space;
   this->score_base = src.score_base;
+  this->history = src.history;
 }
 
 AchiGame::AchiGame(const AchiGame & src) : TttGame(src) {

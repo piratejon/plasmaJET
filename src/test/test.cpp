@@ -435,6 +435,7 @@ TEST_CASE("serializes the board + turn", "[AchiGame]") {
   REQUIRE(a.seenBefore(s[6]));
   REQUIRE(a.seenBefore(s[7]));
 
+  REQUIRE(b.seenBefore(s[0]));
   REQUIRE(!b.seenBefore(s[7]));
 }
 
