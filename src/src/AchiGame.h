@@ -2,6 +2,8 @@
 #if ! defined(PLASMAJET_ACHIGAME_H)
 #define PLASMAJET_ACHIGAME_H
 
+#include <set>
+
 #include "TttGame.h"
 
 class AchiGame : public TttGame {
@@ -11,7 +13,10 @@ class AchiGame : public TttGame {
     void copy_from(const AchiGame &);
     void updateBlankSpace();
 
+    int alpha_beta(int, int, int) const;
     bool achiAdjacent(int, int) const;
+
+    std::set<int> history;
 
   public:
     AchiGame();
@@ -23,6 +28,11 @@ class AchiGame : public TttGame {
     int computeBlankSpot() const;
     bool tttFillMode() const;
     bool isValidMove(int) const;
+
+    bool seenBefore(int) const;
+    bool seenBefore(TttBoard &, int) const;
+
+    int bundle() const;
 };
 
 #endif // PLASMAJET_ACHIGAME_H

@@ -401,3 +401,40 @@ TEST_CASE("serializes the board", "[TttBoard]") {
   REQUIRE(b == "     x   ");
 }
 
+TEST_CASE("serializes the board + turn", "[AchiGame]") {
+  AchiGame a;
+  int s[9];
+
+  // this sequence can yield a loop in achi, such as:
+  // x:2->4, o:5->2, x:4->5, o:2->4, x:5->2, o:4->5
+  a.playMove(0);
+  s[0] = a.bundle();
+  a.playMove(1);
+  s[1] = a.bundle();
+  a.playMove(2);
+  s[2] = a.bundle();
+  a.playMove(5);
+  s[3] = a.bundle();
+  a.playMove(3);
+  s[4] = a.bundle();
+  a.playMove(6);
+  s[5] = a.bundle();
+  a.playMove(7);
+  s[6] = a.bundle();
+
+  AchiGame b(a);
+  a.playMove(8);
+  s[7] = a.bundle();
+
+  REQUIRE(a.seenBefore(s[0]));
+  REQUIRE(a.seenBefore(s[1]));
+  REQUIRE(a.seenBefore(s[2]));
+  REQUIRE(a.seenBefore(s[3]));
+  REQUIRE(a.seenBefore(s[4]));
+  REQUIRE(a.seenBefore(s[5]));
+  REQUIRE(a.seenBefore(s[6]));
+  REQUIRE(a.seenBefore(s[7]));
+
+  REQUIRE(!b.seenBefore(s[7]));
+}
+

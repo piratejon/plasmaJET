@@ -31,6 +31,8 @@ AchiGame::playMove(int i) {
   this->turnNumber += 1;
   this->hasWinner = this->check_for_win();
   updateBlankSpace();
+
+  this->history.insert(this->bundle());
 }
 
 void
@@ -90,6 +92,64 @@ AchiGame::achiAdjacent(int src, int dst) const {
   return src >= 0 && src < 9 && dst >= 0 && dst < 9 && achi_adjacent[src][dst];
 }
 
+bool
+AchiGame::seenBefore(TttBoard &board, int turn) const {
+  // checks if the board + whose turn it is has occurred before
+  return this->history.end() != this->history.find(this->bundle());
+}
+
+bool
+AchiGame::seenBefore(int bundle) const {
+  return this->history.end() != this->history.find(bundle);;
+}
+
+int
+AchiGame::bundle() const {
+  int bundle = this->board.serialize();
+  bundle |= ((this->getTurnNumber() & 1) << 19);
+  return bundle;
+}
+
+int
+AchiGame::alpha_beta(int depth, int alpha, int beta) const {
+  int i, v, tmp_score;
+  if (this->hasWinner) {
+    v = this->score(this->score_base);
+  } else {
+    if (this->getTurnNumber() & 1) { // odd, minimize
+      v = this->score_base;
+      for (i = 0; i < 9; i += 1) {
+        if (this->isValidMove(i)) {
+          AchiGame tmp(*this);
+          tmp.playMove(i);
+          if (!this->seenBefore(tmp.board, this->getTurnNumber() & 1)) {
+            tmp_score = tmp.alpha_beta(depth + 1, alpha, beta);
+            if (tmp_score < v) v = tmp_score;
+            if (v < beta) beta = v;
+            if (beta <= alpha) break;
+          }
+        }
+      }
+    } else { // even, maximize
+      v = 0 - this->score_base; // assume worst possible score for player
+      for (i = 0; i < 9; i += 1) {
+        if (this->isValidMove(i)) {
+          AchiGame tmp(*this);
+          tmp.playMove(i);
+          if (!this->seenBefore(tmp.board, this->getTurnNumber() & 1)) {
+            tmp_score = tmp.alpha_beta(depth + 1, alpha, beta);
+            if (tmp_score > v) v = tmp_score;
+            if (v > alpha) alpha = v;
+            if (beta <= alpha) break;
+          }
+        }
+      }
+    }
+  }
+
+  return v;
+}
+
 int
 AchiGame::computeNextMove(int depth) const {
   int i;
@@ -101,6 +161,7 @@ AchiGame::computeNextMove(int depth) const {
     // only loop scenario i have found has an out which is a one-move win
     // so check for wins first
 
+    /*
     for (i = 0; i < 9; i += 1) {
       if (this->isValidMove(i)) {
         AchiGame tmp(*this);
@@ -111,13 +172,15 @@ AchiGame::computeNextMove(int depth) const {
         }
       }
     }
+    */
 
     for (i = 0; i < 9; i += 1) {
       if (this->isValidMove(i)) {
         AchiGame tmp(*this);
         tmp.playMove(i);
 
-        tmp_score = tmp.computeNextMove(depth + 1);
+        // tmp_score = tmp.computeNextMove(depth + 1);
+        tmp_score = tmp.alpha_beta(depth + 1, 0 - this->score_base, this->score_base);
 
         if (best_move == -1) {
           best_score = tmp_score;
