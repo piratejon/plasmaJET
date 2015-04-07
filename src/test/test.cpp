@@ -317,8 +317,10 @@ TEST_CASE("picks a good move for o", "[AchiGame]") {
   REQUIRE(a.tttFillMode() == false);
 
   // X should play 7->4, forcing O 8->7, so X can play 5->8 to win
+  // Update: the computer discovered that X could instead play 6->4 which I had
+  // not noticed. It may be becoming sentient...
   REQUIRE(a.tttFillMode() == false);
-  // REQUIRE(a.computeNextMove() == 7);
+  REQUIRE(a.computeNextMove() == 6);
   // a.playMove(7);
   a.playMove(6);
   REQUIRE(a.checkWinner() == false);
