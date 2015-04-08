@@ -411,6 +411,8 @@ TEST_CASE("serializes the board + turn", "[AchiGame]") {
   // x:2->4, o:5->2, x:4->5, o:2->4, x:5->2, o:4->5
   a.playMove(0);
   s[0] = a.bundle();
+  REQUIRE(a.seenBefore(a.bundle(a.board, 1)));
+  REQUIRE(!a.seenBefore(a.bundle(a.board, 0)));
   a.playMove(1);
   s[1] = a.bundle();
   a.playMove(2);
@@ -427,6 +429,9 @@ TEST_CASE("serializes the board + turn", "[AchiGame]") {
   AchiGame b(a);
   a.playMove(8);
   s[7] = a.bundle();
+
+  TttBoard board("xoxx ooxo");
+  REQUIRE(a.seenBefore(a.bundle(board, 0)));
 
   REQUIRE(a.seenBefore(s[0]));
   REQUIRE(a.seenBefore(s[1]));
