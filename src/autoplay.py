@@ -1,6 +1,5 @@
 
-import sys
-from ctypes import *
+from ctypes import cdll
 
 def printBoard(game):
   b = [chr(x) for x in [game.getSpace(i) for i in range(9)]]
@@ -23,15 +22,19 @@ def playTicTacToe(game):
   else:
     print("Game ended in a draw!")
 
+def load_library(path):
+  return cdll.LoadLibrary(path)
+
 def main(args):
 # only arg is full path to library
   full_path_to_library = args[0]
-  game = cdll.LoadLibrary(full_path_to_library)
+  game = load_library(full_path_to_library)
   if game is not None:
     playTicTacToe(game)
   else:
     print("unable to load library '{}' (must use full path)".format(full_path_to_library))
 
 if __name__ == '__main__':
+  import sys
   main(sys.argv[1:])
 
