@@ -105,10 +105,15 @@ AchiGame::seenBefore(int bundle) const {
 }
 
 int
-AchiGame::bundle() const {
-  int bundle = this->board.serialize();
-  bundle |= ((this->getTurnNumber() & 1) << 19);
+AchiGame::bundle(const TttBoard & b, int turn) const {
+  int bundle = b.serialize();
+  bundle |= ((turn & 1) << 19);
   return bundle;
+}
+
+int
+AchiGame::bundle() const {
+  return this->bundle(this->board, this->getTurnNumber() & 1);
 }
 
 int

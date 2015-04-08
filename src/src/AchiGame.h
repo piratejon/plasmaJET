@@ -33,6 +33,7 @@ class AchiGame : public TttGame {
     bool seenBefore(TttBoard &, int) const;
 
     int bundle() const;
+    int bundle(const TttBoard &, int) const;
 };
 
 #endif // PLASMAJET_ACHIGAME_H
