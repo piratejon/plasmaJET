@@ -280,7 +280,7 @@ TEST_CASE("tells what achi possible moves exist", "[AchiGame]") {
 }
 
 TEST_CASE("picks a good move for o", "[AchiGame]") {
-  AchiGame a;
+  AchiGame a, c;
   a.playMove(0); // x
   REQUIRE(a.tttFillMode() == true);
   a.playMove(1); // o
@@ -293,6 +293,7 @@ TEST_CASE("picks a good move for o", "[AchiGame]") {
   REQUIRE(a.tttFillMode() == true);
   a.playMove(8); // o
   REQUIRE(a.tttFillMode() == true);
+  c = a; // we'll try some other things too
   a.playMove(6); // x
   REQUIRE(a.tttFillMode() == true);
   a.playMove(3); // o
@@ -328,17 +329,12 @@ TEST_CASE("picks a good move for o", "[AchiGame]") {
   a.playMove(3);
   REQUIRE(a.computeNextMove() == 0);
 
-  /*
-  // O's only valid move
-  REQUIRE(a.computeNextMove() == 8);
-  a.playMove(8);
-  REQUIRE(a.checkWinner() == false);
-
-  // X's winning move
-  REQUIRE(a.computeNextMove() == 5);
-  a.playMove(5);
-  REQUIRE(a.checkWinner() == true);
-  */
+  // xoo__x_xo
+  REQUIRE(c.checkWinner() == false);
+  // where should x go?
+  c.playMove(4);
+  // now O must block at 3
+  REQUIRE(c.computeNextMove() == 3);
 }
 
 TEST_CASE("sets the board using the =string operator", "[TttBoard]") {
@@ -443,5 +439,12 @@ TEST_CASE("serializes the board + turn", "[AchiGame]") {
 
   REQUIRE(b.seenBefore(s[0]));
   REQUIRE(!b.seenBefore(s[7]));
+}
+
+TEST_CASE("can play a whole game of achi", "[AchiGame]") {
+  AchiGame a;
+
+  // x's first and best play is in the middle?
+  REQUIRE(a.computeNextMove() == 4);
 }
 
