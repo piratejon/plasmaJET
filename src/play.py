@@ -57,15 +57,17 @@ def getGrid(gameId):
   values = {'gameid' : gameId}
   sendToServer(url, values)
 
-gameId = getGameId #getGameId()
-playerId = getPlayerId(gameId)
-getStatus(gameId)
-mode = getMode(gameId)
-print(gameId)
-print(playerId)
-print(getGrid(gameId))
+if __name__ == '__main__':
+  gameId = getGameId #getGameId()
+  playerId = getPlayerId(gameId)
+  getStatus(gameId)
+  mode = getMode(gameId)
+  print(gameId)
+  print(playerId)
+  print(getGrid(gameId))
 #makeMove(gameId, playerId)
-print(getGrid(gameId))
-print(mode)
+  print(getGrid(gameId))
+  print(mode)
 #playGame()
-print('done')
+  print('done')
+
