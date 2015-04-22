@@ -3,9 +3,9 @@
 #define SRC_SRC_TTTSPACE_H_
 
 enum TttSpace {
-  X = 0,
-  O,
-  Blank
+    X = 0,
+    O,
+    Blank
 };
 
 #endif  // SRC_SRC_TTTSPACE_H_
