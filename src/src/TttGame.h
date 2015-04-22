@@ -6,7 +6,7 @@
 
 class TttGame {
   protected:
-    int score_base = 10;
+    int score_base;
     int turnNumber; // 0-indexed; even=X, odd=O
     bool hasWinner; // set by playMove() when a winning condition occurs
 

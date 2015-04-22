@@ -3,12 +3,14 @@
 #include "TttGame.h"
 
 TttGame::TttGame() {
+  this->score_base = 10;
   this->turnNumber = 0;
   this->hasWinner = false;
 }
 
 void
 TttGame::copy_from(const TttGame &src) {
+  this->score_base = src.score_base;
   this->turnNumber = src.turnNumber;
   this->hasWinner = src.hasWinner;
   this->board = src.board;
