@@ -5,12 +5,12 @@
 #include "TttSpace.h"
 
 class TttBoard {
-  private:
+private:
     TttSpace space[9];
     void copy(const TttBoard &);
     void setFromString(const char (&)[10]);
 
-  public:
+public:
     TttBoard(); // empty board
     TttBoard(int);
     TttBoard(const char (&)[10]); // preconfigured board

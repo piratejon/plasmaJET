@@ -7,7 +7,7 @@
 #include "TttGame.h"
 
 class AchiGame : public TttGame {
-  private:
+private:
     int space; // simpler to set the free space in playmove
 
     void copy_from(const AchiGame &);
@@ -18,7 +18,7 @@ class AchiGame : public TttGame {
 
     std::set<int> history;
 
-  public:
+public:
     AchiGame();
     AchiGame(const AchiGame &src);
     AchiGame & operator= (const AchiGame &);

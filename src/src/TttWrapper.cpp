@@ -5,22 +5,22 @@
 static TttGame tttGame;
 
 int computeNextMove() {
-  return tttGame.computeNextMove();
+    return tttGame.computeNextMove();
 }
 
 void playMove(int p) {
-  tttGame.playMove(p);
+    tttGame.playMove(p);
 }
 
 char getSpace(int i) {
-  return tttGame.board.getSpace(i);
+    return tttGame.board.getSpace(i);
 }
 
 bool checkWinner() {
-  return tttGame.checkWinner();
+    return tttGame.checkWinner();
 }
 
 int getTurnNumber() {
-  return tttGame.getTurnNumber();
+    return tttGame.getTurnNumber();
 }
 
