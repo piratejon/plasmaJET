@@ -1,6 +1,6 @@
 
 CXX=clang++
-CXXFLAGS=-std=c++11 -Isrc -Wall -g3 -stdlib=libc++
+CXXFLAGS=-std=c++03 -Isrc -Wall -g3 -stdlib=libc++
 LIBFLAGS=-dynamiclib -Wl,-install_name,libplasmajectactoe.dylib
 TEST_FLAGS=-I../Catch/include
 CXX_SOURCES=src/TttGame.cpp src/AchiGame.cpp src/TttBoard.cpp
