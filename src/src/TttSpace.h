@@ -1,6 +1,6 @@
-
-#if ! defined(PLASMAJET_TTTSPACE_H)
-#define PLASMAJET_TTTSPACE_H
+// Copyright 2015 Jonathan Wesley Stone
+#ifndef SRC_SRC_TTTSPACE_H_
+#define SRC_SRC_TTTSPACE_H_
 
 enum TttSpace {
   X = 0,
@@ -8,5 +8,5 @@ enum TttSpace {
   Blank
 };
 
-#endif // PLASMAJET_TTTSPACE_H
+#endif  // SRC_SRC_TTTSPACE_H_
 
