@@ -486,24 +486,29 @@ TEST_CASE("can play a whole game of achi", "[AchiGame]") {
   REQUIRE(a.checkWinner());
 }
 
-void test_every_game(AchiGame & a, int level) {
+void test_every_game(AchiGame & a) {
   int move;
-  REQUIRE(level < 7);
+  REQUIRE(a.getTurnNumber() < 11);
   for (move = 0; move < 9; move += 1) {
     if (a.isValidMove(move)) {
       AchiGame b(a);
-      b.playMove(move); // x
-      REQUIRE(!b.checkWinner());
-      b.playMove(b.computeNextMove()); // o
-      if (b.checkWinner()) break;
-      test_every_game(b, level + 1);
+      b.playMove(move); // o
+      REQUIRE((!b.checkWinner() || a.getTurnNumber() > 6)); // o cannot win if x plays perfectly
+      b.playMove(b.computeNextMove());
+      if (b.checkWinner()) continue;
+      test_every_game(b);
     }
   }
 }
 
-TEST_CASE("x wins in 11 moves or less", "[AchiGame]") {
+TEST_CASE("x wins in 10 moves or less", "[AchiGame]") {
   AchiGame a;
   a.playMove(4); // x
-  test_every_game(a, 1);
+  // test_every_game(a);
+}
+
+TEST_CASE("o wins in 10 moves or less", "[AchiGame]") {
+  AchiGame a;
+  test_every_game(a);
 }
 
