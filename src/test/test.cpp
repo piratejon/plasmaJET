@@ -486,8 +486,24 @@ TEST_CASE("can play a whole game of achi", "[AchiGame]") {
   REQUIRE(a.checkWinner());
 }
 
-TEST_CASE("deserializes a state", "[AchiGame]") {
-  AchiGame a;
+void test_every_game(AchiGame & a, int level) {
+  int move;
+  REQUIRE(level < 7);
+  for (move = 0; move < 9; move += 1) {
+    if (a.isValidMove(move)) {
+      AchiGame b(a);
+      b.playMove(move); // x
+      REQUIRE(!b.checkWinner());
+      b.playMove(b.computeNextMove()); // o
+      if (b.checkWinner()) break;
+      test_every_game(b, level + 1);
+    }
+  }
+}
 
+TEST_CASE("x wins in 11 moves or less", "[AchiGame]") {
+  AchiGame a;
+  a.playMove(4); // x
+  test_every_game(a, 1);
 }
 
