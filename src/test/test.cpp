@@ -450,7 +450,40 @@ TEST_CASE("can play a whole game of achi", "[AchiGame]") {
   AchiGame a;
 
   // x's first and best play is in the middle?
-  // REQUIRE(a.computeNextMove() == 4);
+  REQUIRE(a.computeNextMove() == 4);
+  a.playMove(4);
+  REQUIRE(!a.checkWinner());
+  REQUIRE(a.computeNextMove() == 0);
+  a.playMove(0);
+  REQUIRE(!a.checkWinner());
+  REQUIRE(a.computeNextMove() == 1);
+  a.playMove(1);
+  REQUIRE(!a.checkWinner());
+  REQUIRE(a.computeNextMove() == 7);
+  a.playMove(7);
+  REQUIRE(!a.checkWinner());
+  REQUIRE(a.computeNextMove() == 5);
+  a.playMove(5);
+  REQUIRE(!a.checkWinner());
+  REQUIRE(a.computeNextMove() == 3);
+  REQUIRE(!a.checkWinner());
+  a.playMove(3);
+  REQUIRE(a.computeNextMove() == 6);
+  REQUIRE(!a.checkWinner());
+  a.playMove(6);
+  REQUIRE(a.computeNextMove() == 2);
+  REQUIRE(!a.checkWinner());
+  a.playMove(2);
+  REQUIRE(a.computeNextMove() == 5);
+  REQUIRE(!a.checkWinner());
+  a.playMove(5);
+  REQUIRE(a.computeNextMove() == 2);
+  REQUIRE(!a.checkWinner());
+  a.playMove(2);
+  REQUIRE(a.computeNextMove() == 1);
+  REQUIRE(!a.checkWinner());
+  a.playMove(1);
+  REQUIRE(a.checkWinner());
 }
 
 TEST_CASE("deserializes a state", "[AchiGame]") {

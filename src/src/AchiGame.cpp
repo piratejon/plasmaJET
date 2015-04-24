@@ -180,12 +180,10 @@ AchiGame::computeNextMove(int depth) const {
         }
         */
 
-        /*
         if (depth > 15) {
           if (this->getTurnNumber() & 1) return this->score_base;
           else return 0 - this->score_base;
         };
-        */
 
         for (i = 0; i < 9; i += 1) {
             if (this->isValidMove(i)) {
