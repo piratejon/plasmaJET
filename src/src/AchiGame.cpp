@@ -32,7 +32,7 @@ AchiGame::playMove(int i) {
     this->hasWinner = this->check_for_win();
     updateBlankSpace();
 
-    this->history.insert(this->bundle());
+    // this->history.insert(this->bundle());
 }
 
 void
@@ -96,7 +96,7 @@ AchiGame::achiAdjacent(int src, int dst) const {
 bool
 AchiGame::seenBefore(TttBoard &board, int turn) const {
     // checks if the board + whose turn it is has occurred before
-    return this->history.end() != this->history.find(this->bundle());
+    return this->history.end() != this->history.find(this->bundle(board, turn));
 }
 
 bool
@@ -190,7 +190,7 @@ AchiGame::computeNextMove(int depth) const {
                 AchiGame tmp(*this);
                 tmp.playMove(i);
 
-                if (!this->seenBefore(tmp.bundle())) {
+                // if (!this->seenBefore(tmp.bundle())) {
 
                     tmp_score = tmp.computeNextMove(depth + 1);
                     // tmp_score = tmp.alpha_beta(depth + 1, 0 - this->score_base, this->score_base);
@@ -211,7 +211,7 @@ AchiGame::computeNextMove(int depth) const {
                             best_move = i;
                         }
                     }
-                }
+                // }
             }
         }
     }

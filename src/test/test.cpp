@@ -403,6 +403,7 @@ TEST_CASE("serializes the board", "[TttBoard]") {
   REQUIRE(b == "     x   ");
 }
 
+/*
 TEST_CASE("serializes the board + turn", "[AchiGame]") {
   AchiGame a;
   int s[9];
@@ -445,6 +446,7 @@ TEST_CASE("serializes the board + turn", "[AchiGame]") {
   REQUIRE(b.seenBefore(s[0]));
   REQUIRE(!b.seenBefore(s[7]));
 }
+*/
 
 TEST_CASE("can play a whole game of achi", "[AchiGame]") {
   AchiGame a;
