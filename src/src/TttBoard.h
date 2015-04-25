@@ -2,6 +2,8 @@
 #if ! defined(PLASMAJET_TTTBOARD_H)
 #define PLASMAJET_TTTBOARD_H
 
+#include <string>
+
 #include "TttSpace.h"
 
 class TttBoard {
@@ -29,6 +31,8 @@ public:
 
     int serialize() const;
     void deserialize(int);
+
+    std::string toString() const;
 };
 
 #endif // PLASMAJET_TTTSPACE_H

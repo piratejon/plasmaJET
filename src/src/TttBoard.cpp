@@ -1,3 +1,6 @@
+#include <sstream>
+#include <string>
+
 #include "TttBoard.h"
 
 TttBoard::TttBoard() {
@@ -191,5 +194,14 @@ TttBoard::operator!= (const TttBoard & t) const {
 
 TttBoard::TttBoard (int s) {
     this->deserialize(s);
+}
+
+std::string
+TttBoard::toString() const {
+    std::stringstream ss;
+    ss << this->getSpace(0) << this->getSpace(1) << this->getSpace(2) << "\\n"
+        << this->getSpace(3) << this->getSpace(4) << this->getSpace(5) << "\\n"
+        << this->getSpace(6) << this->getSpace(7) << this->getSpace(8);
+    return ss.str();
 }
 
