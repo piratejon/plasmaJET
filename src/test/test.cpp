@@ -518,6 +518,6 @@ TEST_CASE("x wins in 10 moves or less", "[AchiGame]") {
 
 TEST_CASE("o wins in 10 moves or less", "[AchiGame]") {
   AchiGame a;
-  // test_every_game(a);
+  test_every_game(a);
 }
 
