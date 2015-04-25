@@ -180,7 +180,8 @@ TttGame::score(int base) const {
     return 0;
 }
 
-int TttGame::score() const {
+int
+TttGame::score() const {
     return this->score(this->score_base);
 }
 
