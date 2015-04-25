@@ -495,7 +495,14 @@ void test_every_game(AchiGame & a) {
     if (a.isValidMove(move)) {
       AchiGame b(a);
       b.playMove(move); // o
-      REQUIRE((!b.checkWinner() || a.getTurnNumber() > 7)); // o cannot win if x plays perfectly
+      if (b.getTurnNumber() & 1) { // o's turn
+          // o cannot win if x plays perfectly, but can drag out the game
+          if (b.getTurnNumber() < 11) {
+            REQUIRE(!b.checkWinner());
+          }
+      } else { // x's turn
+          REQUIRE(!b.checkWinner()); // x cannot lose if it plays perfectly
+      }
       b.playMove(b.computeNextMove());
       if (b.checkWinner()) continue;
       test_every_game(b);
