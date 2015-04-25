@@ -17,7 +17,7 @@ lib: $(CXX_SOURCES)
 
 test/test: test/test_main.o test/test.o $(CXX_SOURCES)
 	$(CXX) $(CXXFLAGS) $(CXX_SOURCES) $(LDFLAGS) test/test_main.o test/test.o -o test/test
-	test/test
+	time test/test
 
 check: test/test
 
