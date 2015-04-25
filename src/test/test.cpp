@@ -512,12 +512,12 @@ void test_every_game(AchiGame & a) {
 
 TEST_CASE("x wins in 10 moves or less", "[AchiGame]") {
   AchiGame a;
-  a.playMove(4); // x
-  // test_every_game(a);
+  a.playMove(4); // o can force a win if x does not play the middle
+  test_every_game(a);
 }
 
 TEST_CASE("o wins in 10 moves or less", "[AchiGame]") {
   AchiGame a;
-  test_every_game(a);
+  // test_every_game(a);
 }
 
