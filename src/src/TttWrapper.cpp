@@ -1,8 +1,8 @@
 
 #include "TttWrapper.h"
-#include "TttGame.h"
+#include "AchiGame.h"
 
-static TttGame tttGame;
+static AchiGame tttGame;
 
 int computeNextMove() {
     return tttGame.computeNextMove();

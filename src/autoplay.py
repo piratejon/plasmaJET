@@ -12,14 +12,14 @@ def printBoard(game):
       )
 
 def playTicTacToe(game):
-  while (game.checkWinner() == False) & (game.getTurnNumber() < 9):
+  while game.checkWinner() == False:
     move = game.computeNextMove()
     print("{}: {} will play {}".format(game.getTurnNumber(), 'o' if game.getTurnNumber() & 1 else 'x', move))
     game.playMove(move)
     printBoard(game)
   
   if game.checkWinner():
-    print("{} wins!".format('o' if game.getTurnNumber() & 1 else 'o'))
+    print("{} wins!".format('x' if game.getTurnNumber() & 1 else 'o'))
   else:
     print("Game ended in a draw!")
 
