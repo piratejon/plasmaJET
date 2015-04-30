@@ -42,8 +42,7 @@ def get_status(game_id):
 def get_mode(game_id):
   return send_to_server('mode', {'gameid': game_id})
 
-def make_move(game_id, player_id):
-  position = input("Enter move 0-8: ")
+def make_move(game_id, player_id, position):
   return send_to_server('move', {'gameid' : game_id, 'playerid' : player_id, 'position' : position})
 
 def get_grid(game_id):
@@ -138,9 +137,12 @@ def play_game(player, game_id, player_id):
   while get_status(game_id).decode() != "3" and get_status(game_id).decode() != "4":
     if get_status(game_id).decode() == player:
       if get_mode(game_id).decode() == "tictactoe":
-        make_move(game_id, player_id)
+        position = input("Pick a move, man 0-8: ")
+        make_move(game_id, player_id, position)
       elif get_mode(game_id).decode() == "slide":
-        print("slide TIME")
+        print("It's achi time bb!!!!!!!")
+        position = input("Pick a piece to slide 0-8: ")
+        make_move(game_id, player_id, position)
   print("GAME OVER")
   if get_status(game_id).decode() == "3":
     print("Player 1 is the winner")
