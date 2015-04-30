@@ -1,6 +1,7 @@
 from urllib.request import urlopen
 import urllib.request
 import urllib.parse
+import datetime
 import logging
 import pprint
 import json
@@ -8,6 +9,8 @@ import os
 from ctypes import cdll
 
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
+
+game = None
 
 def build_query(method, values = {}):
   values['controller'] = 'api'
@@ -18,7 +21,9 @@ def build_query_string(query):
   return urllib.parse.urlencode(query).encode('utf-8')
 
 def load_game_object(library_path = os.getcwd() + '/libplasmajetactoe.so'):
-  return cdll.LoadLibrary(library_path)
+  logging.info("load library")
+  game = cdll.LoadLibrary(library_path)
+  return game
 
 #sends request to the server with information
 #all information sent to the server, including moves, will have a response of some sort
@@ -30,6 +35,9 @@ def send_to_server(method, values = {}):
   response = response.read()
   logging.info("[response]", response)
   return response.decode('utf-8')
+
+def store_new_board(l):
+  pass
 
 #gets the game id from the server
 def get_game_id():
@@ -174,7 +182,13 @@ def play_tic_tac_toe(game):
     play_game(player, game_id, player_id, game)
 
 
+def initialize_logging():
+  now = datetime.datetime.now()
+  logging.basicConfig(filename=str(now).translate(None, ':'), level=logging.DEBUG)
+  logging.info('Initialized log at ' + str(now))
+
 def main(args):
+  initialize_logging()
   # The only argument is the full path to the library.  Later, arguments including the game type may appear.
   full_path_to_library = args[0]
   game = load_game_object(full_path_to_library)
