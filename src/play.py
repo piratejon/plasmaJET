@@ -4,10 +4,6 @@ import urllib.request
 import json
 from ctypes import cdll
 
-
-def get_move():
-	return 5
-
 #sends request to the server with information
 #all information sent to the server, including moves, will have a response of some sort
 def send_to_server(url, values = None): 
@@ -21,11 +17,6 @@ def send_to_server(url, values = None):
   response = response.read()
   return response
 
-
-def player_b_game_id():
-  print("Enter Game ID")
-  game_id = input(">")
-  return game_id
 
 #gets the game id from the server
 def get_game_id():
@@ -187,58 +178,6 @@ if __name__ == '__main__':
   import sys
   main(sys.argv[1:])
 
-'''  
-  print("Welcome to PlasmaJetTacToe")
-  print("Are you Player 1 (a) or Player 2 (b)?")
-  
-  player = 'c'
-  while player != 'a' or player != 'b':  
-    player = input(">")
-    if player == 'a':
-      print("hello player 1")
-      gameId = getGameId()
-      playerId = getPlayerId(game_id)
-      print(game_id)
-      print("Has the opponent got their player ID (y/n)?")
-      opponent = False
-      opponentId = input(">")
-      if opponentId == 'y':
-        opponent == True
-        break
-      break
-    elif player == 'b':
-      print("hello player 2")
-      gameId = playerBGameId()
-      opponent = False
-      while opponent == False: 
-        print("Has the opponent got their player ID (y/n)?")
-        opponentId = input(">")
-        if opponentId == 'y':
-          opponent == True
-          break
-      playerId = getPlayerId(game_id)
-      break
-    else:
-      print("Enter a or b")
-  
-  while getStatus(game_id).decode() != '3' or getStatus(game_id).decode() != '4':
-    print(getStatus(game_id).decode())
-    if player == 'a':
-      if getStatus(game_id).decode() == '1':
-        print("here")
-        print(makeMove(gameId, playerId))
-        grid = getGrid(game_id)
-        print(json.dumps(grid))
-    elif player == 'b':
-      if getStatus(game_id).decode() == '2':
-        print(makeMove(gameId, playerId))
-        grid = getGrid(game_id)
-        print(json.dumps(grid))
-    if getStatus(game_id).decode() == '3' or getStatus(game_id).decode() == '4':
-      break
-
-  print(getStatus(game_id))
-'''
 
 
 
