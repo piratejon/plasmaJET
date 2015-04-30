@@ -6,6 +6,11 @@ from ctypes import cdll
 
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
 
+def store_new_board(moves):
+  x_list = [i for i in range(8) if moves[i] = "x"]
+  y_list = [i for i in range(8) if moves[i] = "y"]
+  
+
 def build_query(method, values = {}):
   values['controller'] = 'api'
   values['method'] = method
@@ -148,7 +153,7 @@ def play_game(player, game_id, player_id, game):
         position = game.computeNextMove()
         print("{}: {} will play {}".format(game.getTurnNumber(), 'o' if game.getTurnNumber() & 1 else 'x', position))
         make_move(game_id, player_id, position)
-    game = load_game_object(full_path_to_library)    
+    game = store_new_board(decode_grid_json())    
   print("GAME OVER")
   if get_status(game_id).decode() == "3":
     print("Player 1 is the winner")
