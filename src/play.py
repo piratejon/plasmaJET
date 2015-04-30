@@ -34,8 +34,7 @@ def build_query_string(query):
 
 def load_game_object(library_path = os.getcwd() + '/libplasmajetactoe.so'):
   logging.info("load library")
-  game = cdll.LoadLibrary(library_path)
-  return game
+  return cdll.LoadLibrary(library_path)
 
 #sends request to the server with information
 #all information sent to the server, including moves, will have a response of some sort
@@ -43,10 +42,10 @@ def send_to_server(method, values = {}):
   data = build_query_string(build_query(method, values))
   request = urllib.request.Request(API_URL, data)
   print(request)
-  logging.info("[request]", request.full_url, request.data)
+  logging.info("[request] %s, %s", request.full_url, request.data)
   response = urllib.request.urlopen(request)
   response = response.read()
-  logging.info("[response]", response)
+  logging.info("[response] %s", response)
   return response.decode('utf-8')
 
 #gets the game id from the server
@@ -165,12 +164,11 @@ def play_game(player, game_id, player_id, game):
     if get_status(game_id) == player:
       game = store_new_board(decode_grid_json(get_grid(game_id)))
       if get_mode(game_id) == "tictactoe":
-        position = game.computeNextMove()
-        make_move(game_id, player_id, position)
+        print("tic tac toe time!!")
       elif get_mode(game_id) == "slide":
         print("It's achi time bb!!!!!!!")
-        position = game.computeNextMove()
-        make_move(game_id, player_id, position)    
+      position = game.computeNextMove()
+      make_move(game_id, player_id, position)
   print("GAME OVER")
   if get_status(game_id) == "3":
     print("Player 1 is the winner")
@@ -193,13 +191,13 @@ def play_tic_tac_toe(game):
 
 def initialize_logging():
   now = datetime.datetime.now()
-  logging.basicConfig(filename=str(now).translate(None, ':'), level=logging.DEBUG)
+  logging.basicConfig(filename=str(now).replace(':', '') + '.txt', level=logging.DEBUG)
   logging.info('Initialized log at ' + str(now))
 
 def main(args):
   initialize_logging()
   # The only argument is the full path to the library.  Later, arguments including the game type may appear.
-  full_path_to_library = args[0]
+#full_path_to_library = args[0]
   game = load_game_object()
   if game is not None:
     play_tic_tac_toe(game)
