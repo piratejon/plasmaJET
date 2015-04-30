@@ -10,9 +10,18 @@ from ctypes import cdll
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
 
 def store_new_board(moves):
-  x_list = [i for i in range(8) if moves[i] = "x"]
-  y_list = [i for i in range(8) if moves[i] = "y"]
-  
+  x_list = [i for i in range(8) if moves[i] == "x"]
+  o_list = [i for i in range(8) if moves[i] == "o"]
+  game = load_game_object()
+  o_len = len(o_list) # o plays second and will be < = x in length
+  x_len = len(x_list)
+  if o_len != 0:
+    for i in range(o_len):
+      game.playMove(x_list[i])
+      game.playMove(o_list[i])
+  if x_len != o_len: # There will be one extra in x  
+    game.playMove(x_list(x_len-1))  
+  return game
 
 def build_query(method, values = {}):
   values['controller'] = 'api'
@@ -30,6 +39,7 @@ def load_game_object(library_path = os.getcwd() + '/libplasmajetactoe.so'):
 def send_to_server(method, values = {}):
   data = build_query_string(build_query(method, values))
   request = urllib.request.Request(API_URL, data)
+  print(request)
   logging.info("[request]", request.full_url, request.data)
   response = urllib.request.urlopen(request)
   response = response.read()
@@ -53,6 +63,7 @@ def get_mode(game_id):
   return send_to_server('mode', {'gameid': game_id})
 
 def make_move(game_id, player_id, position):
+  print(position)
   return send_to_server('move', {'gameid' : game_id, 'playerid' : player_id, 'position' : position})
 
 def get_grid(game_id):
@@ -147,22 +158,20 @@ def player_b():
   return game_id, player_id
 
 def play_game(player, game_id, player_id, game):
-  while get_status(game_id).decode() != "3" and get_status(game_id).decode() != "4":
-    if get_status(game_id).decode() == player:
-      if get_mode(game_id).decode() == "tictactoe":
+  while get_status(game_id) != "3" and get_status(game_id) != "4":
+    if get_status(game_id) == player:
+      game = store_new_board(decode_grid_json(get_grid(game_id)))
+      if get_mode(game_id) == "tictactoe":
         position = game.computeNextMove()
-        print("{}: {} will play {}".format(game.getTurnNumber(), 'o' if game.getTurnNumber() & 1 else 'x', position))
         make_move(game_id, player_id, position)
-      elif get_mode(game_id).decode() == "slide":
+      elif get_mode(game_id) == "slide":
         print("It's achi time bb!!!!!!!")
         position = game.computeNextMove()
-        print("{}: {} will play {}".format(game.getTurnNumber(), 'o' if game.getTurnNumber() & 1 else 'x', position))
-        make_move(game_id, player_id, position)
-    game = store_new_board(decode_grid_json())    
+        make_move(game_id, player_id, position)    
   print("GAME OVER")
-  if get_status(game_id).decode() == "3":
+  if get_status(game_id) == "3":
     print("Player 1 is the winner")
-  elif get_status(game_id).decode() == "4":
+  elif get_status(game_id) == "4":
     print("Player 2 is the winner")   
 
 def play_tic_tac_toe(game):
@@ -182,7 +191,7 @@ def play_tic_tac_toe(game):
 def main(args):
   # The only argument is the full path to the library.  Later, arguments including the game type may appear.
   full_path_to_library = args[0]
-  game = load_game_object(full_path_to_library)
+  game = load_game_object()
   if game is not None:
     play_tic_tac_toe(game)
   else:
