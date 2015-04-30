@@ -1,6 +1,7 @@
 from urllib.request import urlopen
 import urllib.request
 import urllib.parse
+import datetime
 import logging
 import pprint
 import json
@@ -10,9 +11,8 @@ from ctypes import cdll
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
 
 def store_new_board(moves):
-  print(moves)
-  x_list = [i for i in range(9) if moves[i] == "X"]
-  o_list = [i for i in range(9) if moves[i] == "O"]
+  x_list = [i for i in range(9) if moves[i] == 'x' or moves[i] == 'X']
+  o_list = [i for i in range(9) if moves[i] == 'o' or moves[i] == 'O']
   game = load_game_object()
   o_len = len(o_list) # o plays second and will be < = x in length
   x_len = len(x_list)
@@ -25,8 +25,7 @@ def store_new_board(moves):
       game.playMove(x_list[i])
       game.playMove(o_list[i])
   if x_len != o_len: # There will be one extra in x  
-    print("x not o len")
-    game.playMove(x_list[x_len-1])  
+    game.playMove(x_list[-1])
   return game
 
 def build_query(method, values = {}):
@@ -38,6 +37,7 @@ def build_query_string(query):
   return urllib.parse.urlencode(query).encode('utf-8')
 
 def load_game_object(library_path = os.getcwd() + '/libplasmajetactoe.so'):
+  logging.info("load library")
   return cdll.LoadLibrary(library_path)
 
 #sends request to the server with information
@@ -45,10 +45,10 @@ def load_game_object(library_path = os.getcwd() + '/libplasmajetactoe.so'):
 def send_to_server(method, values = {}):
   data = build_query_string(build_query(method, values))
   request = urllib.request.Request(API_URL, data)
-  logging.info("[request]", request.full_url, request.data)
+  logging.info("[request] %s, %s", request.full_url, request.data)
   response = urllib.request.urlopen(request)
   response = response.read()
-  logging.info("[response]", response)
+  logging.info("[response] %s", response)
   return response.decode('utf-8')
 
 #gets the game id from the server
@@ -167,12 +167,11 @@ def play_game(player, game_id, player_id, game):
     if get_status(game_id) == player:
       game = store_new_board(decode_grid_json(get_grid(game_id)))
       if get_mode(game_id) == "tictactoe":
-        position = game.computeNextMove()
-        make_move(game_id, player_id, position)
+        print("tic tac toe time!!")
       elif get_mode(game_id) == "slide":
         print("It's achi time bb!!!!!!!")
-        position = game.computeNextMove()
-        make_move(game_id, player_id, position)    
+      position = game.computeNextMove()
+      make_move(game_id, player_id, position)
   print("GAME OVER")
   if get_status(game_id) == "3":
     print("Player 1 is the winner")
@@ -193,9 +192,15 @@ def play_tic_tac_toe(game):
     play_game(player, game_id, player_id, game)
 
 
+def initialize_logging():
+  now = datetime.datetime.now()
+  logging.basicConfig(filename=str(now).replace(':', '') + '.txt', level=logging.DEBUG)
+  logging.info('Initialized log at ' + str(now))
+
 def main(args):
+  initialize_logging()
   # The only argument is the full path to the library.  Later, arguments including the game type may appear.
-  full_path_to_library = args[0]
+#full_path_to_library = args[0]
   game = load_game_object()
   if game is not None:
     play_tic_tac_toe(game)
