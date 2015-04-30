@@ -191,7 +191,10 @@ def play_game(player, game_id, player_id, turn):
   if get_status(game_id) == "3":
     print("Player 1 is the winner")
   elif get_status(game_id) == "4":
-    print("Player 2 is the winner")   
+    print("Player 2 is the winner")  
+
+  game = store_new_board(decode_grid_json(get_grid(game_id)), game, turn)
+  print_board(game) 
 
 def play_tic_tac_toe(game):
   print("Welcome to PlasmaJetTacToe")
