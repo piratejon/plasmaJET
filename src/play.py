@@ -16,16 +16,16 @@ def store_new_board(moves, game, turn):
   game.reset()
   o_len = len(o_list) # o plays second and will be < = x in length
   x_len = len(x_list)
-  move_list = []
+#  move_list = []
   if o_len != 0:
     for i in range(o_len):
       game.playMove(x_list[i])
-      move_list.append(x_list[i])
+#move_list.append(x_list[i])
       game.playMove(o_list[i])
-      move_list.append(o_list[i])
+#      move_list.append(o_list[i])
   if x_len != o_len: # There will be one extra in x  
     game.playMove(x_list[-1])
-    move_list.append(x_list[-1])
+#    move_list.append(x_list[-1])
   game.setTurnNumber(turn)
   return game
 
