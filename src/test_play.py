@@ -28,12 +28,12 @@ class TestPlay(unittest.TestCase):
     self.assertTrue(cond)
 
   def test_build_server_request(self):
-    p1 = 'p1=v1&p2=v2&method=lol'
-    p2 = 'p1=v1&method=lol&p2=v2'
-    p3 = 'method=lol&p1=v1&p2=v2'
-    p4 = 'method=lol&p2=v2&p1=v1'
-    p5 = 'p2=v2&p1=v1&method=lol'
-    p6 = 'p2=v2&method=lol&p1=v1'
+    p1 = play.get_server_query_string() + '?p1=v1&p2=v2&method=lol'
+    p2 = play.get_server_query_string() + '?p1=v1&method=lol&p2=v2'
+    p3 = play.get_server_query_string() + '?method=lol&p1=v1&p2=v2'
+    p4 = play.get_server_query_string() + '?method=lol&p2=v2&p1=v1'
+    p5 = play.get_server_query_string() + '?p2=v2&p1=v1&method=lol'
+    p6 = play.get_server_query_string() + '?p2=v2&method=lol&p1=v1'
     t = play.build_request_string('lol', {'p1':'v1', 'p2':'v2'})
     cond = sum(t == p for p in [p1, p2, p3, p4, p5, p6])
     self.assertEqual(cond, 1)

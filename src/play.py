@@ -18,7 +18,7 @@ def create_server_query_string(method):
 
 def build_request_string(method, params):
   params['method'] = method
-  return urllib.parse.urlencode(params)
+  return SERVER_PATH + '?' + urllib.parse.urlencode(params)
 
 def getMove():
 	return 5
