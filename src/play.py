@@ -28,42 +28,26 @@ def send_to_server(method, values = {}):
 
 #gets the game id from the server
 def get_game_id():
-  url = 'http://cs2.uco.edu/~gq011/tictactoe/server/?controller=api&method=start&boardsize=3'
-  game_id = send_to_server(url)
-  return game_id
+  return send_to_server('start', {'boardsize': 3})
 
 #creates a connection with the other player and returs your player id
 def get_player_id(game_id):
-  url = 'http://cs2.uco.edu/~gq011/tictactoe/server/?controller=api&method=connect'
-  values = {'gameid' : game_id}
-  player_id = send_to_server(url, values)
-  return player_id
+  return send_to_server('connect', {'gameid': game_id})
 
 #gets the status of the game
 def get_status(game_id):
-  url = 'http://cs2.uco.edu/~gq011/tictactoe/server/?controller=api&method=status'
-  values = {'gameid' : game_id}
-  status = send_to_server(url, values)
-  return status
+  return send_to_server('status', {'gameid': game_id})
 
 #gets the game mode
 def get_mode(game_id):
-  url = 'http://cs2.uco.edu/~gq011/tictactoe/server/?controller=api&method=mode'
-  values = {'gameid' : game_id}
-  mode = send_to_server(url, values)
-  return mode
+  return send_to_server('mode', {'gameid': game_id})
 
 def make_move(game_id, player_id):
-  url = 'http://cs2.uco.edu/~gq011/tictactoe/server/?controller=api&method=move'
-  print("here")
   position = input("Enter move 0-8: ")
-  values = {'gameid' : game_id, 'playerid' : player_id, 'position' : position}
-  return(send_to_server(url, values))
+  return send_to_server('move', {'gameid' : game_id, 'playerid' : player_id, 'position' : position})
 
 def get_grid(game_id):
-  url = 'http://cs2.uco.edu/~gq011/tictactoe/server/?controller=api&method=grid'
-  values = {'gameid' : game_id}
-  send_to_server(url, values)
+  return send_to_server('grid', {'gameid' : game_id})
 
 def get_player():
   print("Are you Player 1 or Player 2?")
