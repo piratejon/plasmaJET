@@ -16,6 +16,10 @@ def get_server_query_string():
 def create_server_query_string(method):
   return SERVER_PATH + '?' + urllib.parse.urlencode({'controller': 'api', 'method': method})
 
+def build_request_string(method, params):
+  params['method'] = method
+  return urllib.parse.urlencode(params)
+
 def getMove():
 	return 5
 
