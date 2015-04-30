@@ -1,7 +1,10 @@
 from urllib.request import urlopen
-import urllib.parse
 import urllib.request
+import urllib.parse
+import logging
+import pprint
 import json
+import os
 from ctypes import cdll
 
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
@@ -19,7 +22,7 @@ def build_query(method, values = {}):
 def build_query_string(query):
   return urllib.parse.urlencode(query).encode('utf-8')
 
-def load_game_object(library_path):
+def load_game_object(library_path = os.getcwd() + '/libplasmajetactoe.so'):
   return cdll.LoadLibrary(library_path)
 
 #sends request to the server with information
@@ -27,8 +30,10 @@ def load_game_object(library_path):
 def send_to_server(method, values = {}):
   data = build_query_string(build_query(method, values))
   request = urllib.request.Request(API_URL, data)
+  logging.info("[request]", request.full_url, request.data)
   response = urllib.request.urlopen(request)
   response = response.read()
+  logging.info("[response]", response)
   return response.decode('utf-8')
 
 #gets the game id from the server
