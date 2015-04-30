@@ -218,8 +218,11 @@ def initialize_logging():
 def main(args):
   initialize_logging()
   # The only argument is the full path to the library.  Later, arguments including the game type may appear.
-#full_path_to_library = args[0]
-  game = load_game_object()
+  if len(args) > 0:
+    full_path_to_library = args[0]
+  else:
+    full_path_to_library = None
+  game = load_game_object(full_path_to_library)
   if game is not None:
     play_tic_tac_toe(game)
   else:
