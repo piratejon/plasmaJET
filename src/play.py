@@ -8,16 +8,17 @@ from ctypes import cdll
 #all information sent to the server, including moves, will have a response of some sort
 def send_to_server(url, values = None): 
   if (values != None):
+    print(values)
     data = urllib.parse.urlencode(values)
     data = data.encode('utf-8')
+    print(data)
     request = urllib.request.Request(url, data)
+    print(request)
   else:
     request = url
-
   response = urllib.request.urlopen(request)
   response = response.read()
   return response
-
 
 #gets the game id from the server
 def get_game_id():
@@ -148,7 +149,7 @@ def play_game(player, game_id, player_id):
     if get_status(game_id).decode() == player:
       if get_mode(game_id).decode() == "tictactoe":
         print("yolo")
-        make_move(player_id, game_id)
+        make_move(game_id, player_id)
       elif get_mode(game_id).decode() == "slide":
         print("slide TIME")
 
@@ -178,8 +179,3 @@ def main(args):
 if __name__ == '__main__':
   import sys
   main(sys.argv[1:])
-
-
-
-
-
