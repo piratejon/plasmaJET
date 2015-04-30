@@ -10,8 +10,8 @@ from ctypes import cdll
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
 
 def store_new_board(moves):
-  x_list = [i for i in range(8) if moves[i] == "x"]
-  o_list = [i for i in range(8) if moves[i] == "o"]
+  x_list = [i for i in range(9) if moves[i] == "x"]
+  o_list = [i for i in range(9) if moves[i] == "o"]
   game = load_game_object()
   o_len = len(o_list) # o plays second and will be < = x in length
   x_len = len(x_list)
@@ -39,7 +39,6 @@ def load_game_object(library_path = os.getcwd() + '/libplasmajetactoe.so'):
 def send_to_server(method, values = {}):
   data = build_query_string(build_query(method, values))
   request = urllib.request.Request(API_URL, data)
-  print(request)
   logging.info("[request]", request.full_url, request.data)
   response = urllib.request.urlopen(request)
   response = response.read()
