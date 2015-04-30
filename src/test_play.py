@@ -234,6 +234,7 @@ class TestPlay(unittest.TestCase):
     self.assertEqual(play.get_status(game_id), "1")
 
     game = play.load_game_object()
+    game.reset()
 
 # game starts with empty board
     board = ['','','','','','','','','']
