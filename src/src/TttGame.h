@@ -19,6 +19,7 @@ protected:
 public:
     TttBoard board;
     int getTurnNumber() const;
+    void setTurnNumber(int);
 
     void playMove(int);
     bool checkWinner() const;

@@ -31,6 +31,11 @@ TttGame::getTurnNumber() const {
     return this->turnNumber;
 }
 
+void
+TttGame::setTurnNumber(int t) {
+    this->turnNumber = t;
+}
+
 bool
 TttGame::checkWinner() const {
     return this->hasWinner;

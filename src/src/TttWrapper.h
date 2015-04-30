@@ -11,6 +11,7 @@ void playMove(int);
 char getSpace(int);
 bool checkWinner();
 int getTurnNumber();
+void setTurnNumber(int);
 
 #if defined(__cplusplus)
 }

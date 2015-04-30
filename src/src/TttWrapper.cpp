@@ -1,8 +1,8 @@
 
 #include "TttWrapper.h"
-#include "TttGame.h"
+#include "AchiGame.h"
 
-static TttGame tttGame;
+static AchiGame tttGame;
 
 int computeNextMove() {
     return tttGame.computeNextMove();
@@ -22,5 +22,9 @@ bool checkWinner() {
 
 int getTurnNumber() {
     return tttGame.getTurnNumber();
+}
+
+void setTurnNumber(int t) {
+    tttGame.setTurnNumber(t);
 }
 
