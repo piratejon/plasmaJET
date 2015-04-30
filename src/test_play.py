@@ -39,8 +39,7 @@ class TestPlay(unittest.TestCase):
     self.assertEqual(cond, 1)
 
   def test_create_game(self):
-    pass
-#self.assertIsNotNone(play.getGameId())
+    self.assertIsNotNone(play.getGameId())
 
 if __name__=='__main__':
   if len(sys.argv) < 2:
