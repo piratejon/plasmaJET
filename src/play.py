@@ -14,6 +14,9 @@ def build_query(method, values = {}):
 def build_query_string(query):
   return urllib.parse.urlencode(query).encode('utf-8')
 
+def load_game_object(library_path):
+  return cdll.LoadLibrary(library_path)
+
 #sends request to the server with information
 #all information sent to the server, including moves, will have a response of some sort
 def send_to_server(method, values = {}):
@@ -177,7 +180,7 @@ def play_tic_tac_toe(game):
 def main(args):
   # The only argument is the full path to the library.  Later, arguments including the game type may appear.
   full_path_to_library = args[0]
-  game = cdll.LoadLibrary(full_path_to_library)
+  game = load_game_object(full_path_to_library)
   if game is not None:
     play_tic_tac_toe(game)
   else:
@@ -186,3 +189,4 @@ def main(args):
 if __name__ == '__main__':
   import sys
   main(sys.argv[1:])
+

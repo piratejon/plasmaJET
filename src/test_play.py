@@ -16,8 +16,7 @@ class TestPlay(unittest.TestCase):
     self.assertTrue(True)
 
   def test_init_library(self):
-    pass
-#self.assertIsNotNone(play.get_game(LOAD_LIBRARY_ARGUMENT))
+    self.assertIsNotNone(play.load_game_object(LOAD_LIBRARY_ARGUMENT))
 
   def test_build_query(self):
     qs = play.build_query('lol', {'p1': 'v1', 'p2': 'v2'})
