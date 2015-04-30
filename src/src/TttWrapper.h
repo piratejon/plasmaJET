@@ -12,6 +12,7 @@ char getSpace(int);
 bool checkWinner();
 int getTurnNumber();
 void setTurnNumber(int);
+void reset();
 
 #if defined(__cplusplus)
 }
