@@ -17,9 +17,8 @@ class TestPlay(unittest.TestCase):
   def test_init_library(self):
     self.assertIsNotNone(play.get_game(LOAD_LIBRARY_ARGUMENT))
 
-  def test_create_server_game(self):
+  def test_build_query_string(self):
     self.assertEqual(play.create_server_query_string('lol'), play.get_server_query_string() + '?controller=api&method=lol')
-#self.assertIsNotNone(play.create_server_game())
 
 if __name__=='__main__':
   import sys
