@@ -167,7 +167,7 @@ AchiGame::computeNextMove(int depth) const {
         // only loop scenario i have found has an out which is a one-move win
         // so check for wins first
 
-        if (depth > 20) {
+        if (depth > 12) {
           if (this->getTurnNumber() & 1) return this->score_base;
           else return 0 - this->score_base;
         };
