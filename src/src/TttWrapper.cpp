@@ -24,3 +24,7 @@ int getTurnNumber() {
     return tttGame.getTurnNumber();
 }
 
+viod setTurnNumber(int t) {
+    tttGame.getTurnNumber(t);
+}
+
