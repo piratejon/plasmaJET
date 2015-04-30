@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
 from ctypes import cdll
+import os
+
+LIBRARY_FILE_NAME = 'libplasmajetactoe.so'
 
 def printBoard(game):
   b = [chr(x) for x in [game.getSpace(i) for i in range(9)]]
@@ -18,18 +21,18 @@ def playTicTacToe(game):
     game.playMove(move)
     printBoard(game)
   
-  if game.checkWinner():
-    print("{} wins!".format('x' if game.getTurnNumber() & 1 else 'o'))
-  else:
-    print("Game ended in a draw!")
+  print("{} wins!".format('x' if game.getTurnNumber() & 1 else 'o'))
 
-def load_library(path):
+def load_library(path = os.getcwd() + '/' + LIBRARY_FILE_NAME):
   return cdll.LoadLibrary(path)
 
 def main(args):
 # only arg is full path to library
-  full_path_to_library = args[0]
-  game = load_library(full_path_to_library)
+  if len(args) > 0:
+    full_path_to_library = args[0]
+    game = load_library(full_path_to_library)
+  else:
+    game = load_library()
   if game is not None:
     playTicTacToe(game)
   else:
