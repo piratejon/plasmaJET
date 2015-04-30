@@ -133,16 +133,19 @@ def player_b():
 
   return game_id, player_id
 
-def play_game(player, game_id, player_id):
+def play_game(player, game_id, player_id, game):
   while get_status(game_id).decode() != "3" and get_status(game_id).decode() != "4":
     if get_status(game_id).decode() == player:
       if get_mode(game_id).decode() == "tictactoe":
-        position = input("Pick a move, man 0-8: ")
+        position = game.computeNextMove()
+        print("{}: {} will play {}".format(game.getTurnNumber(), 'o' if game.getTurnNumber() & 1 else 'x', position))
         make_move(game_id, player_id, position)
       elif get_mode(game_id).decode() == "slide":
         print("It's achi time bb!!!!!!!")
-        position = input("Pick a piece to slide 0-8: ")
+        position = game.computeNextMove()
+        print("{}: {} will play {}".format(game.getTurnNumber(), 'o' if game.getTurnNumber() & 1 else 'x', position))
         make_move(game_id, player_id, position)
+    game = load_game_object(full_path_to_library)    
   print("GAME OVER")
   if get_status(game_id).decode() == "3":
     print("Player 1 is the winner")
@@ -157,10 +160,10 @@ def play_tic_tac_toe(game):
   player_id = "0"
   if player == "1":
     game_id, player_id = player_a()
-    play_game(player, game_id, player_id)
+    play_game(player, game_id, player_id, game)
   elif player == "2":
     game_id, player_id = player_b()
-    play_game(player, game_id, player_id)
+    play_game(player, game_id, player_id, game)
 
 
 def main(args):
