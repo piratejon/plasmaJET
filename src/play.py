@@ -212,7 +212,7 @@ def play_tic_tac_toe(game):
 
 def initialize_logging():
   now = datetime.datetime.now()
-  logging.basicConfig(filename=str(now).replace(':', '') + '.txt', level=logging.DEBUG)
+  logging.basicConfig(filename=str(now).replace(':', '') + '.txt', level=logging.DEBUG, format='%(asctime)s %(message)s')
   logging.info('Initialized log at ' + str(now))
 
 def main(args):
