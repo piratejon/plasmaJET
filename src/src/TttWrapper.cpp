@@ -28,3 +28,8 @@ void setTurnNumber(int t) {
     tttGame.setTurnNumber(t);
 }
 
+void reset() {
+  AchiGame newGame;
+  tttGame = newGame;
+}
+

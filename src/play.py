@@ -14,6 +14,7 @@ def store_new_board(moves):
   x_list = [i for i in range(9) if moves[i] == 'x' or moves[i] == 'X']
   o_list = [i for i in range(9) if moves[i] == 'o' or moves[i] == 'O']
   game = load_game_object()
+  game.reset()
   o_len = len(o_list) # o plays second and will be < = x in length
   x_len = len(x_list)
   print(x_list)
