@@ -3,6 +3,19 @@ import urllib.parse
 import urllib.request
 import json
 
+import autoplay
+
+SERVER_PATH = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
+
+def get_game(library_path):
+  return autoplay.load_library(library_path)
+
+def get_server_query_string():
+  return SERVER_PATH
+
+def create_server_query_string(method):
+  return SERVER_PATH + '?' + urllib.parse.urlencode({'controller': 'api', 'method': method})
+
 def getMove():
 	return 5
 
