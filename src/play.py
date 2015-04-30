@@ -150,7 +150,7 @@ def play_game(player, game_id, player_id, game):
   if get_status(game_id).decode() == "3":
     print("Player 1 is the winner")
   elif get_status(game_id).decode() == "4":
-    print("Player 2 is teh winner")   
+    print("Player 2 is the winner")   
 
 def play_tic_tac_toe(game):
   print("Welcome to PlasmaJetTacToe")
