@@ -38,7 +38,7 @@ class TestPlay(unittest.TestCase):
 
   def test_store_board(self):
     game = play.load_game_object()
-    game = play.store_new_board(['','','','','','','','',''], game)
+    game = play.store_new_board(['','','','','','','','',''], game, 0)
     self.assertEqual(chr(game.getSpace(0)), ' ')
     self.assertEqual(chr(game.getSpace(1)), ' ')
     self.assertEqual(chr(game.getSpace(2)), ' ')
@@ -49,7 +49,7 @@ class TestPlay(unittest.TestCase):
     self.assertEqual(chr(game.getSpace(7)), ' ')
     self.assertEqual(chr(game.getSpace(8)), ' ')
 
-    game = play.store_new_board([' ','x','o','x','x',' ','o','o','x'], game)
+    game = play.store_new_board([' ','x','o','x','x',' ','o','o','x'], game, 7)
     self.assertEqual(chr(game.getSpace(0)), ' ')
     self.assertEqual(chr(game.getSpace(1)), 'x')
     self.assertEqual(chr(game.getSpace(2)), 'o')
@@ -60,7 +60,7 @@ class TestPlay(unittest.TestCase):
     self.assertEqual(chr(game.getSpace(7)), 'o')
     self.assertEqual(chr(game.getSpace(8)), 'x')
 
-    game = play.store_new_board(['o','x','','x','','o','x','o',''], game)
+    game = play.store_new_board(['o','x','','x','','o','x','o',''], game, 6)
     self.assertEqual(chr(game.getSpace(0)), 'o')
     self.assertEqual(chr(game.getSpace(1)), 'x')
     self.assertEqual(chr(game.getSpace(2)), ' ')
@@ -71,7 +71,7 @@ class TestPlay(unittest.TestCase):
     self.assertEqual(chr(game.getSpace(7)), 'o')
     self.assertEqual(chr(game.getSpace(8)), ' ')
 
-    game = play.store_new_board(['o','x',' ','o','x','o','x','o','x'], game)
+    game = play.store_new_board(['o','x',' ','o','x','o','x','o','x'], game, 8)
     self.assertEqual(chr(game.getSpace(0)), 'o')
     self.assertEqual(chr(game.getSpace(1)), 'x')
     self.assertEqual(chr(game.getSpace(2)), ' ')
@@ -82,7 +82,7 @@ class TestPlay(unittest.TestCase):
     self.assertEqual(chr(game.getSpace(7)), 'o')
     self.assertEqual(chr(game.getSpace(8)), 'x')
 
-  def x_test_two_player_game(self):
+  def test_two_player_game(self):
     game_id = play.get_game_id()
     self.assertIsNotNone(game_id)
     self.assertEqual(play.get_status(game_id), "0")
@@ -136,7 +136,7 @@ class TestPlay(unittest.TestCase):
     self.assertEqual(play.get_status(game_id), "3")
     self.assertEqual(play.decode_grid_json(play.get_grid(game_id)), ['O','','X','O','X','O','X','O','X'])
 
-  def x_test_autoplay_with_network(self):
+  def test_autoplay_with_network(self):
     game_id = play.get_game_id()
     self.assertIsNotNone(game_id)
     self.assertEqual(play.get_status(game_id), "0")
@@ -155,6 +155,7 @@ class TestPlay(unittest.TestCase):
     self.assertEqual(play.get_status(game_id), "1")
 
     game = play.load_game_object()
+    game.reset()
 
 # game starts with empty board
     self.assertEqual(play.decode_grid_json(play.get_grid(game_id)), ['','','','','','','','',''])
@@ -238,7 +239,7 @@ class TestPlay(unittest.TestCase):
     board = ['','','','','','','','','']
     self.assertEqual(play.decode_grid_json(play.get_grid(game_id)), board)
     self.assertEqual(game.getTurnNumber(), 0)
-    game = play.store_new_board(board, game)
+    game = play.store_new_board(board, game, 0)
     self.assertEqual(game.getTurnNumber(), 0)
     move = game.computeNextMove()
     game.playMove(move)
