@@ -10,24 +10,31 @@ from ctypes import cdll
 
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
 
-def store_new_board(moves):
+def store_new_board(moves, game):
+  print_board(game)
   x_list = [i for i in range(9) if moves[i] == 'x' or moves[i] == 'X']
   o_list = [i for i in range(9) if moves[i] == 'o' or moves[i] == 'O']
-  game = load_game_object()
+  turn = game.getTurnNumber()
   game.reset()
   o_len = len(o_list) # o plays second and will be < = x in length
   x_len = len(x_list)
-  print(x_list)
-  print (o_list)
   if o_len != 0:
-    print("o len not 0")
     for i in range(o_len):
-      print("i in o len")
       game.playMove(x_list[i])
       game.playMove(o_list[i])
   if x_len != o_len: # There will be one extra in x  
     game.playMove(x_list[-1])
+  game.setTurnNumber(turn+1)
   return game
+
+def print_board(game):
+  b = [chr(x) for x in [game.getSpace(i) for i in range(9)]]
+  print('{}|{}|{}\n{}|{}|{}\n{}|{}|{}'.format(
+        b[0], b[1], b[2],
+        b[3], b[4], b[5],
+        b[6], b[7], b[8]
+        )
+      )
 
 def build_query(method, values = {}):
   values['controller'] = 'api'
@@ -159,14 +166,14 @@ def player_b():
       print("What?")
 
   player_id = get_player_id(game_id)
-  print(player_id)
 
   return game_id, player_id
 
 def play_game(player, game_id, player_id, game):
+  game = load_game_object()
   while get_status(game_id) != "3" and get_status(game_id) != "4":
     if get_status(game_id) == player:
-      game = store_new_board(decode_grid_json(get_grid(game_id)))
+      game = store_new_board(decode_grid_json(get_grid(game_id)), game)
       if get_mode(game_id) == "tictactoe":
         print("tic tac toe time!!")
       elif get_mode(game_id) == "slide":
