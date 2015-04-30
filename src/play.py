@@ -10,21 +10,23 @@ from ctypes import cdll
 
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
 
-def store_new_board(moves, game):
-  print_board(game)
+def store_new_board(moves, game, turn):
   x_list = [i for i in range(9) if moves[i] == 'x' or moves[i] == 'X']
   o_list = [i for i in range(9) if moves[i] == 'o' or moves[i] == 'O']
-  turn = game.getTurnNumber()
   game.reset()
   o_len = len(o_list) # o plays second and will be < = x in length
   x_len = len(x_list)
+  move_list = []
   if o_len != 0:
     for i in range(o_len):
       game.playMove(x_list[i])
+      move_list.append(x_list[i])
       game.playMove(o_list[i])
+      move_list.append(o_list[i])
   if x_len != o_len: # There will be one extra in x  
     game.playMove(x_list[-1])
-  game.setTurnNumber(turn+1)
+    move_list.append(x_list[-1])
+  game.setTurnNumber(turn)
   return game
 
 def print_board(game):
@@ -169,17 +171,22 @@ def player_b():
 
   return game_id, player_id
 
-def play_game(player, game_id, player_id, game):
+def play_game(player, game_id, player_id, turn):
   game = load_game_object()
-  while get_status(game_id) != "3" and get_status(game_id) != "4":
-    if get_status(game_id) == player:
-      game = store_new_board(decode_grid_json(get_grid(game_id)), game)
-      if get_mode(game_id) == "tictactoe":
-        print("tic tac toe time!!")
-      elif get_mode(game_id) == "slide":
-        print("It's achi time bb!!!!!!!")
+  status = get_status(game_id)
+  while status != "3" and status != "4":
+    status = get_status(game_id)
+    if status == player:
+      game = store_new_board(decode_grid_json(get_grid(game_id)), game, turn)
+      #if get_mode(game_id) == "tictactoe":
+        #print("tic tac toe time!!")
+      #elif get_mode(game_id) == "slide":
+        #print("It's achi time bb!!!!!!!")
       position = game.computeNextMove()
       make_move(game_id, player_id, position)
+      game = store_new_board(decode_grid_json(get_grid(game_id)), game, turn)
+      print_board(game)
+      turn += 2
   print("GAME OVER")
   if get_status(game_id) == "3":
     print("Player 1 is the winner")
@@ -194,10 +201,10 @@ def play_tic_tac_toe(game):
   player_id = "0"
   if player == "1":
     game_id, player_id = player_a()
-    play_game(player, game_id, player_id, game)
+    play_game(player, game_id, player_id, 0)
   elif player == "2":
     game_id, player_id = player_b()
-    play_game(player, game_id, player_id, game)
+    play_game(player, game_id, player_id, 1)
 
 
 def initialize_logging():
