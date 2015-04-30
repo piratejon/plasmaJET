@@ -11,8 +11,8 @@ from ctypes import cdll
 API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
 
 def store_new_board(moves):
-  x_list = [i for i in range(9) if moves[i] == "x"]
-  o_list = [i for i in range(9) if moves[i] == "o"]
+  x_list = [i for i in range(9) if moves[i] == 'x' or moves[i] == 'X']
+  o_list = [i for i in range(9) if moves[i] == 'o' or moves[i] == 'O']
   game = load_game_object()
   o_len = len(o_list) # o plays second and will be < = x in length
   x_len = len(x_list)
@@ -21,7 +21,7 @@ def store_new_board(moves):
       game.playMove(x_list[i])
       game.playMove(o_list[i])
   if x_len != o_len: # There will be one extra in x  
-    game.playMove(x_list(x_len-1))  
+    game.playMove(x_list[-1])
   return game
 
 def build_query(method, values = {}):
