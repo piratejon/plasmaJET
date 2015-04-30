@@ -148,13 +148,17 @@ def player_b():
   return game_id, player_id
 
 def play_game(player, game_id, player_id):
-  while get_status(game_id).decode() != "3" or get_status(game_id).decode() != "4":
+  while get_status(game_id).decode() != "3" and get_status(game_id).decode() != "4":
     if get_status(game_id).decode() == player:
       if get_mode(game_id).decode() == "tictactoe":
-        print("yolo")
         make_move(game_id, player_id)
       elif get_mode(game_id).decode() == "slide":
         print("slide TIME")
+  print("GAME OVER")
+  if get_status(game_id).decode() == "3":
+    print("Player 1 is the winner")
+  elif get_status(game_id).decode() == "4":
+    print("Player 2 is teh winner")   
 
 def play_tic_tac_toe(game):
   print("Welcome to PlasmaJetTacToe")
@@ -182,8 +186,3 @@ def main(args):
 if __name__ == '__main__':
   import sys
   main(sys.argv[1:])
-
-
-
-
-
