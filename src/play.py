@@ -24,7 +24,7 @@ def send_to_server(method, values = {}):
   request = urllib.request.Request(API_URL, data)
   response = urllib.request.urlopen(request)
   response = response.read()
-  return response
+  return response.decode('utf-8')
 
 #gets the game id from the server
 def get_game_id():
@@ -47,6 +47,9 @@ def make_move(game_id, player_id, position):
 
 def get_grid(game_id):
   return send_to_server('grid', {'gameid' : game_id})
+
+def decode_grid_json(grid):
+  return json.JSONDecoder().decode(grid)
 
 def get_player():
   print("Are you Player 1 or Player 2?")

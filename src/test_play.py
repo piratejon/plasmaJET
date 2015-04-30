@@ -5,12 +5,11 @@ import play
 import sys
 import os
 
-LOAD_LIBRARY_ARGUMENT = ''
+LOAD_LIBRARY_ARGUMENT = '' # overwritten in main
 
 class TestPlay(unittest.TestCase):
   def setUp(self):
     pass
-#self.game = autoplay.load_library(LOAD_LIBRARY_ARGUMENT)
 
   def test_we_are_alive(self):
     self.assertTrue(True)
@@ -28,6 +27,13 @@ class TestPlay(unittest.TestCase):
 
   def test_create_game(self):
     self.assertIsNotNone(play.get_game_id())
+
+  def test_get_grid(self):
+    j = b'["","","","","","","","",""]'.decode('utf-8')
+    self.assertEqual(play.decode_grid_json(j), ['','','','','','','','',''])
+
+    j = b'["x","o","","x","","o","x","o",""]'.decode('utf-8')
+    self.assertEqual(play.decode_grid_json(j), ['x','o','','x','','o','x','o',''])
 
 if __name__=='__main__':
   if len(sys.argv) < 2:
