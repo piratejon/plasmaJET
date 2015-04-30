@@ -4,20 +4,24 @@ import urllib.request
 import json
 from ctypes import cdll
 
+API_URL = 'http://cs2.uco.edu/~gq011/tictactoe/server/'
+
+def build_query(method, values = {}):
+  values['controller'] = 'api'
+  values['method'] = method
+  return values
+
+def build_query_string(query):
+  return urllib.parse.urlencode(query).encode('utf-8')
+
 #sends request to the server with information
 #all information sent to the server, including moves, will have a response of some sort
-def send_to_server(url, values = None): 
-  if (values != None):
-    data = urllib.parse.urlencode(values)
-    data = data.encode('utf-8')
-    request = urllib.request.Request(url, data)
-  else:
-    request = url
-
+def send_to_server(method, values = {}):
+  data = build_query_string(build_query(method, values))
+  request = urllib.request.Request(API_URL, data)
   response = urllib.request.urlopen(request)
   response = response.read()
   return response
-
 
 #gets the game id from the server
 def get_game_id():
@@ -148,7 +152,7 @@ def play_game(player, game_id, player_id):
     if get_status(game_id).decode() == player:
       if get_mode(game_id).decode() == "tictactoe":
         print("yolo")
-        make_move(player_id, game_id)
+        make_move(game_id, player_id)
       elif get_mode(game_id).decode() == "slide":
         print("slide TIME")
 
