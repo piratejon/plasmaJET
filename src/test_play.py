@@ -35,6 +35,18 @@ class TestPlay(unittest.TestCase):
     j = b'["x","o","","x","","o","x","o",""]'.decode('utf-8')
     self.assertEqual(play.decode_grid_json(j), ['x','o','','x','','o','x','o',''])
 
+  def test_store_board(self):
+    play.store_new_board(['o','x','','x','','o','x','o',''])
+    self.assertEqual(play.game.getSpace(0) == 'o')
+    self.assertEqual(play.game.getSpace(1) == 'x')
+    self.assertEqual(play.game.getSpace(2) == ' ')
+    self.assertEqual(play.game.getSpace(3) == 'x')
+    self.assertEqual(play.game.getSpace(4) == ' ')
+    self.assertEqual(play.game.getSpace(5) == 'o')
+    self.assertEqual(play.game.getSpace(6) == 'x')
+    self.assertEqual(play.game.getSpace(7) == 'o')
+    self.assertEqual(play.game.getSpace(8) == ' ')
+
 if __name__=='__main__':
   if len(sys.argv) < 2:
     LOAD_LIBRARY_ARGUMENT = os.getcwd() + '/libplasmajetactoe.so'
