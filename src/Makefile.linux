@@ -18,6 +18,9 @@ test/test: test/test_main.o test/test.o $(CXX_SOURCES)
 	$(CXX) $(CXXFLAGS) $(CXX_SOURCES) $(LDFLAGS) test/test_main.o test/test.o -o test/test
 	time test/test
 
+dot: dot.cpp
+	$(CXX) $(CXXFLAGS) dot.cpp $(CXX_SOURCES) $(LDFLAGS) -o dot
+
 check: test/test
 
 clean:
